@@ -4,6 +4,22 @@ A private PDF toolkit for Android that works fully offline. Every tool runs on y
 
 Made by [Lumio Apps](https://github.com/lumio-apps).
 
+## Download
+
+Get the latest APK from the [Releases page](https://github.com/lumio-apps/paperwise/releases/latest). Requires Android 7.0 or newer.
+
+After that, Paperwise updates itself: open **Settings → Check for updates**.
+
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/home.jpg" width="240" alt="Home screen with tool tiles">
+  &nbsp;
+  <img src="docs/screenshots/files.jpg" width="240" alt="Your files screen">
+  &nbsp;
+  <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
+</p>
+
 ## What's in v0.1
 
 - **Merge PDF**: join two or more PDFs and drag them into the order you want.
@@ -18,7 +34,7 @@ Paperwise grows one small update at a time, one group of features per update.
 
 | Update | Theme | Features |
 | --- | --- | --- |
-| **v0.1** | Foundation | Merge, split, image to PDF (gallery and camera), files list with open, share, save, rename and delete, update checker |
+| **v0.1** ✅ released | Foundation | Merge, split, image to PDF (gallery and camera), files list with open, share, save, rename and delete, update checker |
 | **v0.2** | PDF viewer | Built-in reader with zoom, page jump and thumbnails, continue reading, favorites, open PDFs from other apps |
 | **v0.3** | Page tools | Reorder, rotate, delete and extract pages on a visual page grid |
 | **v0.4** | Convert | PDF to image (JPG or PNG), scan paper to PDF with the camera, crop and filters |
