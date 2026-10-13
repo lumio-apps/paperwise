@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'library.dart';
+
 /// A PDF that Paperwise created and keeps on this phone.
 class OutputFile {
   const OutputFile({
@@ -78,6 +80,7 @@ class FileStore extends ChangeNotifier {
   Future<void> delete(OutputFile file) async {
     final f = File(file.path);
     if (await f.exists()) await f.delete();
+    ReadingLibrary.instance.remove(file.path);
     await load();
   }
 
@@ -88,6 +91,7 @@ class FileStore extends ChangeNotifier {
     if ('$base.pdf' == file.name) return;
     final target = await _uniqueFile(dir, base);
     await File(file.path).rename(target.path);
+    ReadingLibrary.instance.move(file.path, target.path);
     await load();
   }
 

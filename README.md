@@ -20,6 +20,13 @@ After that, Paperwise updates itself: open **Settings → Check for updates**.
   <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
 </p>
 
+## What's in v0.2
+
+- **PDF viewer**: read any PDF inside Paperwise. Zoom, jump to a page, see page thumbnails, and open locked PDFs with their password.
+- **Continue reading**: Paperwise remembers the page you stopped on and shows a "Continue reading" card in Your files.
+- **Favorites**: star the PDFs you use most and filter them in Your files.
+- **Open from other apps**: choose Paperwise when you tap a PDF in your file manager, a chat app or email. Or tap "Open a PDF" in Your files.
+
 ## What's in v0.1
 
 - **Merge PDF**: join two or more PDFs and drag them into the order you want.
@@ -35,14 +42,16 @@ Paperwise grows one small update at a time, one group of features per update.
 | Update | Theme | Features |
 | --- | --- | --- |
 | **v0.1** ✅ released | Foundation | Merge, split, image to PDF (gallery and camera), files list with open, share, save, rename and delete, update checker |
-| **v0.2** | PDF viewer | Built-in reader with zoom, page jump and thumbnails, continue reading, favorites, open PDFs from other apps |
+| **v0.2** 🚧 in progress | PDF viewer | Built-in reader with zoom, page jump and thumbnails, continue reading, favorites, open PDFs from other apps |
 | **v0.3** | Page tools | Reorder, rotate, delete and extract pages on a visual page grid |
-| **v0.4** | Convert | PDF to image (JPG or PNG), scan paper to PDF with the camera, crop and filters |
-| **v0.5** | Compress | Light, balanced and strong compression, image quality control, size estimate before saving |
-| **v0.6** | Security | Password lock, unlock with the right password, text or image watermark |
-| **v0.7** | Edit | Add text, signature, page numbers, header and footer |
-| **v0.8** | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
-| **v0.9** | Your way | Dark mode, more languages, sort and search files, local backup and restore |
+| **v0.4** | Convert and scan | PDF to image (JPG or PNG), scan paper to PDF with the camera, manual crop and filters |
+| **v0.5** | Image privacy | Remove EXIF data (location, device info), resize, compress, blur or hide parts of a photo, batch processing |
+| **v0.6** | Compress | Light, balanced and strong PDF compression, image quality control, size estimate before saving |
+| **v0.7** | Security | Password lock, unlock with the right password, text or image watermark |
+| **v0.8** | Edit | Add text, signature, page numbers, header and footer |
+| **v0.9** | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
+| **v0.10** | Your way | Dark mode, more languages, sort and search files, local backup and restore |
+| **v0.11** | OCR | Offline text recognition for scanned pages, searchable PDFs |
 | **v1.0** | Ready for stores | Final polish, then F-Droid and Google Play |
 
 ## Privacy

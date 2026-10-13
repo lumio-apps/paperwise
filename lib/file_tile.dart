@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'file_actions.dart';
 import 'file_store.dart';
 import 'format.dart';
+import 'library.dart';
 import 'theme.dart';
 import 'widgets.dart';
 
-enum _FileAction { open, share, save, rename, delete }
+enum _FileAction { open, favorite, share, save, rename, delete }
 
 /// One saved PDF in a list, with a menu for Open, Share, Save, Rename and Delete.
 class FileTile extends StatelessWidget {
@@ -51,6 +52,8 @@ class FileTile extends StatelessWidget {
     switch (action) {
       case _FileAction.open:
         openPdf(context, file.path);
+      case _FileAction.favorite:
+        ReadingLibrary.instance.toggleFavorite(file.path);
       case _FileAction.share:
         sharePdfs([file.path]);
       case _FileAction.save:
@@ -64,6 +67,15 @@ class FileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ListenableBuilder(
+      listenable: ReadingLibrary.instance,
+      builder: (context, _) => _buildTile(context),
+    );
+  }
+
+  Widget _buildTile(BuildContext context) {
+    final info = ReadingLibrary.instance.infoFor(file.path);
+    final favorite = info?.favorite ?? false;
     return Material(
       color: AppColors.surface,
       borderRadius: BorderRadius.circular(20),
@@ -80,11 +92,21 @@ class FileTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      file.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            file.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+                          ),
+                        ),
+                        if (favorite) ...[
+                          const SizedBox(width: 6),
+                          Icon(Icons.star_rounded, size: 18, color: TilePalette.yellow.color),
+                        ],
+                      ],
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -98,24 +120,31 @@ class FileTile extends StatelessWidget {
                 tooltip: 'More options for ${file.name}',
                 icon: const Icon(Icons.more_vert_rounded, color: AppColors.muted),
                 onSelected: (action) => _onAction(context, action),
-                itemBuilder: (context) => const [
-                  PopupMenuItem(
+                itemBuilder: (context) => [
+                  const PopupMenuItem(
                     value: _FileAction.open,
-                    child: ListTile(leading: Icon(Icons.open_in_new_rounded), title: Text('Open')),
+                    child: ListTile(leading: Icon(Icons.menu_book_outlined), title: Text('Read')),
                   ),
                   PopupMenuItem(
+                    value: _FileAction.favorite,
+                    child: ListTile(
+                      leading: Icon(favorite ? Icons.star_rounded : Icons.star_outline_rounded),
+                      title: Text(favorite ? 'Remove from favorites' : 'Add to favorites'),
+                    ),
+                  ),
+                  const PopupMenuItem(
                     value: _FileAction.share,
                     child: ListTile(leading: Icon(Icons.share_outlined), title: Text('Share')),
                   ),
-                  PopupMenuItem(
+                  const PopupMenuItem(
                     value: _FileAction.save,
                     child: ListTile(leading: Icon(Icons.download_rounded), title: Text('Save to phone')),
                   ),
-                  PopupMenuItem(
+                  const PopupMenuItem(
                     value: _FileAction.rename,
                     child: ListTile(leading: Icon(Icons.drive_file_rename_outline_rounded), title: Text('Rename')),
                   ),
-                  PopupMenuItem(
+                  const PopupMenuItem(
                     value: _FileAction.delete,
                     child: ListTile(
                       leading: Icon(Icons.delete_outline_rounded, color: AppColors.danger),

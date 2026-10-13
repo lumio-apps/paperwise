@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdfrx/pdfrx.dart';
 
+import 'external_open.dart';
 import 'file_store.dart';
 import 'home_shell.dart';
+import 'library.dart';
 import 'theme.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +22,9 @@ Future<void> main() async {
 
   await pdfrxFlutterInitialize();
   await FileStore.instance.load();
+  await ReadingLibrary.instance.load();
   runApp(const PaperwiseApp());
+  ExternalOpen.start(navigatorKey);
 }
 
 class PaperwiseApp extends StatelessWidget {
@@ -28,6 +34,7 @@ class PaperwiseApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Paperwise',
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: buildTheme(),
       home: const HomeShell(),

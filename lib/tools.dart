@@ -34,7 +34,7 @@ const homeTools = <ToolInfo>[
     title: 'Compress',
     icon: Icons.compress_rounded,
     palette: TilePalette.green,
-    comingIn: 'v0.5',
+    comingIn: 'v0.6',
   ),
   ToolInfo(
     id: ToolId.scan,
@@ -48,9 +48,9 @@ const homeTools = <ToolInfo>[
     title: 'Protect',
     icon: Icons.lock_outline_rounded,
     palette: TilePalette.purple,
-    comingIn: 'v0.6',
+    comingIn: 'v0.7',
   ),
-  ToolInfo(id: ToolId.sign, title: 'Sign', icon: Icons.draw_outlined, palette: TilePalette.yellow, comingIn: 'v0.7'),
+  ToolInfo(id: ToolId.sign, title: 'Sign', icon: Icons.draw_outlined, palette: TilePalette.yellow, comingIn: 'v0.8'),
   ToolInfo(id: ToolId.more, title: 'More tools', icon: Icons.grid_view_rounded, palette: TilePalette.slate),
 ];
 
@@ -64,30 +64,34 @@ class PlannedUpdate {
 }
 
 const plannedUpdates = <PlannedUpdate>[
-  PlannedUpdate(
-    'v0.2',
-    'PDF viewer',
-    'Read any PDF inside Paperwise with zoom, page jump and thumbnails. '
-        'Continue where you left off, mark favorites, and open PDFs from other apps.',
-  ),
   PlannedUpdate('v0.3', 'Page tools', 'Reorder, rotate, delete and extract pages on a visual page grid.'),
   PlannedUpdate(
     'v0.4',
-    'Convert',
+    'Convert and scan',
     'Save PDF pages as JPG or PNG. Scan paper to PDF with your camera, with crop and filters.',
   ),
   PlannedUpdate(
     'v0.5',
+    'Image privacy',
+    'Remove location and device info from photos. Resize, compress, blur or hide parts of an image, many photos at once.',
+  ),
+  PlannedUpdate(
+    'v0.6',
     'Compress',
     'Make PDFs smaller with light, balanced or strong compression, and see the new size first.',
   ),
-  PlannedUpdate('v0.6', 'Security', 'Lock a PDF with a password, unlock it, and add a text or image watermark.'),
-  PlannedUpdate('v0.7', 'Edit', 'Add text, your signature, page numbers, header and footer.'),
-  PlannedUpdate('v0.8', 'Markup and search', 'Highlight, draw and add shapes. Search for words inside a PDF.'),
+  PlannedUpdate('v0.7', 'Security', 'Lock a PDF with a password, unlock it, and add a text or image watermark.'),
+  PlannedUpdate('v0.8', 'Edit', 'Add text, your signature, page numbers, header and footer.'),
+  PlannedUpdate('v0.9', 'Markup and search', 'Highlight, draw and add shapes. Search for words inside a PDF.'),
   PlannedUpdate(
-    'v0.9',
+    'v0.10',
     'Your way',
     'Dark mode, more languages, sort and search your files, and local backup.',
+  ),
+  PlannedUpdate(
+    'v0.11',
+    'Text from scans (OCR)',
+    'Read text from scanned pages on your phone, with no internet, and make searchable PDFs.',
   ),
   PlannedUpdate('v1.0', 'Ready for stores', 'Final polish, then Paperwise on F-Droid and Google Play.'),
 ];

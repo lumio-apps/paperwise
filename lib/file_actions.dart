@@ -2,22 +2,14 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:open_filex/open_filex.dart';
 import 'package:share_plus/share_plus.dart';
 
-/// Opens a PDF in a viewer app that is already on the phone.
-Future<void> openPdf(BuildContext context, String path) async {
-  final messenger = ScaffoldMessenger.of(context);
-  final result = await OpenFilex.open(path, type: 'application/pdf');
-  if (result.type == ResultType.done) return;
-  messenger.showSnackBar(
-    SnackBar(
-      content: Text(
-        result.type == ResultType.noAppToOpen
-            ? 'No PDF viewer found on this phone. A built-in viewer is coming in the next update.'
-            : 'Could not open the file.',
-      ),
-    ),
+import 'pages/viewer_page.dart';
+
+/// Opens a PDF in the built-in Paperwise viewer.
+Future<void> openPdf(BuildContext context, String path) {
+  return Navigator.of(context).push(
+    MaterialPageRoute<void>(builder: (_) => ViewerPage(path: path)),
   );
 }
 
