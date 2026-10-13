@@ -196,7 +196,7 @@ class SectionCard extends StatelessWidget {
   const SectionCard({
     super.key,
     required this.child,
-    this.padding = EdgeInsets.all(16),
+    this.padding = const EdgeInsets.all(16),
   });
 
   final Widget child;
@@ -377,7 +377,7 @@ class EmptyState extends StatelessWidget {
 
 /// A tiny drawing of a page, used as a file thumbnail.
 class PageThumb extends StatelessWidget {
-  const PageThumb({super.key, this.color = AppColors.background, this.lineColor = Color(0xFFC8C4E0)});
+  const PageThumb({super.key, this.color = AppColors.background, this.lineColor = const Color(0xFFC8C4E0)});
 
   final Color color;
   final Color lineColor;
