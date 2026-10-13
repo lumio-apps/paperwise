@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   analyze:
@@ -14,5 +15,20 @@ jobs:
         with:
           channel: stable
           cache: true
+      - run: flutter --version
       - run: flutter pub get
-      - run: flutter analyze
+      - name: flutter analyze
+        run: |
+          set -o pipefail
+          flutter analyze 2>&1 | tee analyze.txt || {
+            # Show every issue next to its line of code on GitHub.
+            awk -F ' • ' '/ • .*:[0-9]+:[0-9]+ • / {
+              sev = $1; gsub(/^[ \t]+/, "", sev)
+              split($3, loc, ":")
+              level = (sev == "error") ? "error" : (sev == "warning") ? "warning" : "notice"
+              code = $4; gsub(/[ \t\r]+$/, "", code)
+              msg = $2; gsub(/%/, "%25", msg)
+              printf "::%s file=%s,line=%s,col=%s,title=%s::%s\n", level, loc[1], loc[2], loc[3], code, msg
+            }' analyze.txt
+            exit 1
+          }
