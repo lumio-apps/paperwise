@@ -102,6 +102,134 @@ Future<Uint8List> encodeBgraPixels(
 }
 
 // ---------------------------------------------------------------------------
+// Image privacy: strip hidden data, resize, compress, blur or cover parts
+// ---------------------------------------------------------------------------
+
+/// A part of a picture to hide. Numbers are between 0 and 1 and count from the
+/// top-left corner of the picture as it looks on screen.
+class RedactBox {
+  const RedactBox(this.left, this.top, this.right, this.bottom, {this.blackOut = false});
+
+  final double left;
+  final double top;
+  final double right;
+  final double bottom;
+
+  /// True for a solid black box, false for a strong blur.
+  final bool blackOut;
+}
+
+/// A cleaned picture and how it was saved.
+class CleanedImage {
+  const CleanedImage({required this.bytes, required this.png, required this.width, required this.height});
+
+  final Uint8List bytes;
+  final bool png;
+  final int width;
+  final int height;
+}
+
+/// A smaller picture to draw boxes on. Already turned the right way up.
+class RedactPreview {
+  const RedactPreview({required this.bytes, required this.width, required this.height});
+
+  final Uint8List bytes;
+  final int width;
+  final int height;
+}
+
+Future<RedactPreview> prepareRedactPreview(Uint8List bytes) {
+  return Isolate.run(() {
+    final decoded = img.decodeImage(bytes);
+    if (decoded == null) throw const FormatException('This is not a picture.');
+    final small = _shrink(img.bakeOrientation(decoded), 1600);
+    return RedactPreview(bytes: _encodeJpg(_toRgb(small), 85), width: small.width, height: small.height);
+  });
+}
+
+/// Makes a clean copy: the picture is rebuilt from its pixels only, so
+/// location, device name, date and any other hidden data are left behind.
+///
+/// [maxSide] shrinks big pictures (null keeps the size). [quality] is for JPG.
+Future<CleanedImage> cleanImage(
+  Uint8List bytes, {
+  int? maxSide,
+  int quality = 85,
+  List<RedactBox> boxes = const [],
+}) {
+  return Isolate.run(() => _clean(bytes, maxSide, quality, boxes));
+}
+
+bool _isPng(Uint8List b) => b.length > 8 && b[0] == 0x89 && b[1] == 0x50 && b[2] == 0x4E && b[3] == 0x47;
+
+CleanedImage _clean(Uint8List bytes, int? maxSide, int quality, List<RedactBox> boxes) {
+  final decoded = img.decodeImage(bytes);
+  if (decoded == null) throw const FormatException('This is not a picture.');
+  final png = _isPng(bytes);
+
+  var rgb = _toRgb(img.bakeOrientation(decoded));
+  for (final box in boxes) {
+    _redact(rgb, box);
+  }
+
+  if (maxSide != null && math.max(rgb.width, rgb.height) > maxSide) {
+    final fresh = img.Image.fromBytes(width: rgb.width, height: rgb.height, bytes: rgb.data.buffer, numChannels: 3);
+    rgb = _toRgb(_shrink(fresh, maxSide));
+  }
+
+  final image = img.Image.fromBytes(width: rgb.width, height: rgb.height, bytes: rgb.data.buffer, numChannels: 3);
+  final out = png ? img.encodePng(image) : img.encodeJpg(image, quality: quality);
+  return CleanedImage(bytes: out, png: png, width: rgb.width, height: rgb.height);
+}
+
+void _redact(_Rgb rgb, RedactBox box) {
+  final w = rgb.width;
+  final h = rgb.height;
+  final x0 = (math.min(box.left, box.right) * w).floor().clamp(0, w).toInt();
+  final x1 = (math.max(box.left, box.right) * w).ceil().clamp(0, w).toInt();
+  final y0 = (math.min(box.top, box.bottom) * h).floor().clamp(0, h).toInt();
+  final y1 = (math.max(box.top, box.bottom) * h).ceil().clamp(0, h).toInt();
+  if (x1 <= x0 || y1 <= y0) return;
+  final d = rgb.data;
+
+  if (box.blackOut) {
+    for (var y = y0; y < y1; y++) {
+      final row = (y * w + x0) * 3;
+      d.fillRange(row, row + (x1 - x0) * 3, 0);
+    }
+    return;
+  }
+
+  // Big flat squares cannot be undone, unlike a light blur.
+  final block = math.max(10, math.max(math.min(x1 - x0, y1 - y0) ~/ 5, math.min(w, h) ~/ 50));
+  for (var by = y0; by < y1; by += block) {
+    for (var bx = x0; bx < x1; bx += block) {
+      final ex = math.min(bx + block, x1);
+      final ey = math.min(by + block, y1);
+      var r = 0, g = 0, b = 0;
+      for (var y = by; y < ey; y++) {
+        for (var x = bx; x < ex; x++) {
+          final i = (y * w + x) * 3;
+          r += d[i];
+          g += d[i + 1];
+          b += d[i + 2];
+        }
+      }
+      final n = (ex - bx) * (ey - by);
+      final ar = r ~/ n, ag = g ~/ n, ab = b ~/ n;
+      for (var y = by; y < ey; y++) {
+        for (var x = bx; x < ex; x++) {
+          final i = (y * w + x) * 3;
+          d[i] = ar;
+          d[i + 1] = ag;
+          d[i + 2] = ab;
+        }
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Pixel helpers (plain RGB bytes, 3 per pixel)
 // ---------------------------------------------------------------------------
 

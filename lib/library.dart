@@ -119,7 +119,7 @@ class ReadingLibrary extends ChangeNotifier {
   /// Called when the viewer finishes loading a PDF.
   void recordOpened(String path, int pageCount) {
     final old = _entries[path] ?? ReadingInfo(path: path);
-    final page = old.page.clamp(1, pageCount < 1 ? 1 : pageCount);
+    final page = old.page.clamp(1, pageCount < 1 ? 1 : pageCount).toInt();
     _entries[path] = old.copyWith(pageCount: pageCount, page: page, lastOpened: DateTime.now());
     _changed();
   }

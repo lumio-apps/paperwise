@@ -6,9 +6,10 @@ Made by [Lumio Apps](https://github.com/lumio-apps).
 
 ## Download
 
-Get the latest APK from the [Releases page](https://github.com/lumio-apps/paperwise/releases/latest). Requires Android 7.0 or newer.
+Get the latest files from the [Releases page](https://github.com/lumio-apps/paperwise/releases/latest).
 
-After that, Paperwise updates itself: open **Settings → Check for updates**.
+- **Android**: download `Paperwise-<version>.apk`. Requires Android 7.0 or newer. After that, Paperwise updates itself: open **Settings → Check for updates**.
+- **Windows 10 / 11 (64-bit)**: download `Paperwise-<version>-windows.zip`, unzip the whole folder and run `paperwise.exe`. The app is not code-signed yet, so Windows SmartScreen may warn you: choose **More info → Run anyway**. On Windows, Check for updates opens the download page. There is no camera button on Windows; pick pictures from your files instead.
 
 ## Screenshots
 
@@ -19,6 +20,19 @@ After that, Paperwise updates itself: open **Settings → Check for updates**.
   &nbsp;
   <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
 </p>
+
+## What's in v0.6
+
+- **Compress PDF**: choose Light, Balanced or Strong and see the expected size before you start. The new file is saved next to your other files and the original is never changed.
+- Pages are redrawn as pictures, so text can no longer be selected or searched in the compressed copy. It works best on scans and photo PDFs. If a PDF would not get smaller, nothing is saved.
+
+## What's in v0.5
+
+- **Image privacy**: pick one or many photos and see what is hidden inside them: location, phone or camera name, date and the app that edited them. Paperwise makes a clean copy that is rebuilt from the pixels only, so all of that is left behind.
+- **Resize and compress**: shrink pictures to Large, Medium or Small, and choose how strongly JPG pictures are compressed.
+- **Blur or hide**: drag boxes over faces, number plates or text, and choose a strong blur or a solid black box.
+- Your original pictures are never changed. Everything stays on your phone.
+- **Windows**: Paperwise now also runs on Windows 10 / 11, with the same offline tools.
 
 ## What's in v0.4
 
@@ -53,9 +67,9 @@ Paperwise grows one small update at a time, one group of features per update.
 | **v0.1** ✅ released | Foundation | Merge, split, image to PDF (gallery and camera), files list with open, share, save, rename and delete, update checker |
 | **v0.2** ✅ released | PDF viewer | Built-in reader with zoom, page jump and thumbnails, continue reading, favorites, open PDFs from other apps |
 | **v0.3** ✅ released | Page tools | Reorder, rotate, delete and extract pages on a visual page grid |
-| **v0.4** 🚧 in progress | Convert and scan | PDF to image (JPG or PNG), scan paper to PDF with the camera, manual crop and filters |
-| **v0.5** | Image privacy | Remove EXIF data (location, device info), resize, compress, blur or hide parts of a photo, batch processing |
-| **v0.6** | Compress | Light, balanced and strong PDF compression, image quality control, size estimate before saving |
+| **v0.4** ✅ released | Convert and scan | PDF to image (JPG or PNG), scan paper to PDF with the camera, manual crop and filters |
+| **v0.5** ✅ released | Image privacy | Remove EXIF data (location, device info), resize, compress, blur or hide parts of a photo, batch processing |
+| **v0.6** 🚧 in progress | Compress | Light, balanced and strong PDF compression, image quality control, size estimate before saving |
 | **v0.7** | Security | Password lock, unlock with the right password, text or image watermark |
 | **v0.8** | Edit | Add text, signature, page numbers, header and footer |
 | **v0.9** | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
@@ -75,9 +89,10 @@ Paperwise grows one small update at a time, one group of features per update.
 flutter pub get
 flutter analyze
 flutter build apk --release
+# Windows (needs Developer Mode on): flutter create --platforms=windows . && flutter build windows --release
 ```
 
-Pushing a tag like `v0.1.0` builds a signed APK with GitHub Actions and publishes it on the Releases page.
+Pushing a tag like `v0.1.0` builds a signed APK and a Windows zip with GitHub Actions and publishes them on the Releases page.
 
 ## License
 

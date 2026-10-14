@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 
-enum ToolId { merge, split, pages, imageToPdf, pdfToImage, compress, scan, protect, sign, more }
+enum ToolId { merge, split, pages, imageToPdf, pdfToImage, imagePrivacy, compress, scan, protect, sign, more }
 
 /// A tile on the home screen.
 class ToolInfo {
@@ -37,11 +37,16 @@ const homeTools = <ToolInfo>[
     palette: TilePalette.green,
   ),
   ToolInfo(
+    id: ToolId.imagePrivacy,
+    title: 'Image privacy',
+    icon: Icons.privacy_tip_outlined,
+    palette: TilePalette.purple,
+  ),
+  ToolInfo(
     id: ToolId.compress,
     title: 'Compress',
     icon: Icons.compress_rounded,
     palette: TilePalette.green,
-    comingIn: 'v0.6',
   ),
   ToolInfo(
     id: ToolId.scan,
@@ -57,7 +62,6 @@ const homeTools = <ToolInfo>[
     comingIn: 'v0.7',
   ),
   ToolInfo(id: ToolId.sign, title: 'Sign', icon: Icons.draw_outlined, palette: TilePalette.yellow, comingIn: 'v0.8'),
-  ToolInfo(id: ToolId.more, title: 'More tools', icon: Icons.grid_view_rounded, palette: TilePalette.slate),
 ];
 
 /// One planned update, shown in "What's coming".
@@ -70,16 +74,6 @@ class PlannedUpdate {
 }
 
 const plannedUpdates = <PlannedUpdate>[
-  PlannedUpdate(
-    'v0.5',
-    'Image privacy',
-    'Remove location and device info from photos. Resize, compress, blur or hide parts of an image, many photos at once.',
-  ),
-  PlannedUpdate(
-    'v0.6',
-    'Compress',
-    'Make PDFs smaller with light, balanced or strong compression, and see the new size first.',
-  ),
   PlannedUpdate('v0.7', 'Security', 'Lock a PDF with a password, unlock it, and add a text or image watermark.'),
   PlannedUpdate('v0.8', 'Edit', 'Add text, your signature, page numbers, header and footer.'),
   PlannedUpdate('v0.9', 'Markup and search', 'Highlight, draw and add shapes. Search for words inside a PDF.'),

@@ -8,20 +8,21 @@ import 'theme.dart';
 import 'widgets.dart';
 
 /// Shows the pictures a tool just made, with Share and Save buttons.
-Future<void> showImagesResultSheet(BuildContext context, List<String> paths) {
+Future<void> showImagesResultSheet(BuildContext context, List<String> paths, {String? note}) {
   return showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
     isScrollControlled: true,
     backgroundColor: AppColors.surface,
-    builder: (context) => _ImagesResultSheet(paths: paths),
+    builder: (context) => _ImagesResultSheet(paths: paths, note: note),
   );
 }
 
 class _ImagesResultSheet extends StatelessWidget {
-  const _ImagesResultSheet({required this.paths});
+  const _ImagesResultSheet({required this.paths, this.note});
 
   final List<String> paths;
+  final String? note;
 
   String _nameOf(String path) => File(path).uri.pathSegments.last;
 
@@ -56,6 +57,14 @@ class _ImagesResultSheet extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 15, color: AppColors.muted),
             ),
+            if (note != null) ...[
+              const SizedBox(height: 6),
+              Text(
+                note!,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 14, color: AppColors.success, fontWeight: FontWeight.w600),
+              ),
+            ],
             const SizedBox(height: 16),
             SizedBox(
               height: 96,

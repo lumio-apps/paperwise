@@ -223,7 +223,7 @@ class _PdfToImagePageState extends State<PdfToImagePage> {
               ),
             )
           else ...[
-            _FileCard(file: file, onChange: _busy ? null : _chooseFile),
+            PickedPdfCard(file: file, onChange: _busy ? null : _chooseFile),
             if (file.isReady) ..._buildOptions(file),
           ],
         ],
@@ -301,8 +301,8 @@ class _PdfToImagePageState extends State<PdfToImagePage> {
 }
 
 /// The chosen PDF with its size and a "Change" button.
-class _FileCard extends StatelessWidget {
-  const _FileCard({required this.file, required this.onChange});
+class PickedPdfCard extends StatelessWidget {
+  const PickedPdfCard({super.key, required this.file, required this.onChange});
 
   final PickedPdf file;
   final VoidCallback? onChange;

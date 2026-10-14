@@ -7,6 +7,7 @@ import 'external_open.dart';
 import 'file_store.dart';
 import 'home_shell.dart';
 import 'library.dart';
+import 'platform_info.dart';
 import 'theme.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -38,6 +39,16 @@ class PaperwiseApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: buildTheme(),
       home: const HomeShell(),
+      builder: (context, child) {
+        // On a wide desktop window keep the phone-style layout readable.
+        if (!PlatformInfo.isDesktop || child == null) return child ?? const SizedBox.shrink();
+        return ColoredBox(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Center(
+            child: ConstrainedBox(constraints: const BoxConstraints(maxWidth: 900), child: child),
+          ),
+        );
+      },
     );
   }
 }

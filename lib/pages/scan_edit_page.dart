@@ -224,8 +224,8 @@ class _CropAreaState extends State<_CropArea> {
 
         void moveTo(int index, Offset position) {
           final next = List<double>.of(widget.corners);
-          next[index * 2] = ((position.dx - left) / w).clamp(0.0, 1.0);
-          next[index * 2 + 1] = ((position.dy - top) / h).clamp(0.0, 1.0);
+          next[index * 2] = ((position.dx - left) / w).clamp(0.0, 1.0).toDouble();
+          next[index * 2 + 1] = ((position.dy - top) / h).clamp(0.0, 1.0).toDouble();
           widget.onChanged(next);
         }
 

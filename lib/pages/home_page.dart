@@ -6,6 +6,8 @@ import '../file_tile.dart';
 import '../theme.dart';
 import '../tools.dart';
 import '../widgets.dart';
+import 'compress_page.dart';
+import 'image_privacy_page.dart';
 import 'image_to_pdf_page.dart';
 import 'merge_page.dart';
 import 'pages_page.dart';
@@ -120,12 +122,15 @@ void openTool(BuildContext context, ToolInfo tool) {
       page = const PdfToImagePage();
     case ToolId.scan:
       page = const ScanToPdfPage();
+    case ToolId.imagePrivacy:
+      page = const ImagePrivacyPage();
     case ToolId.imageToPdf:
       page = const ImageToPdfPage();
     case ToolId.more:
       showComingSoonSheet(context);
       return;
     case ToolId.compress:
+      page = const CompressPage();
     case ToolId.protect:
     case ToolId.sign:
       showMessage(context, '${tool.title} is coming in ${tool.comingIn}. Stay tuned!');
