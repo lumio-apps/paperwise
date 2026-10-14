@@ -21,15 +21,20 @@ Future<void> sharePdfs(List<String> paths) async {
 }
 
 /// Lets the user pick a folder on the phone (like Downloads) and saves a copy there.
-Future<void> savePdfToDevice(BuildContext context, String path, String fileName) async {
+Future<void> savePdfToDevice(BuildContext context, String path, String fileName) {
+  return saveFileToDevice(context, path, fileName, 'application/pdf');
+}
+
+/// Like [savePdfToDevice] but for any file type, for example a picture.
+Future<void> saveFileToDevice(BuildContext context, String path, String fileName, String mimeType) async {
   final messenger = ScaffoldMessenger.of(context);
   try {
     final bytes = await File(path).readAsBytes();
     final saved = await FilePicker.saveFile(
       fileName: fileName,
       bytes: bytes,
-      mimeType: 'application/pdf',
-      dialogTitle: 'Save PDF',
+      mimeType: mimeType,
+      dialogTitle: 'Save file',
     );
     if (saved != null) {
       messenger.showSnackBar(SnackBar(content: Text('Saved "$fileName" to your phone.')));
@@ -37,4 +42,16 @@ Future<void> savePdfToDevice(BuildContext context, String path, String fileName)
   } catch (_) {
     messenger.showSnackBar(const SnackBar(content: Text('Could not save the file. Please try again.')));
   }
+}
+
+/// Opens the share sheet for pictures made by Paperwise.
+Future<void> shareImages(List<String> paths) async {
+  await SharePlus.instance.share(
+    ShareParams(
+      files: [
+        for (final path in paths)
+          XFile(path, mimeType: path.toLowerCase().endsWith('.png') ? 'image/png' : 'image/jpeg'),
+      ],
+    ),
+  );
 }

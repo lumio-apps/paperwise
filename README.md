@@ -20,6 +20,15 @@ After that, Paperwise updates itself: open **Settings → Check for updates**.
   <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
 </p>
 
+## What's in v0.4
+
+- **PDF to image**: save the pages of a PDF as JPG or PNG. Choose the quality (standard, high or best) and all pages or only some, like `1-3, 7`.
+- **Scan to PDF**: take a photo of a page with the camera (or pick one from the gallery). Drag the four corners onto the page edges, and Paperwise straightens it. Pick a look: Original, Magic color, Black & white or Gray. Add more pages, reorder them, and make one PDF. Nothing leaves your phone.
+
+## What's in v0.3
+
+- **Page tools**: open a PDF as a grid of page previews. Tap pages to select them, then move them earlier or later, rotate left or right, delete them, or extract them into a new PDF. You can also hold a page and drag it to a new place. Save the result as a new file; your original PDF is never changed.
+
 ## What's in v0.2
 
 - **PDF viewer**: read any PDF inside Paperwise. Zoom, jump to a page, see page thumbnails, and open locked PDFs with their password.
@@ -42,9 +51,9 @@ Paperwise grows one small update at a time, one group of features per update.
 | Update | Theme | Features |
 | --- | --- | --- |
 | **v0.1** ✅ released | Foundation | Merge, split, image to PDF (gallery and camera), files list with open, share, save, rename and delete, update checker |
-| **v0.2** 🚧 in progress | PDF viewer | Built-in reader with zoom, page jump and thumbnails, continue reading, favorites, open PDFs from other apps |
-| **v0.3** | Page tools | Reorder, rotate, delete and extract pages on a visual page grid |
-| **v0.4** | Convert and scan | PDF to image (JPG or PNG), scan paper to PDF with the camera, manual crop and filters |
+| **v0.2** ✅ released | PDF viewer | Built-in reader with zoom, page jump and thumbnails, continue reading, favorites, open PDFs from other apps |
+| **v0.3** ✅ released | Page tools | Reorder, rotate, delete and extract pages on a visual page grid |
+| **v0.4** 🚧 in progress | Convert and scan | PDF to image (JPG or PNG), scan paper to PDF with the camera, manual crop and filters |
 | **v0.5** | Image privacy | Remove EXIF data (location, device info), resize, compress, blur or hide parts of a photo, batch processing |
 | **v0.6** | Compress | Light, balanced and strong PDF compression, image quality control, size estimate before saving |
 | **v0.7** | Security | Password lock, unlock with the right password, text or image watermark |
@@ -52,7 +61,7 @@ Paperwise grows one small update at a time, one group of features per update.
 | **v0.9** | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
 | **v0.10** | Your way | Dark mode, more languages, sort and search files, local backup and restore |
 | **v0.11** | OCR | Offline text recognition for scanned pages, searchable PDFs |
-| **v1.0** | Ready for stores | Final polish, then F-Droid and Google Play |
+| **v1.0** | Ready for F-Droid | Final polish, then F-Droid and GitHub Releases. Paperwise will not be on Google Play |
 
 ## Privacy
 

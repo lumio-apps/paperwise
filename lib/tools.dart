@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 
-enum ToolId { merge, split, imageToPdf, compress, scan, protect, sign, more }
+enum ToolId { merge, split, pages, imageToPdf, pdfToImage, compress, scan, protect, sign, more }
 
 /// A tile on the home screen.
 class ToolInfo {
@@ -28,7 +28,14 @@ class ToolInfo {
 const homeTools = <ToolInfo>[
   ToolInfo(id: ToolId.merge, title: 'Merge PDF', icon: Icons.merge_type_rounded, palette: TilePalette.blue),
   ToolInfo(id: ToolId.split, title: 'Split PDF', icon: Icons.call_split_rounded, palette: TilePalette.orange),
+  ToolInfo(id: ToolId.pages, title: 'Page tools', icon: Icons.view_module_outlined, palette: TilePalette.slate),
   ToolInfo(id: ToolId.imageToPdf, title: 'Image to PDF', icon: Icons.image_outlined, palette: TilePalette.pink),
+  ToolInfo(
+    id: ToolId.pdfToImage,
+    title: 'PDF to image',
+    icon: Icons.photo_size_select_actual_outlined,
+    palette: TilePalette.green,
+  ),
   ToolInfo(
     id: ToolId.compress,
     title: 'Compress',
@@ -41,7 +48,6 @@ const homeTools = <ToolInfo>[
     title: 'Scan to PDF',
     icon: Icons.document_scanner_outlined,
     palette: TilePalette.teal,
-    comingIn: 'v0.4',
   ),
   ToolInfo(
     id: ToolId.protect,
@@ -64,12 +70,6 @@ class PlannedUpdate {
 }
 
 const plannedUpdates = <PlannedUpdate>[
-  PlannedUpdate('v0.3', 'Page tools', 'Reorder, rotate, delete and extract pages on a visual page grid.'),
-  PlannedUpdate(
-    'v0.4',
-    'Convert and scan',
-    'Save PDF pages as JPG or PNG. Scan paper to PDF with your camera, with crop and filters.',
-  ),
   PlannedUpdate(
     'v0.5',
     'Image privacy',
@@ -93,5 +93,5 @@ const plannedUpdates = <PlannedUpdate>[
     'Text from scans (OCR)',
     'Read text from scanned pages on your phone, with no internet, and make searchable PDFs.',
   ),
-  PlannedUpdate('v1.0', 'Ready for stores', 'Final polish, then Paperwise on F-Droid and Google Play.'),
+  PlannedUpdate('v1.0', 'Ready for F-Droid', 'Final polish, then Paperwise on F-Droid and GitHub Releases. Never on Google Play.'),
 ];

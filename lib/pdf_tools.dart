@@ -14,6 +14,18 @@ class PdfToolException implements Exception {
   String toString() => message;
 }
 
+/// One page in a new arrangement: which page of the source PDF, and how many
+/// quarter turns clockwise to add to its rotation.
+class PageEdit {
+  const PageEdit(this.source, {this.turns = 0});
+
+  /// Index in the source PDF, starting at 0.
+  final int source;
+
+  /// Extra clockwise quarter turns, 0 to 3.
+  final int turns;
+}
+
 /// PDF work done fully on the phone with PDFium (through pdfrx).
 class PdfTools {
   PdfTools._();
@@ -26,6 +38,26 @@ class PdfTools {
       throw PdfToolException('"$name" is locked with a password. Unlocking PDFs is coming in a later update.');
     } catch (_) {
       throw PdfToolException('"$name" could not be opened. It may be damaged or not a real PDF.');
+    }
+  }
+
+  /// Opens [path] for reading. The caller must call `dispose()` on the result.
+  static Future<PdfDocument> openDocument(String path, String name) => _open(path, name);
+
+  /// Builds a new PDF from pages of [source], in the order of [edits], with
+  /// their extra rotation. [source] stays open and unchanged.
+  static Future<Uint8List> arrange(PdfDocument source, List<PageEdit> edits) async {
+    if (edits.isEmpty) throw const PdfToolException('Choose at least one page.');
+    final pages = source.pages;
+    final out = await PdfDocument.createNew(sourceName: 'paperwise-pages');
+    try {
+      out.pages = [
+        for (final edit in edits)
+          pages[edit.source].rotatedBy(PdfPageRotation.values[edit.turns & 3]),
+      ];
+      return await out.encodePdf();
+    } finally {
+      await out.dispose();
     }
   }
 

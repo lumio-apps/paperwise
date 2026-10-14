@@ -8,6 +8,9 @@ import '../tools.dart';
 import '../widgets.dart';
 import 'image_to_pdf_page.dart';
 import 'merge_page.dart';
+import 'pages_page.dart';
+import 'pdf_to_image_page.dart';
+import 'scan_page.dart';
 import 'split_page.dart';
 
 /// The first screen: tool tiles and the latest files.
@@ -111,13 +114,18 @@ void openTool(BuildContext context, ToolInfo tool) {
       page = const MergePage();
     case ToolId.split:
       page = const SplitPage();
+    case ToolId.pages:
+      page = const PagesPage();
+    case ToolId.pdfToImage:
+      page = const PdfToImagePage();
+    case ToolId.scan:
+      page = const ScanToPdfPage();
     case ToolId.imageToPdf:
       page = const ImageToPdfPage();
     case ToolId.more:
       showComingSoonSheet(context);
       return;
     case ToolId.compress:
-    case ToolId.scan:
     case ToolId.protect:
     case ToolId.sign:
       showMessage(context, '${tool.title} is coming in ${tool.comingIn}. Stay tuned!');
