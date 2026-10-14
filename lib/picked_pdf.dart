@@ -20,6 +20,9 @@ class PickedPdf {
   /// Set when the PDF can't be used (locked or damaged).
   String? error;
 
+  /// True when the PDF is locked with a password.
+  bool locked = false;
+
   bool get isReady => pageCount != null && error == null;
   bool get isLoading => pageCount == null && error == null;
 
@@ -27,6 +30,9 @@ class PickedPdf {
   Future<void> load() async {
     try {
       pageCount = await PdfTools.pageCount(path, name);
+    } on PdfLockedException catch (e) {
+      locked = true;
+      error = e.message;
     } on PdfToolException catch (e) {
       error = e.message;
     } catch (_) {

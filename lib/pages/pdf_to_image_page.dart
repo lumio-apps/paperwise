@@ -302,20 +302,25 @@ class _PdfToImagePageState extends State<PdfToImagePage> {
 
 /// The chosen PDF with its size and a "Change" button.
 class PickedPdfCard extends StatelessWidget {
-  const PickedPdfCard({super.key, required this.file, required this.onChange});
+  const PickedPdfCard({super.key, required this.file, required this.onChange, this.detail});
 
   final PickedPdf file;
   final VoidCallback? onChange;
 
+  /// Replaces the default line under the name, for example "Locked".
+  final String? detail;
+
   @override
   Widget build(BuildContext context) {
-    final String detail;
-    if (file.error != null) {
-      detail = file.error!;
+    final String line;
+    if (detail != null) {
+      line = detail!;
+    } else if (file.error != null) {
+      line = file.error!;
     } else if (file.isLoading) {
-      detail = 'Reading…';
+      line = 'Reading…';
     } else {
-      detail = '${pageCountLabel(file.pageCount ?? 0)} · ${formatBytes(file.sizeBytes)}';
+      line = '${pageCountLabel(file.pageCount ?? 0)} · ${formatBytes(file.sizeBytes)}';
     }
     return SectionCard(
       padding: const EdgeInsets.fromLTRB(14, 12, 6, 12),
@@ -335,8 +340,8 @@ class PickedPdfCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  detail,
-                  style: TextStyle(fontSize: 13, color: file.error != null ? AppColors.danger : AppColors.muted),
+                  line,
+                  style: TextStyle(fontSize: 13, color: (file.error != null && detail == null) ? AppColors.danger : AppColors.muted),
                 ),
               ],
             ),

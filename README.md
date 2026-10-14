@@ -21,6 +21,13 @@ Get the latest files from the [Releases page](https://github.com/lumio-apps/pape
   <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
 </p>
 
+## What's in v0.7
+
+- **Lock PDF**: protect a PDF with a password (AES-128). Paperwise checks that the new file opens with your password and not without it before saving. It never stores your password.
+- **Unlock PDF**: type the password and get an unlocked copy. Text stays selectable.
+- **Watermark**: stamp text or a picture on every page, centered or repeated, in three sizes and strengths.
+- Locking and watermarking redraw pages as sharp pictures, so text in those copies can no longer be selected or searched. Originals are never changed.
+
 ## What's in v0.6
 
 - **Compress PDF**: choose Light, Balanced or Strong and see the expected size before you start. The new file is saved next to your other files and the original is never changed.
@@ -69,8 +76,8 @@ Paperwise grows one small update at a time, one group of features per update.
 | **v0.3** ✅ released | Page tools | Reorder, rotate, delete and extract pages on a visual page grid |
 | **v0.4** ✅ released | Convert and scan | PDF to image (JPG or PNG), scan paper to PDF with the camera, manual crop and filters |
 | **v0.5** ✅ released | Image privacy | Remove EXIF data (location, device info), resize, compress, blur or hide parts of a photo, batch processing |
-| **v0.6** 🚧 in progress | Compress | Light, balanced and strong PDF compression, image quality control, size estimate before saving |
-| **v0.7** | Security | Password lock, unlock with the right password, text or image watermark |
+| **v0.6** ✅ released | Compress | Light, balanced and strong PDF compression, image quality control, size estimate before saving |
+| **v0.7** 🚧 in progress | Security | Password lock, unlock with the right password, text or image watermark |
 | **v0.8** | Edit | Add text, signature, page numbers, header and footer |
 | **v0.9** | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
 | **v0.10** | Your way | Dark mode, more languages, sort and search files, local backup and restore |

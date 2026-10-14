@@ -59,7 +59,6 @@ const homeTools = <ToolInfo>[
     title: 'Protect',
     icon: Icons.lock_outline_rounded,
     palette: TilePalette.purple,
-    comingIn: 'v0.7',
   ),
   ToolInfo(id: ToolId.sign, title: 'Sign', icon: Icons.draw_outlined, palette: TilePalette.yellow, comingIn: 'v0.8'),
 ];
@@ -74,7 +73,6 @@ class PlannedUpdate {
 }
 
 const plannedUpdates = <PlannedUpdate>[
-  PlannedUpdate('v0.7', 'Security', 'Lock a PDF with a password, unlock it, and add a text or image watermark.'),
   PlannedUpdate('v0.8', 'Edit', 'Add text, your signature, page numbers, header and footer.'),
   PlannedUpdate('v0.9', 'Markup and search', 'Highlight, draw and add shapes. Search for words inside a PDF.'),
   PlannedUpdate(

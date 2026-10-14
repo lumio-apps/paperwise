@@ -12,6 +12,7 @@ import 'image_to_pdf_page.dart';
 import 'merge_page.dart';
 import 'pages_page.dart';
 import 'pdf_to_image_page.dart';
+import 'protect_page.dart';
 import 'scan_page.dart';
 import 'split_page.dart';
 
@@ -132,6 +133,7 @@ void openTool(BuildContext context, ToolInfo tool) {
     case ToolId.compress:
       page = const CompressPage();
     case ToolId.protect:
+      page = const ProtectPage();
     case ToolId.sign:
       showMessage(context, '${tool.title} is coming in ${tool.comingIn}. Stay tuned!');
       return;

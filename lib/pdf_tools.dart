@@ -14,6 +14,11 @@ class PdfToolException implements Exception {
   String toString() => message;
 }
 
+/// Thrown when a PDF needs a password that was not given.
+class PdfLockedException extends PdfToolException {
+  const PdfLockedException(super.message);
+}
+
 /// One page in a new arrangement: which page of the source PDF, and how many
 /// quarter turns clockwise to add to its rotation.
 class PageEdit {
@@ -35,7 +40,7 @@ class PdfTools {
     try {
       return await PdfDocument.openFile(path);
     } on PdfPasswordException {
-      throw PdfToolException('"$name" is locked with a password. Unlocking PDFs is coming in a later update.');
+      throw PdfLockedException('"$name" is locked with a password. Open Protect → Unlock first.');
     } catch (_) {
       throw PdfToolException('"$name" could not be opened. It may be damaged or not a real PDF.');
     }
@@ -43,6 +48,31 @@ class PdfTools {
 
   /// Opens [path] for reading. The caller must call `dispose()` on the result.
   static Future<PdfDocument> openDocument(String path, String name) => _open(path, name);
+
+  /// Opens a PDF that may be locked. [onPasswordNeeded] is called when the
+  /// file turns out to be locked. A wrong password throws a friendly error.
+  static Future<PdfDocument> openWithPassword(
+    String path,
+    String name,
+    String password, {
+    void Function()? onPasswordNeeded,
+  }) async {
+    var attempts = 0;
+    try {
+      return await PdfDocument.openFile(
+        path,
+        passwordProvider: () {
+          onPasswordNeeded?.call();
+          // Give the password once; null stops PDFium from asking again.
+          return attempts++ == 0 ? password : null;
+        },
+      );
+    } on PdfPasswordException {
+      throw const PdfToolException('That password is not right.');
+    } catch (_) {
+      throw PdfToolException('"$name" could not be opened. It may be damaged or not a real PDF.');
+    }
+  }
 
   /// Builds a new PDF from pages of [source], in the order of [edits], with
   /// their extra rotation. [source] stays open and unchanged.
