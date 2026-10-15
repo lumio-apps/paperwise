@@ -8,7 +8,7 @@ Made by [Lumio Apps](https://github.com/lumio-apps).
 
 Get the latest APK from the [Releases page](https://github.com/lumio-apps/paperwise/releases/latest). Requires Android 7.0 or newer.
 
-After that, Paperwise updates itself: open **Settings → Check for updates**.
+Google Play version: coming soon. The APK from the Releases page does not update itself, so download the new APK when a new version comes out.
 
 ## Screenshots
 
@@ -19,6 +19,11 @@ After that, Paperwise updates itself: open **Settings → Check for updates**.
   &nbsp;
   <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
 </p>
+
+## What's in v1.0
+
+- Ready for Google Play: the app no longer has any internet permission and the in-app updater is gone. Releases now also include a signed `.aab` bundle for Play.
+- Privacy policy: [PRIVACY.md](PRIVACY.md). Store listing text and checklist: [docs/play-store/listing.md](docs/play-store/listing.md).
 
 ## What's in v0.11
 
@@ -88,7 +93,7 @@ After that, Paperwise updates itself: open **Settings → Check for updates**.
 - **Split PDF**: cut a PDF by page ranges (like `1-4, 5-10`) or make one file per page. A colored page grid shows which pages go into which file.
 - **Image to PDF**: pick photos from the gallery or take new ones with the camera. Reorder them, then choose page size (A4, Letter, fit image), orientation and margin.
 - **Your files**: every PDF you make is saved in Paperwise. Open, share, save to your phone, rename or delete it.
-- **Check for updates**: asks GitHub Releases for a newer version and installs it inside the app. This is the only time Paperwise uses the internet.
+- _(v0.1 had an in-app updater. It was removed in v1.0.)_
 
 ## Roadmap
 
@@ -106,14 +111,14 @@ Paperwise grows one small update at a time, one group of features per update.
 | **v0.8** ✅ released | Edit | Add text, signature, page numbers, header and footer |
 | **v0.9** ✅ released | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
 | **v0.10** ✅ released | Your way | Dark mode, more languages, sort and search files, local backup and restore |
-| **v0.11** 🚧 in progress | OCR | Offline text recognition for scanned pages, searchable PDFs |
-| **v1.0** | Ready for everyone | Final polish, then Google Play and GitHub Releases |
+| **v0.11** ✅ released | OCR | Offline text recognition for scanned pages, searchable PDFs |
+| **v1.0** 🚧 in progress | Ready for Google Play | No internet permission, signed bundle, privacy policy, store listing |
 
 ## Privacy
 
 - All PDF work happens on the device with [PDFium](https://pdfium.googlesource.com/pdfium/) (through `pdfrx`) and the `pdf` package.
 - Files are stored in the app's own folder until you share or save them.
-- The internet permission is used only by **Check for updates**.
+- Since v1.0 the app has no internet permission at all. See [PRIVACY.md](PRIVACY.md).
 
 ## Build
 
