@@ -20,6 +20,12 @@ After that, Paperwise updates itself: open **Settings → Check for updates**.
   <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
 </p>
 
+## What's in v0.11
+
+- **Text from scans (OCR)**: read the words on scanned pages, on your phone, with no internet. Text recognition uses the ML Kit model that is bundled inside the app. English only for now.
+- **Searchable PDF**: your scan stays exactly as it is, and the words are added invisibly behind it, so you can search and copy from the PDF. Pages that already contain text are skipped.
+- **Copy text**: shows the text of the whole PDF so you can copy or share it.
+
 ## What's in v0.10
 
 - **Dark mode**: light, dark, or follow the phone. Your choice is remembered.
@@ -99,8 +105,8 @@ Paperwise grows one small update at a time, one group of features per update.
 | **v0.7** ✅ released | Security | Password lock, unlock with the right password, text or image watermark |
 | **v0.8** ✅ released | Edit | Add text, signature, page numbers, header and footer |
 | **v0.9** ✅ released | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
-| **v0.10** 🚧 in progress | Your way | Dark mode, more languages, sort and search files, local backup and restore |
-| **v0.11** | OCR | Offline text recognition for scanned pages, searchable PDFs |
+| **v0.10** ✅ released | Your way | Dark mode, more languages, sort and search files, local backup and restore |
+| **v0.11** 🚧 in progress | OCR | Offline text recognition for scanned pages, searchable PDFs |
 | **v1.0** | Ready for everyone | Final polish, then Google Play and GitHub Releases |
 
 ## Privacy

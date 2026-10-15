@@ -180,7 +180,7 @@ class SecondaryButton extends StatelessWidget {
     return OutlinedButton.icon(
       onPressed: onPressed,
       icon: Icon(icon, size: 20),
-      label: Text(label, overflow: TextOverflow.ellipsis),
+      label: Text(label.tr, overflow: TextOverflow.ellipsis),
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.ink,
         minimumSize: const Size.fromHeight(52),
@@ -225,7 +225,7 @@ class FieldLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text.tr,
       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.muted),
     );
   }

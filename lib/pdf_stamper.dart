@@ -45,6 +45,25 @@ class TextStamp extends Stamp {
   final StampColor color;
 }
 
+/// A word found by text recognition (OCR). It is written invisibly, on top of
+/// the scanned word, so the page can be searched and copied from. The four
+/// numbers are the box around the word, as fractions of the page.
+class HiddenWordStamp extends Stamp {
+  const HiddenWordStamp({
+    required this.left,
+    required this.top,
+    required this.right,
+    required this.bottom,
+    required this.text,
+  });
+
+  final double left;
+  final double top;
+  final double right;
+  final double bottom;
+  final String text;
+}
+
 /// Pen strokes, for example a signature. Each stroke is a flat list of
 /// x,y,x,y... fractions of the page.
 class InkStamp extends Stamp {
@@ -291,6 +310,26 @@ class PdfStamper {
               '${_n(right.$1)} ${_n(right.$2)} ${_n(up.$1)} ${_n(up.$2)} ${_n(origin.$1)} ${_n(origin.$2)} Tm '
               '(${_escape(stamp.text)}) Tj ET',
             );
+          case HiddenWordStamp():
+            final word = _plainWord(stamp.text);
+            final boxWidth = (stamp.right - stamp.left) * width;
+            final boxHeight = (stamp.bottom - stamp.top) * height;
+            if (word.isEmpty || boxWidth <= 0 || boxHeight <= 0) continue;
+            final name = fontName(PdfFont.sans);
+            // Text size follows the height of the word, and the text is
+            // stretched sideways so it is exactly as wide as the scanned word.
+            final size = boxHeight.clamp(1.0, 200.0);
+            final natural = PdfFont.sans.width(word, size);
+            final stretch = natural <= 0 ? 1.0 : (boxWidth / natural).clamp(0.05, 20.0);
+            final origin = geometry.point(stamp.left, stamp.bottom - 0.2 * size / height);
+            final right = geometry.vector(1, 0);
+            final up = geometry.vector(0, -1);
+            // Mode 3 draws nothing. The space after the word keeps copied text readable.
+            ops.add(
+              'BT 3 Tr /$name ${_n(size)} Tf '
+              '${_n(right.$1 * stretch)} ${_n(right.$2 * stretch)} ${_n(up.$1)} ${_n(up.$2)} '
+              '${_n(origin.$1)} ${_n(origin.$2)} Tm (${_escape(word)} ) Tj 0 Tr ET',
+            );
           case InkStamp():
             final c = stamp.color;
             ops.add('${_n(c.red)} ${_n(c.green)} ${_n(c.blue)} RG ${_n(stamp.width)} w 1 J 1 j');
@@ -449,6 +488,22 @@ class PdfStamper {
       s = s.replaceFirst(RegExp(r'0+$'), '').replaceFirst(RegExp(r'\.$'), '');
     }
     return (s.isEmpty || s == '-0') ? '0' : s;
+  }
+
+  /// Keeps what the built-in font can write. Accents are dropped (é becomes e).
+  static String _plainWord(String text) {
+    const from = 'àáâãäåçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ';
+    const to = 'aaaaaaceeeeiiiinooooouuuuyyAAAAAACEEEEIIIINOOOOOUUUUY';
+    final out = StringBuffer();
+    for (final unit in text.codeUnits) {
+      if (unit >= 33 && unit <= 126) {
+        out.writeCharCode(unit);
+        continue;
+      }
+      final index = from.indexOf(String.fromCharCode(unit));
+      if (index >= 0) out.write(to[index]);
+    }
+    return out.toString();
   }
 
   static String _escape(String text) {

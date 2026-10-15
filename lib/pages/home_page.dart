@@ -14,6 +14,7 @@ import 'image_to_pdf_page.dart';
 import 'markup_page.dart';
 import 'merge_page.dart';
 import 'pages_page.dart';
+import 'ocr_page.dart';
 import 'pdf_to_image_page.dart';
 import 'protect_page.dart';
 import 'scan_page.dart';
@@ -137,6 +138,8 @@ void openTool(BuildContext context, ToolInfo tool) {
       return;
     case ToolId.compress:
       page = const CompressPage();
+    case ToolId.ocr:
+      page = const OcrPage();
     case ToolId.protect:
       page = const ProtectPage();
     case ToolId.sign:

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 
-enum ToolId { merge, split, pages, imageToPdf, pdfToImage, imagePrivacy, compress, scan, protect, sign, markup, search, more }
+enum ToolId { merge, split, pages, imageToPdf, pdfToImage, imagePrivacy, compress, scan, ocr, protect, sign, markup, search, more }
 
 /// A tile on the home screen.
 class ToolInfo {
@@ -55,6 +55,12 @@ List<ToolInfo> get homeTools => <ToolInfo>[
     palette: TilePalette.teal,
   ),
   ToolInfo(
+    id: ToolId.ocr,
+    title: 'Text from scans',
+    icon: Icons.text_fields_rounded,
+    palette: TilePalette.pink,
+  ),
+  ToolInfo(
     id: ToolId.protect,
     title: 'Protect',
     icon: Icons.lock_outline_rounded,
@@ -75,10 +81,5 @@ class PlannedUpdate {
 }
 
 const plannedUpdates = <PlannedUpdate>[
-  PlannedUpdate(
-    'v0.11',
-    'Text from scans (OCR)',
-    'Read text from scanned pages on your phone, with no internet, and make searchable PDFs.',
-  ),
   PlannedUpdate('v1.0', 'Ready for everyone', 'Final polish, then Paperwise on Google Play and GitHub Releases.'),
 ];

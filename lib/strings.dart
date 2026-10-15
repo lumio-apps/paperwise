@@ -39,6 +39,22 @@ const _hindi = <String, String>{
   'Markup': 'मार्कअप',
   'Search in PDF': 'PDF में खोजें',
 
+  'Text from scans': 'स्कैन से टेक्स्ट',
+  'Choose a scanned PDF': 'स्कैन किया PDF चुनें',
+  'Choose PDF': 'PDF चुनें',
+  'Read the words on scanned pages. Everything happens on your phone, with no internet.':
+      'स्कैन किए पन्नों के शब्द पढ़ें। सब कुछ आपके फ़ोन पर होता है, बिना इंटरनेट के।',
+  'Make searchable': 'खोजने लायक बनाएँ',
+  'Read text': 'टेक्स्ट पढ़ें',
+  'What do you want?': 'आपको क्या चाहिए?',
+  'Searchable PDF': 'खोजने लायक PDF',
+  'Copy text': 'टेक्स्ट कॉपी करें',
+  'Copy': 'कॉपी',
+  'Text copied.': 'टेक्स्ट कॉपी हो गया।',
+  'Starting…': 'शुरू हो रहा है…',
+  'Saving…': 'सेव हो रहा है…',
+  'No text was found on these pages.': 'इन पन्नों पर कोई टेक्स्ट नहीं मिला।',
+
   // Shared buttons
   'Back': 'वापस',
   'Cancel': 'रद्द करें',
