@@ -1,135 +1,115 @@
-# Paperwise
-
-A private PDF toolkit for Android that works fully offline. Every tool runs on your phone, so your files never leave it. No ads, no tracking, no account.
-
-Made by [Lumio Apps](https://github.com/lumio-apps).
-
-## Download
-
-Get the latest APK from the [Releases page](https://github.com/lumio-apps/paperwise/releases/latest). Requires Android 7.0 or newer.
-
-Google Play version: coming soon. The APK from the Releases page does not update itself, so download the new APK when a new version comes out.
-
-## Screenshots
+<h1 align="center">Paperwise</h1>
 
 <p align="center">
-  <img src="docs/screenshots/home.jpg" width="240" alt="Home screen with tool tiles">
-  &nbsp;
-  <img src="docs/screenshots/files.jpg" width="240" alt="Your files screen">
-  &nbsp;
-  <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
+  <b>Private PDF tools for Android. Fully offline.</b><br>
+  Merge, split, sign, scan, compress, protect and search PDFs, all on your phone.<br>
+  No ads. No account. No tracking. No internet permission.
 </p>
 
-## What's in v1.0
+<p align="center">
+  <a href="https://github.com/lumio-apps/paperwise/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/lumio-apps/paperwise?color=4338CA&label=release"></a>
+  <img alt="Android 7.0+" src="https://img.shields.io/badge/Android-7.0%2B-15803D">
+  <img alt="Works offline" src="https://img.shields.io/badge/works-offline-0E7490">
+  <img alt="No ads" src="https://img.shields.io/badge/ads-none-BE185D">
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-334155"></a>
+</p>
 
-- Ready for Google Play: the app no longer has any internet permission and the in-app updater is gone. Releases now also include a signed `.aab` bundle for Play.
-- Privacy policy: [PRIVACY.md](PRIVACY.md). Store listing text and checklist: [docs/play-store/listing.md](docs/play-store/listing.md).
+<p align="center">
+  <img src="docs/screenshots/home.jpg" width="190" alt="Home screen with colorful tool tiles">
+  &nbsp;
+  <img src="docs/screenshots/tools.jpg" width="190" alt="More tools: Text from scans, Protect, Edit and sign, Markup, Search">
+  &nbsp;
+  <img src="docs/screenshots/files.jpg" width="190" alt="Your files with search and sort">
+  &nbsp;
+  <img src="docs/screenshots/settings-dark.jpg" width="190" alt="Settings in dark mode">
+</p>
 
-## What's in v0.11
+## Why Paperwise
 
-- **Text from scans (OCR)**: read the words on scanned pages, on your phone, with no internet. Text recognition uses the ML Kit model that is bundled inside the app. English only for now.
-- **Searchable PDF**: your scan stays exactly as it is, and the words are added invisibly behind it, so you can search and copy from the PDF. Pages that already contain text are skipped.
-- **Copy text**: shows the text of the whole PDF so you can copy or share it.
+Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does none of that. Every tool runs on your phone, and the app has **no internet permission at all**, so it could not send your documents anywhere even if it wanted to. The code is open, so you can check that for yourself.
 
-## What's in v0.10
+## What you can do
 
-- **Dark mode**: light, dark, or follow the phone. Your choice is remembered.
-- **Languages**: English and Hindi (हिन्दी) for the main screens. The tool screens are still English and will follow.
-- **Files**: search by name and sort by newest, oldest, name or size.
-- **Backup and restore**: save all your PDFs, reading list and signature in one `.pwbackup` file, and bring them back on this or a new phone. Nothing is uploaded; you choose where the file goes.
-
-## What's in v0.9
-
-- **Markup**: highlight text with a see-through marker, draw with a pen, and add boxes, ovals, lines and arrows in six colors and three thicknesses. Marks are written into the PDF page, so the text underneath stays selectable.
-- **Search in PDF**: find words inside a PDF. Matches are marked on the page and you can jump to the previous or next one. The search box is also in the viewer (tap the magnifier).
-- A scanned PDF has no text to search until OCR arrives in v0.11.
-
-## What's in v0.8
-
-- **Edit & sign**: type text anywhere on a page, or draw your signature with a finger and place it. Drag to move, tap to resize, and the signature can be remembered on your phone for next time.
-- **Page numbers**: top or bottom, left, center or right, in three looks (`1`, `Page 1`, `Page 1 of N`). Choose the page to start on, so a cover page can stay clean.
-- **Header and footer**: add your own text to every page. Use `{n}` for the page number and `{total}` for the number of pages.
-- Text is written straight into the PDF page, so the text that was already there stays selectable and searchable. Originals are never changed.
-- For now added text supports letters, numbers and keyboard symbols (no accents or other scripts yet).
-
-## What's in v0.7
-
-- **Lock PDF**: protect a PDF with a password (AES-128). Paperwise checks that the new file opens with your password and not without it before saving. It never stores your password.
-- **Unlock PDF**: type the password and get an unlocked copy. Text stays selectable.
-- **Watermark**: stamp text or a picture on every page, centered or repeated, in three sizes and strengths.
-- Locking and watermarking redraw pages as sharp pictures, so text in those copies can no longer be selected or searched. Originals are never changed.
-
-## What's in v0.6
-
-- **Compress PDF**: choose Light, Balanced or Strong and see the expected size before you start. The new file is saved next to your other files and the original is never changed.
-- Pages are redrawn as pictures, so text can no longer be selected or searched in the compressed copy. It works best on scans and photo PDFs. If a PDF would not get smaller, nothing is saved.
-
-## What's in v0.5
-
-- **Image privacy**: pick one or many photos and see what is hidden inside them: location, phone or camera name, date and the app that edited them. Paperwise makes a clean copy that is rebuilt from the pixels only, so all of that is left behind.
-- **Resize and compress**: shrink pictures to Large, Medium or Small, and choose how strongly JPG pictures are compressed.
-- **Blur or hide**: drag boxes over faces, number plates or text, and choose a strong blur or a solid black box.
-- Your original pictures are never changed. Everything stays on your phone.
-
-## What's in v0.4
-
-- **PDF to image**: save the pages of a PDF as JPG or PNG. Choose the quality (standard, high or best) and all pages or only some, like `1-3, 7`.
-- **Scan to PDF**: take a photo of a page with the camera (or pick one from the gallery). Drag the four corners onto the page edges, and Paperwise straightens it. Pick a look: Original, Magic color, Black & white or Gray. Add more pages, reorder them, and make one PDF. Nothing leaves your phone.
-
-## What's in v0.3
-
-- **Page tools**: open a PDF as a grid of page previews. Tap pages to select them, then move them earlier or later, rotate left or right, delete them, or extract them into a new PDF. You can also hold a page and drag it to a new place. Save the result as a new file; your original PDF is never changed.
-
-## What's in v0.2
-
-- **PDF viewer**: read any PDF inside Paperwise. Zoom, jump to a page, see page thumbnails, and open locked PDFs with their password.
-- **Continue reading**: Paperwise remembers the page you stopped on and shows a "Continue reading" card in Your files.
-- **Favorites**: star the PDFs you use most and filter them in Your files.
-- **Open from other apps**: choose Paperwise when you tap a PDF in your file manager, a chat app or email. Or tap "Open a PDF" in Your files.
-
-## What's in v0.1
-
-- **Merge PDF**: join two or more PDFs and drag them into the order you want.
-- **Split PDF**: cut a PDF by page ranges (like `1-4, 5-10`) or make one file per page. A colored page grid shows which pages go into which file.
-- **Image to PDF**: pick photos from the gallery or take new ones with the camera. Reorder them, then choose page size (A4, Letter, fit image), orientation and margin.
-- **Your files**: every PDF you make is saved in Paperwise. Open, share, save to your phone, rename or delete it.
-- _(v0.1 had an in-app updater. It was removed in v1.0.)_
-
-## Roadmap
-
-Paperwise grows one small update at a time, one group of features per update.
-
-| Update | Theme | Features |
+| | Tool | What it does |
 | --- | --- | --- |
-| **v0.1** ✅ released | Foundation | Merge, split, image to PDF (gallery and camera), files list with open, share, save, rename and delete, update checker |
-| **v0.2** ✅ released | PDF viewer | Built-in reader with zoom, page jump and thumbnails, continue reading, favorites, open PDFs from other apps |
-| **v0.3** ✅ released | Page tools | Reorder, rotate, delete and extract pages on a visual page grid |
-| **v0.4** ✅ released | Convert and scan | PDF to image (JPG or PNG), scan paper to PDF with the camera, manual crop and filters |
-| **v0.5** ✅ released | Image privacy | Remove EXIF data (location, device info), resize, compress, blur or hide parts of a photo, batch processing |
-| **v0.6** ✅ released | Compress | Light, balanced and strong PDF compression, image quality control, size estimate before saving |
-| **v0.7** ✅ released | Security | Password lock, unlock with the right password, text or image watermark |
-| **v0.8** ✅ released | Edit | Add text, signature, page numbers, header and footer |
-| **v0.9** ✅ released | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
-| **v0.10** ✅ released | Your way | Dark mode, more languages, sort and search files, local backup and restore |
-| **v0.11** ✅ released | OCR | Offline text recognition for scanned pages, searchable PDFs |
-| **v1.0** 🚧 in progress | Ready for Google Play | No internet permission, signed bundle, privacy policy, store listing |
+| 🔗 | **Merge PDF** | Join PDFs into one and drag them into the order you want |
+| ✂️ | **Split PDF** | Cut by page ranges (`1-4, 5-10`) or make one file per page |
+| 🧩 | **Page tools** | Reorder, rotate, delete and extract pages on a visual page grid |
+| 🖼️ | **Image to PDF** | Turn photos from the gallery or camera into a PDF (A4, Letter or fit image) |
+| 📤 | **PDF to image** | Save pages as JPG or PNG, all pages or just some |
+| 📷 | **Scan to PDF** | Photograph paper, straighten it with the four corners, pick a look and build a PDF |
+| 🗜️ | **Compress** | Light, Balanced or Strong, with the expected size shown first |
+| 🔤 | **Text from scans** | Make scanned PDFs searchable, or copy their text (offline, English) |
+| 🔒 | **Protect** | Lock with a password (AES-128), unlock, or add a text or image watermark |
+| ✍️ | **Edit & sign** | Type text anywhere, draw and place your signature, add page numbers, headers and footers |
+| 🖍️ | **Markup** | Highlighter, pen, boxes, ovals, lines and arrows in six colors |
+| 🔎 | **Search in PDF** | Find words inside a PDF and jump between matches |
+| 🛡️ | **Image privacy** | Remove hidden location and device info from photos, blur faces or number plates |
+
+**Also built in**
+
+- A PDF reader with zoom, page jump, thumbnails, "Continue reading" and favorites
+- Open PDFs straight from your file manager, chat apps or email ("Open with Paperwise")
+- Search and sort your files by newest, oldest, name or size
+- Light, dark or system look, in English and Hindi (हिन्दी)
+- Backup and restore in one `.pwbackup` file (you choose where it goes)
+
+Your original files are never changed. Every tool saves a new copy.
+
+## Install
+
+**Google Play:** coming soon.
+
+**From GitHub:** download the latest `.apk` from the [Releases page](https://github.com/lumio-apps/paperwise/releases/latest), open it on your phone and allow installs from your browser or file manager when Android asks. Requires Android 7.0 or newer.
+
+The GitHub APK and the Google Play version are signed with different keys, so Android will not update one over the other. To switch, use **Settings → Back up your files** first, uninstall, install the other one, then **Restore from a backup**. The APK does not update itself, so download the new one from Releases when a new version comes out.
+
+## Good to know
+
+- **Text from scans** reads English text. It adds the words invisibly behind your scan, so the scan looks exactly the same but becomes searchable. Clear, straight scans work best.
+- **Lock, Watermark and Compress** redraw each page as a picture. Text in those copies can no longer be selected. Edit & sign, Markup and Unlock keep the text selectable.
+- Text you add with **Edit & sign** supports letters, numbers and keyboard symbols (no accents or other scripts yet).
+- Hindi covers the main screens. Tool screens are still in English.
 
 ## Privacy
 
-- All PDF work happens on the device with [PDFium](https://pdfium.googlesource.com/pdfium/) (through `pdfrx`) and the `pdf` package.
-- Files are stored in the app's own folder until you share or save them.
-- Since v1.0 the app has no internet permission at all. See [PRIVACY.md](PRIVACY.md).
+- Everything happens on your phone. Files you pick are read locally and results are saved in the app's own storage.
+- No internet permission, no ads, no analytics, no account.
+- Passwords are used only to lock the file and are never stored.
+- Full policy: [PRIVACY.md](PRIVACY.md)
 
-## Build
+## Build from source
+
+You need [Flutter](https://docs.flutter.dev/get-started/install) (stable) and the Android SDK.
 
 ```sh
 flutter pub get
 flutter analyze
-flutter build apk --release
+flutter run                    # on a connected phone or emulator
+flutter build apk --release    # signed with the debug key unless android/key.properties exists
 ```
 
-Pushing a tag like `v0.1.0` builds a signed APK with GitHub Actions and publishes them on the Releases page.
+**Releases:** pushing a tag like `v1.0.0` runs GitHub Actions, which builds the APK and the Play Store bundle (`.aab`), signs them with the Lumio release key from repository secrets and publishes both on the Releases page. The Google Play listing text and checklist are in [docs/play-store/listing.md](docs/play-store/listing.md).
+
+## Built with
+
+- [Flutter](https://flutter.dev) and Material 3
+- [PDFium](https://pdfium.googlesource.com/pdfium/) through [`pdfrx`](https://pub.dev/packages/pdfrx) for reading, rendering and page assembly
+- [`pdf`](https://pub.dev/packages/pdf) and [`image`](https://pub.dev/packages/image) for creating PDFs and pictures
+- [`pointycastle`](https://pub.dev/packages/pointycastle) for PDF encryption
+- Google ML Kit text recognition (bundled, runs on the device) for scans
+- [Outfit](https://fonts.google.com/specimen/Outfit) font (SIL Open Font License)
+
+## Roadmap
+
+Paperwise is feature complete for v1.0. Ideas for later: OCR for more languages, more of the tool screens in Hindi, and more languages. See what changed in each version in the [changelog](CHANGELOG.md).
+
+## Contributing
+
+Bug reports and ideas are welcome: [open an issue](https://github.com/lumio-apps/paperwise/issues). Please do not attach private documents to issues.
 
 ## License
 
-MIT. The bundled Outfit font is under the SIL Open Font License (see `assets/fonts/OFL.txt`).
+[MIT](LICENSE) © Lumio Apps. The bundled Outfit font is under the SIL Open Font License (see `assets/fonts/OFL.txt`).
+
+<p align="center"><sub>Made by <a href="https://github.com/lumio-apps">Lumio Apps</a>: simple, private, open source apps.</sub></p>
