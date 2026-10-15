@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import '../file_store.dart';
 import '../format.dart';
 import '../image_pdf.dart';
-import '../platform_info.dart';
 import '../result_sheet.dart';
 import '../theme.dart';
 import '../widgets.dart';
@@ -122,16 +121,14 @@ class _ImageToPdfPageState extends State<ImageToPdfPage> {
                         onPressed: _pickFromGallery,
                       ),
                     ),
-                    if (PlatformInfo.hasCamera) ...[
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: SecondaryButton(
-                          label: 'Camera',
-                          icon: Icons.photo_camera_outlined,
-                          onPressed: _takePhoto,
-                        ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: SecondaryButton(
+                        label: 'Camera',
+                        icon: Icons.photo_camera_outlined,
+                        onPressed: _takePhoto,
                       ),
-                    ],
+                    ),
                   ],
                 ),
               ),
@@ -162,7 +159,7 @@ class _ImageToPdfPageState extends State<ImageToPdfPage> {
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
               ),
-              itemCount: _images.length + (PlatformInfo.hasCamera ? 2 : 1),
+              itemCount: _images.length + 2,
               itemBuilder: (context, index) {
                 if (index == _images.length) {
                   return _AddCell(icon: Icons.add_rounded, label: 'Gallery', onTap: _pickFromGallery);

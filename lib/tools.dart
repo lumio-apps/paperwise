@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 
-enum ToolId { merge, split, pages, imageToPdf, pdfToImage, imagePrivacy, compress, scan, protect, sign, more }
+enum ToolId { merge, split, pages, imageToPdf, pdfToImage, imagePrivacy, compress, scan, protect, sign, markup, search, more }
 
 /// A tile on the home screen.
 class ToolInfo {
@@ -61,6 +61,8 @@ const homeTools = <ToolInfo>[
     palette: TilePalette.purple,
   ),
   ToolInfo(id: ToolId.sign, title: 'Edit & sign', icon: Icons.draw_outlined, palette: TilePalette.yellow),
+  ToolInfo(id: ToolId.markup, title: 'Markup', icon: Icons.highlight_rounded, palette: TilePalette.orange),
+  ToolInfo(id: ToolId.search, title: 'Search in PDF', icon: Icons.search_rounded, palette: TilePalette.blue),
 ];
 
 /// One planned update, shown in "What's coming".
@@ -73,7 +75,6 @@ class PlannedUpdate {
 }
 
 const plannedUpdates = <PlannedUpdate>[
-  PlannedUpdate('v0.9', 'Markup and search', 'Highlight, draw and add shapes. Search for words inside a PDF.'),
   PlannedUpdate(
     'v0.10',
     'Your way',
@@ -84,5 +85,5 @@ const plannedUpdates = <PlannedUpdate>[
     'Text from scans (OCR)',
     'Read text from scanned pages on your phone, with no internet, and make searchable PDFs.',
   ),
-  PlannedUpdate('v1.0', 'Ready for F-Droid', 'Final polish, then Paperwise on F-Droid and GitHub Releases. Never on Google Play.'),
+  PlannedUpdate('v1.0', 'Ready for F-Droid', 'Final polish, then Paperwise on F-Droid and GitHub Releases.'),
 ];

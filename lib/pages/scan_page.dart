@@ -7,7 +7,6 @@ import '../file_store.dart';
 import '../format.dart';
 import '../image_pdf.dart';
 import '../image_tools.dart';
-import '../platform_info.dart';
 import '../result_sheet.dart';
 import '../theme.dart';
 import '../widgets.dart';
@@ -178,16 +177,14 @@ class _ScanToPdfPageState extends State<ScanToPdfPage> {
                                   onPressed: _fromGallery,
                                 ),
                               ),
-                              if (PlatformInfo.hasCamera) ...[
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: SecondaryButton(
-                                    label: 'Camera',
-                                    icon: Icons.photo_camera_outlined,
-                                    onPressed: _capture,
-                                  ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: SecondaryButton(
+                                  label: 'Camera',
+                                  icon: Icons.photo_camera_outlined,
+                                  onPressed: _capture,
                                 ),
-                              ],
+                              ),
                             ],
                           ),
                   ),
@@ -261,16 +258,14 @@ class _ScanToPdfPageState extends State<ScanToPdfPage> {
                 ],
                 Row(
                   children: [
-                    if (PlatformInfo.hasCamera) ...[
-                      Expanded(
-                        child: SecondaryButton(
-                          label: 'Camera',
-                          icon: Icons.photo_camera_outlined,
-                          onPressed: (_busy || _preparing) ? null : _capture,
-                        ),
+                    Expanded(
+                      child: SecondaryButton(
+                        label: 'Camera',
+                        icon: Icons.photo_camera_outlined,
+                        onPressed: (_busy || _preparing) ? null : _capture,
                       ),
-                      const SizedBox(width: 10),
-                    ],
+                    ),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: SecondaryButton(
                         label: 'Gallery',

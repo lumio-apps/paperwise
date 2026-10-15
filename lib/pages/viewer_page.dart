@@ -17,9 +17,12 @@ enum _ViewerMenu { share, save, otherApp }
 /// Reads a PDF inside Paperwise: zoom, jump to a page, thumbnails, and it
 /// remembers where you stopped.
 class ViewerPage extends StatefulWidget {
-  const ViewerPage({super.key, required this.path});
+  const ViewerPage({super.key, required this.path, this.startWithSearch = false});
 
   final String path;
+
+  /// Opens with the search box ready, for the Search tool.
+  final bool startWithSearch;
 
   @override
   State<ViewerPage> createState() => _ViewerPageState();
@@ -28,6 +31,10 @@ class ViewerPage extends StatefulWidget {
 class _ViewerPageState extends State<ViewerPage> {
   final PdfViewerController _controller = PdfViewerController();
   final ReadingLibrary _library = ReadingLibrary.instance;
+  late final PdfTextSearcher _searcher = PdfTextSearcher(_controller)..addListener(_onSearchChanged);
+  final TextEditingController _query = TextEditingController();
+  bool _searchMode = false;
+  String _searched = '';
 
   late final int _startPage;
   late final String _fileName;
@@ -41,6 +48,7 @@ class _ViewerPageState extends State<ViewerPage> {
   @override
   void initState() {
     super.initState();
+    _searchMode = widget.startWithSearch;
     _startPage = _library.infoFor(widget.path)?.page ?? 1;
     _page = _startPage;
     _fileName = File(widget.path).uri.pathSegments.last;
@@ -53,7 +61,45 @@ class _ViewerPageState extends State<ViewerPage> {
   void dispose() {
     _saveTimer?.cancel();
     _savePosition();
+    _searcher.removeListener(_onSearchChanged);
+    _searcher.dispose();
+    _query.dispose();
     super.dispose();
+  }
+
+  void _onSearchChanged() {
+    if (mounted) setState(() {});
+  }
+
+  void _runSearch() {
+    final text = _query.text.trim();
+    if (text.isEmpty || !_controller.isReady) return;
+    FocusScope.of(context).unfocus();
+    setState(() => _searched = text);
+    _searcher.startTextSearch(text);
+  }
+
+  void _closeSearch() {
+    _searcher.resetTextSearch();
+    setState(() {
+      _searchMode = false;
+      _searched = '';
+      _query.clear();
+    });
+  }
+
+  /// A short line about the search: progress, the match you are on, or none found.
+  String get _searchStatus {
+    if (_searched.isEmpty) return 'Type a word and tap search.';
+    final total = _searcher.matches.length;
+    if (_searcher.isSearching) {
+      return total == 0 ? 'Searching…' : 'Searching… $total found so far';
+    }
+    if (total == 0) {
+      return 'No matches. A scanned PDF has no text to search until OCR arrives (v0.11).';
+    }
+    final current = (_searcher.currentIndex ?? 0) + 1;
+    return 'Match $current of $total';
   }
 
   void _savePosition() {
@@ -156,19 +202,47 @@ class _ViewerPageState extends State<ViewerPage> {
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Text(
-                      _fileName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: -0.2,
-                        color: AppColors.ink,
-                      ),
-                    ),
+                    child: _searchMode
+                        ? TextField(
+                            controller: _query,
+                            autofocus: true,
+                            textInputAction: TextInputAction.search,
+                            onSubmitted: (_) => _runSearch(),
+                            decoration: InputDecoration(
+                              hintText: 'Search in this PDF',
+                              isDense: true,
+                              suffixIcon: IconButton(
+                                tooltip: 'Search',
+                                onPressed: _runSearch,
+                                icon: const Icon(Icons.search_rounded),
+                              ),
+                            ),
+                          )
+                        : Text(
+                            _fileName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: -0.2,
+                              color: AppColors.ink,
+                            ),
+                          ),
                   ),
-                  if (_canFavorite)
+                  if (_searchMode)
+                    IconButton(
+                      tooltip: 'Close search',
+                      onPressed: _closeSearch,
+                      icon: const Icon(Icons.close_rounded, color: AppColors.muted),
+                    )
+                  else
+                    IconButton(
+                      tooltip: 'Search in this PDF',
+                      onPressed: () => setState(() => _searchMode = true),
+                      icon: const Icon(Icons.search_rounded, color: AppColors.muted),
+                    ),
+                  if (_canFavorite && !_searchMode)
                     ListenableBuilder(
                       listenable: _library,
                       builder: (context, _) {
@@ -205,6 +279,30 @@ class _ViewerPageState extends State<ViewerPage> {
                 ],
               ),
             ),
+            if (_searchMode)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 8, 6),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _searchStatus,
+                        style: const TextStyle(fontSize: 13, color: AppColors.muted),
+                      ),
+                    ),
+                    IconButton(
+                      tooltip: 'Previous match',
+                      onPressed: _searcher.matches.isEmpty ? null : _searcher.goToPrevMatch,
+                      icon: const Icon(Icons.keyboard_arrow_up_rounded),
+                    ),
+                    IconButton(
+                      tooltip: 'Next match',
+                      onPressed: _searcher.matches.isEmpty ? null : _searcher.goToNextMatch,
+                      icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                    ),
+                  ],
+                ),
+              ),
             Expanded(
               child: PdfViewer.file(
                 widget.path,
@@ -216,6 +314,7 @@ class _ViewerPageState extends State<ViewerPage> {
                   margin: 8,
                   onViewerReady: _onViewerReady,
                   onPageChanged: _onPageChanged,
+                  pagePaintCallbacks: [_searcher.pageTextMatchPaintCallback],
                   viewerOverlayBuilder: (context, size, handleLinkTap) => [
                     PdfViewerScrollThumb(controller: _controller, orientation: ScrollbarOrientation.right),
                   ],

@@ -7,8 +7,6 @@ import 'package:open_filex/open_filex.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'platform_info.dart';
-
 /// Checks GitHub Releases for a newer APK and installs it inside the app.
 ///
 /// This is the only part of Paperwise that uses the internet, and only when
@@ -42,9 +40,7 @@ class UpdateService {
       final latest = latestTag.replaceFirst(RegExp(r'^[vV]'), '');
       final notes = (data['body'] as String? ?? '').trim();
       final assets = (data['assets'] as List? ?? []).cast<Map<String, dynamic>>();
-      final wantedEnd = PlatformInfo.isWindows ? '-windows.zip' : '.apk';
-      final apk = assets.where((a) => (a['name'] as String? ?? '').endsWith(wantedEnd)).firstOrNull;
-      final pageUrl = data['html_url'] as String? ?? 'https://github.com/lumio-apps/paperwise/releases/latest';
+      final apk = assets.where((a) => (a['name'] as String? ?? '').endsWith('.apk')).firstOrNull;
 
       if (!context.mounted) return;
 
@@ -68,20 +64,12 @@ class UpdateService {
           ),
           actions: [
             TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Later')),
-            FilledButton(
-              onPressed: () => Navigator.pop(ctx, true),
-              child: Text(PlatformInfo.isWindows ? 'Download' : 'Update'),
-            ),
+            FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Update')),
           ],
         ),
       );
       if (install != true || !context.mounted) return;
 
-      if (PlatformInfo.isWindows) {
-        // Windows has no in-app installer: open the download in the browser.
-        await Process.run('explorer.exe', [apk['browser_download_url'] as String? ?? pageUrl]);
-        return;
-      }
       await _downloadAndInstall(context, apk['browser_download_url'] as String);
     } catch (_) {
       if (!context.mounted) return;

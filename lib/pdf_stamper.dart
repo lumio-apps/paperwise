@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'pdf_fonts.dart';
@@ -54,6 +55,72 @@ class InkStamp extends Stamp {
   /// Pen width in PDF points.
   final double width;
   final StampColor color;
+}
+
+/// A rectangle. With [filled] and an [opacity] below 1 it works like a
+/// highlighter pen: the text underneath stays readable.
+class RectStamp extends Stamp {
+  const RectStamp({
+    required this.left,
+    required this.top,
+    required this.right,
+    required this.bottom,
+    required this.color,
+    this.filled = false,
+    this.opacity = 1,
+    this.width = 2,
+  });
+
+  final double left;
+  final double top;
+  final double right;
+  final double bottom;
+  final StampColor color;
+  final bool filled;
+  final double opacity;
+
+  /// Outline width in PDF points.
+  final double width;
+}
+
+/// An ellipse that fits inside the box given by the four fractions.
+class EllipseStamp extends Stamp {
+  const EllipseStamp({
+    required this.left,
+    required this.top,
+    required this.right,
+    required this.bottom,
+    required this.color,
+    this.width = 2,
+  });
+
+  final double left;
+  final double top;
+  final double right;
+  final double bottom;
+  final StampColor color;
+  final double width;
+}
+
+/// A straight line, optionally with an arrow head at the end.
+class LineStamp extends Stamp {
+  const LineStamp({
+    required this.fromLeft,
+    required this.fromTop,
+    required this.toLeft,
+    required this.toTop,
+    required this.color,
+    this.width = 2,
+    this.arrow = false,
+  });
+
+  final double fromLeft;
+  final double fromTop;
+  final double toLeft;
+  final double toTop;
+  final StampColor color;
+  final double width;
+  final bool arrow;
 }
 
 enum HAnchor { left, center, right }
@@ -179,6 +246,22 @@ class PdfStamper {
       final fonts = fontsValue is Map ? Map<String, Object>.from(fontsValue) : <String, Object>{};
       resources['Font'] = fonts;
 
+      final gsValue = doc.resolve(resources['ExtGState'] ?? <String, Object>{});
+      final graphicsStates = gsValue is Map ? Map<String, Object>.from(gsValue) : <String, Object>{};
+      final gsNames = <double, String>{};
+      String opacityName(double opacity) {
+        return gsNames.putIfAbsent(opacity, () {
+          var k = 0;
+          while (graphicsStates.containsKey('PwG$k')) {
+            k++;
+          }
+          final name = 'PwG$k';
+          final value = _Raw(_n(opacity));
+          graphicsStates[name] = <String, Object>{'ca': value, 'CA': value, 'BM': const _Raw('/Multiply')};
+          return name;
+        });
+      }
+
       final ops = <String>[];
       final fontNames = <PdfFont, String>{};
       String fontName(PdfFont font) {
@@ -224,9 +307,73 @@ class PdfStamper {
               line.write(' S');
               ops.add(line.toString());
             }
+          case RectStamp():
+            final a = geometry.point(stamp.left, stamp.top);
+            final b = geometry.point(stamp.right, stamp.top);
+            final c = geometry.point(stamp.right, stamp.bottom);
+            final d = geometry.point(stamp.left, stamp.bottom);
+            final path = '${_n(a.$1)} ${_n(a.$2)} m ${_n(b.$1)} ${_n(b.$2)} l '
+                '${_n(c.$1)} ${_n(c.$2)} l ${_n(d.$1)} ${_n(d.$2)} l h';
+            final col = stamp.color;
+            final paint = stamp.filled
+                ? '${_n(col.red)} ${_n(col.green)} ${_n(col.blue)} rg $path f'
+                : '${_n(col.red)} ${_n(col.green)} ${_n(col.blue)} RG ${_n(stamp.width)} w 1 j $path S';
+            ops.add(stamp.opacity < 1 ? 'q /${opacityName(stamp.opacity)} gs $paint Q' : paint);
+          case EllipseStamp():
+            const k = 0.5523;
+            final cx = (stamp.left + stamp.right) / 2;
+            final cy = (stamp.top + stamp.bottom) / 2;
+            final rx = (stamp.right - stamp.left).abs() / 2;
+            final ry = (stamp.bottom - stamp.top).abs() / 2;
+            String p(double u, double v) {
+              final point = geometry.point(u, v);
+              return '${_n(point.$1)} ${_n(point.$2)}';
+            }
+
+            final col = stamp.color;
+            ops.add(
+              '${_n(col.red)} ${_n(col.green)} ${_n(col.blue)} RG ${_n(stamp.width)} w '
+              '${p(cx + rx, cy)} m '
+              '${p(cx + rx, cy + k * ry)} ${p(cx + k * rx, cy + ry)} ${p(cx, cy + ry)} c '
+              '${p(cx - k * rx, cy + ry)} ${p(cx - rx, cy + k * ry)} ${p(cx - rx, cy)} c '
+              '${p(cx - rx, cy - k * ry)} ${p(cx - k * rx, cy - ry)} ${p(cx, cy - ry)} c '
+              '${p(cx + k * rx, cy - ry)} ${p(cx + rx, cy - k * ry)} ${p(cx + rx, cy)} c h S',
+            );
+          case LineStamp():
+            final col = stamp.color;
+            final from = geometry.point(stamp.fromLeft, stamp.fromTop);
+            final to = geometry.point(stamp.toLeft, stamp.toTop);
+            final line = StringBuffer(
+              '${_n(col.red)} ${_n(col.green)} ${_n(col.blue)} RG ${_n(stamp.width)} w 1 J 1 j '
+              '${_n(from.$1)} ${_n(from.$2)} m ${_n(to.$1)} ${_n(to.$2)} l S',
+            );
+            if (stamp.arrow) {
+              // The arrow head is worked out in points on the page as shown.
+              final dx = (stamp.toLeft - stamp.fromLeft) * width;
+              final dy = (stamp.toTop - stamp.fromTop) * height;
+              final length = math.sqrt(dx * dx + dy * dy);
+              if (length > 1) {
+                final angle = math.atan2(dy, dx);
+                final head = math.max(8.0, stamp.width * 5);
+                (double, double) tip(double turn) {
+                  final u = stamp.toLeft - head * math.cos(angle + turn) / width;
+                  final v = stamp.toTop - head * math.sin(angle + turn) / height;
+                  return geometry.point(u, v);
+                }
+
+                final left = tip(0.45);
+                final right = tip(-0.45);
+                line.write(
+                  ' ${_n(left.$1)} ${_n(left.$2)} m ${_n(to.$1)} ${_n(to.$2)} l ${_n(right.$1)} ${_n(right.$2)} l S',
+                );
+              }
+            }
+            ops.add(line.toString());
         }
       }
       if (ops.isEmpty) continue;
+
+      if (gsNames.isNotEmpty) resources['ExtGState'] = graphicsStates;
 
       // Contents: a "q" before the old content and our drawing after it.
       final before = allocate();

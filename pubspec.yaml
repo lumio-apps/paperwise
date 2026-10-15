@@ -1,7 +1,7 @@
 name: paperwise
 description: Paperwise is a private, fully offline PDF toolkit by Lumio Apps.
 publish_to: "none"
-version: 0.8.0+8
+version: 0.9.0+9
 
 environment:
   sdk: ">=3.10.0 <4.0.0"

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../coming_soon_sheet.dart';
 import '../file_store.dart';
 import '../file_tile.dart';
+import '../picked_pdf.dart';
 import '../theme.dart';
 import '../tools.dart';
 import '../widgets.dart';
@@ -10,12 +11,14 @@ import 'compress_page.dart';
 import 'edit_page.dart';
 import 'image_privacy_page.dart';
 import 'image_to_pdf_page.dart';
+import 'markup_page.dart';
 import 'merge_page.dart';
 import 'pages_page.dart';
 import 'pdf_to_image_page.dart';
 import 'protect_page.dart';
 import 'scan_page.dart';
 import 'split_page.dart';
+import 'viewer_page.dart';
 
 /// The first screen: tool tiles and the latest files.
 class HomePage extends StatelessWidget {
@@ -137,8 +140,26 @@ void openTool(BuildContext context, ToolInfo tool) {
       page = const ProtectPage();
     case ToolId.sign:
       page = const EditPage();
+    case ToolId.markup:
+      page = const MarkupPage();
+    case ToolId.search:
+      _openSearch(context);
+      return;
   }
   Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));
+}
+
+/// Picks a PDF and opens it in the viewer with the search box ready.
+Future<void> _openSearch(BuildContext context) async {
+  try {
+    final picked = await pickPdfFiles(multiple: false);
+    if (picked.isEmpty || !context.mounted) return;
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => ViewerPage(path: picked.first.path, startWithSearch: true)),
+    );
+  } catch (_) {
+    if (context.mounted) showMessage(context, 'Could not open the file picker.');
+  }
 }
 
 class _SectionTitle extends StatelessWidget {

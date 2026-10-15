@@ -6,10 +6,9 @@ Made by [Lumio Apps](https://github.com/lumio-apps).
 
 ## Download
 
-Get the latest files from the [Releases page](https://github.com/lumio-apps/paperwise/releases/latest).
+Get the latest APK from the [Releases page](https://github.com/lumio-apps/paperwise/releases/latest). Requires Android 7.0 or newer.
 
-- **Android**: download `Paperwise-<version>.apk`. Requires Android 7.0 or newer. After that, Paperwise updates itself: open **Settings → Check for updates**.
-- **Windows 10 / 11 (64-bit)**: download `Paperwise-<version>-windows.zip`, unzip the whole folder and run `paperwise.exe`. The app is not code-signed yet, so Windows SmartScreen may warn you: choose **More info → Run anyway**. On Windows, Check for updates opens the download page. There is no camera button on Windows; pick pictures from your files instead.
+After that, Paperwise updates itself: open **Settings → Check for updates**.
 
 ## Screenshots
 
@@ -20,6 +19,12 @@ Get the latest files from the [Releases page](https://github.com/lumio-apps/pape
   &nbsp;
   <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
 </p>
+
+## What's in v0.9
+
+- **Markup**: highlight text with a see-through marker, draw with a pen, and add boxes, ovals, lines and arrows in six colors and three thicknesses. Marks are written into the PDF page, so the text underneath stays selectable.
+- **Search in PDF**: find words inside a PDF. Matches are marked on the page and you can jump to the previous or next one. The search box is also in the viewer (tap the magnifier).
+- A scanned PDF has no text to search until OCR arrives in v0.11.
 
 ## What's in v0.8
 
@@ -47,7 +52,6 @@ Get the latest files from the [Releases page](https://github.com/lumio-apps/pape
 - **Resize and compress**: shrink pictures to Large, Medium or Small, and choose how strongly JPG pictures are compressed.
 - **Blur or hide**: drag boxes over faces, number plates or text, and choose a strong blur or a solid black box.
 - Your original pictures are never changed. Everything stays on your phone.
-- **Windows**: Paperwise now also runs on Windows 10 / 11, with the same offline tools.
 
 ## What's in v0.4
 
@@ -86,11 +90,11 @@ Paperwise grows one small update at a time, one group of features per update.
 | **v0.5** ✅ released | Image privacy | Remove EXIF data (location, device info), resize, compress, blur or hide parts of a photo, batch processing |
 | **v0.6** ✅ released | Compress | Light, balanced and strong PDF compression, image quality control, size estimate before saving |
 | **v0.7** ✅ released | Security | Password lock, unlock with the right password, text or image watermark |
-| **v0.8** 🚧 in progress | Edit | Add text, signature, page numbers, header and footer |
-| **v0.9** | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
+| **v0.8** ✅ released | Edit | Add text, signature, page numbers, header and footer |
+| **v0.9** 🚧 in progress | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
 | **v0.10** | Your way | Dark mode, more languages, sort and search files, local backup and restore |
 | **v0.11** | OCR | Offline text recognition for scanned pages, searchable PDFs |
-| **v1.0** | Ready for F-Droid | Final polish, then F-Droid and GitHub Releases. Paperwise will not be on Google Play |
+| **v1.0** | Ready for F-Droid | Final polish, then F-Droid and GitHub Releases |
 
 ## Privacy
 
@@ -104,10 +108,9 @@ Paperwise grows one small update at a time, one group of features per update.
 flutter pub get
 flutter analyze
 flutter build apk --release
-# Windows (needs Developer Mode on): flutter create --platforms=windows . && flutter build windows --release
 ```
 
-Pushing a tag like `v0.1.0` builds a signed APK and a Windows zip with GitHub Actions and publishes them on the Releases page.
+Pushing a tag like `v0.1.0` builds a signed APK with GitHub Actions and publishes them on the Releases page.
 
 ## License
 
