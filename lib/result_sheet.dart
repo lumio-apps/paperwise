@@ -5,6 +5,7 @@ import 'file_store.dart';
 import 'format.dart';
 import 'theme.dart';
 import 'widgets.dart';
+import 'strings.dart';
 
 /// Shows what a tool just made, with Open, Share and Save buttons.
 Future<void> showResultSheet(BuildContext context, List<OutputFile> results) {
@@ -37,14 +38,14 @@ class _ResultSheet extends StatelessWidget {
             Container(
               width: 68,
               height: 68,
-              decoration: const BoxDecoration(color: AppColors.successTint, shape: BoxShape.circle),
-              child: const Icon(Icons.check_rounded, size: 38, color: AppColors.success),
+              decoration: BoxDecoration(color: AppColors.successTint, shape: BoxShape.circle),
+              child: Icon(Icons.check_rounded, size: 38, color: AppColors.success),
             ),
             const SizedBox(height: 14),
             Text(
-              single ? 'Your PDF is ready' : '${fileCountLabel(results.length)} ready',
+              single ? 'Your PDF is ready'.tr : '${fileCountLabel(results.length)} ready',
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: AppColors.ink),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: AppColors.ink),
             ),
             const SizedBox(height: 6),
             Text(
@@ -52,7 +53,7 @@ class _ResultSheet extends StatelessWidget {
                   ? '${first.name} · ${formatBytes(first.sizeBytes)}'
                   : '${formatBytes(totalBytes)} in total · saved in Paperwise',
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 15, color: AppColors.muted),
+              style: TextStyle(fontSize: 15, color: AppColors.muted),
             ),
             if (!single) ...[
               const SizedBox(height: 14),
@@ -66,7 +67,7 @@ class _ResultSheet extends StatelessWidget {
                     final f = results[index];
                     return Row(
                       children: [
-                        const Icon(Icons.picture_as_pdf_outlined, size: 20, color: AppColors.muted),
+                        Icon(Icons.picture_as_pdf_outlined, size: 20, color: AppColors.muted),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
@@ -78,7 +79,7 @@ class _ResultSheet extends StatelessWidget {
                         ),
                         Text(
                           formatBytes(f.sizeBytes),
-                          style: const TextStyle(fontSize: 13, color: AppColors.muted),
+                          style: TextStyle(fontSize: 13, color: AppColors.muted),
                         ),
                       ],
                     );
@@ -89,7 +90,7 @@ class _ResultSheet extends StatelessWidget {
             const SizedBox(height: 22),
             if (single) ...[
               PrimaryButton(
-                label: 'Open',
+                label: 'Open'.tr,
                 icon: Icons.open_in_new_rounded,
                 onPressed: () => openPdf(context, first.path),
               ),
@@ -98,7 +99,7 @@ class _ResultSheet extends StatelessWidget {
                 children: [
                   Expanded(
                     child: SecondaryButton(
-                      label: 'Share',
+                      label: 'Share'.tr,
                       icon: Icons.share_outlined,
                       onPressed: () => sharePdfs([first.path]),
                     ),
@@ -106,7 +107,7 @@ class _ResultSheet extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: SecondaryButton(
-                      label: 'Save to phone',
+                      label: 'Save to phone'.tr,
                       icon: Icons.download_rounded,
                       onPressed: () => savePdfToDevice(context, first.path, first.name),
                     ),
@@ -115,15 +116,15 @@ class _ResultSheet extends StatelessWidget {
               ),
             ] else
               PrimaryButton(
-                label: 'Share all',
+                label: 'Share all'.tr,
                 icon: Icons.share_outlined,
                 onPressed: () => sharePdfs([for (final f in results) f.path]),
               ),
             const SizedBox(height: 6),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
-                'Done',
+              child: Text(
+                'Done'.tr,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.accent),
               ),
             ),

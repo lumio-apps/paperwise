@@ -199,7 +199,7 @@ class _ScanToPdfPageState extends State<ScanToPdfPage> {
                   padding: const EdgeInsets.fromLTRB(20, 4, 20, 4),
                   child: Text(
                     '${pageCountLabel(_pages.length)} · tap to crop, hold and drag to move',
-                    style: const TextStyle(fontSize: 13, color: AppColors.muted),
+                    style: TextStyle(fontSize: 13, color: AppColors.muted),
                   ),
                 ),
                 Expanded(
@@ -253,7 +253,7 @@ class _ScanToPdfPageState extends State<ScanToPdfPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (_progress != null) ...[
-                  Text(_progress!, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+                  Text(_progress!, style: TextStyle(fontSize: 13, color: AppColors.muted)),
                   const SizedBox(height: 8),
                 ],
                 Row(

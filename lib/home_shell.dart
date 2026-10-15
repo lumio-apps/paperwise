@@ -4,6 +4,7 @@ import 'pages/files_page.dart';
 import 'pages/home_page.dart';
 import 'pages/settings_page.dart';
 import 'theme.dart';
+import 'strings.dart';
 
 /// Holds the three main sections and the floating pill bar to switch between them.
 class HomeShell extends StatefulWidget {
@@ -106,10 +107,10 @@ class _NavItem extends StatelessWidget {
     return Semantics(
       selected: selected,
       button: true,
-      label: destination.label,
+      label: destination.label.tr,
       excludeSemantics: true,
       child: Tooltip(
-        message: destination.label,
+        message: destination.label.tr,
         child: Material(
           color: selected ? Colors.white : Colors.transparent,
           shape: const StadiumBorder(),
@@ -128,7 +129,7 @@ class _NavItem extends StatelessWidget {
                     if (selected) ...[
                       const SizedBox(width: 8),
                       Text(
-                        destination.label,
+                        destination.label.tr,
                         style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: color),
                       ),
                     ],

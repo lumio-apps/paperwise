@@ -25,7 +25,7 @@ class ToolInfo {
   bool get isReady => comingIn == null;
 }
 
-const homeTools = <ToolInfo>[
+List<ToolInfo> get homeTools => <ToolInfo>[
   ToolInfo(id: ToolId.merge, title: 'Merge PDF', icon: Icons.merge_type_rounded, palette: TilePalette.blue),
   ToolInfo(id: ToolId.split, title: 'Split PDF', icon: Icons.call_split_rounded, palette: TilePalette.orange),
   ToolInfo(id: ToolId.pages, title: 'Page tools', icon: Icons.view_module_outlined, palette: TilePalette.slate),
@@ -76,14 +76,9 @@ class PlannedUpdate {
 
 const plannedUpdates = <PlannedUpdate>[
   PlannedUpdate(
-    'v0.10',
-    'Your way',
-    'Dark mode, more languages, sort and search your files, and local backup.',
-  ),
-  PlannedUpdate(
     'v0.11',
     'Text from scans (OCR)',
     'Read text from scanned pages on your phone, with no internet, and make searchable PDFs.',
   ),
-  PlannedUpdate('v1.0', 'Ready for F-Droid', 'Final polish, then Paperwise on F-Droid and GitHub Releases.'),
+  PlannedUpdate('v1.0', 'Ready for everyone', 'Final polish, then Paperwise on Google Play and GitHub Releases.'),
 ];

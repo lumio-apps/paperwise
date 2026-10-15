@@ -222,7 +222,7 @@ class _ViewerPageState extends State<ViewerPage> {
                             _fileName,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w700,
                               letterSpacing: -0.2,
@@ -234,13 +234,13 @@ class _ViewerPageState extends State<ViewerPage> {
                     IconButton(
                       tooltip: 'Close search',
                       onPressed: _closeSearch,
-                      icon: const Icon(Icons.close_rounded, color: AppColors.muted),
+                      icon: Icon(Icons.close_rounded, color: AppColors.muted),
                     )
                   else
                     IconButton(
                       tooltip: 'Search in this PDF',
                       onPressed: () => setState(() => _searchMode = true),
-                      icon: const Icon(Icons.search_rounded, color: AppColors.muted),
+                      icon: Icon(Icons.search_rounded, color: AppColors.muted),
                     ),
                   if (_canFavorite && !_searchMode)
                     ListenableBuilder(
@@ -259,7 +259,7 @@ class _ViewerPageState extends State<ViewerPage> {
                     ),
                   PopupMenuButton<_ViewerMenu>(
                     tooltip: 'More options',
-                    icon: const Icon(Icons.more_vert_rounded, color: AppColors.muted),
+                    icon: Icon(Icons.more_vert_rounded, color: AppColors.muted),
                     onSelected: _onMenu,
                     itemBuilder: (context) => const [
                       PopupMenuItem(
@@ -287,7 +287,7 @@ class _ViewerPageState extends State<ViewerPage> {
                     Expanded(
                       child: Text(
                         _searchStatus,
-                        style: const TextStyle(fontSize: 13, color: AppColors.muted),
+                        style: TextStyle(fontSize: 13, color: AppColors.muted),
                       ),
                     ),
                     IconButton(

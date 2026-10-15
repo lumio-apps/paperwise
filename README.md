@@ -20,6 +20,13 @@ After that, Paperwise updates itself: open **Settings → Check for updates**.
   <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
 </p>
 
+## What's in v0.10
+
+- **Dark mode**: light, dark, or follow the phone. Your choice is remembered.
+- **Languages**: English and Hindi (हिन्दी) for the main screens. The tool screens are still English and will follow.
+- **Files**: search by name and sort by newest, oldest, name or size.
+- **Backup and restore**: save all your PDFs, reading list and signature in one `.pwbackup` file, and bring them back on this or a new phone. Nothing is uploaded; you choose where the file goes.
+
 ## What's in v0.9
 
 - **Markup**: highlight text with a see-through marker, draw with a pen, and add boxes, ovals, lines and arrows in six colors and three thicknesses. Marks are written into the PDF page, so the text underneath stays selectable.
@@ -91,10 +98,10 @@ Paperwise grows one small update at a time, one group of features per update.
 | **v0.6** ✅ released | Compress | Light, balanced and strong PDF compression, image quality control, size estimate before saving |
 | **v0.7** ✅ released | Security | Password lock, unlock with the right password, text or image watermark |
 | **v0.8** ✅ released | Edit | Add text, signature, page numbers, header and footer |
-| **v0.9** 🚧 in progress | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
-| **v0.10** | Your way | Dark mode, more languages, sort and search files, local backup and restore |
+| **v0.9** ✅ released | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
+| **v0.10** 🚧 in progress | Your way | Dark mode, more languages, sort and search files, local backup and restore |
 | **v0.11** | OCR | Offline text recognition for scanned pages, searchable PDFs |
-| **v1.0** | Ready for F-Droid | Final polish, then F-Droid and GitHub Releases |
+| **v1.0** | Ready for everyone | Final polish, then Google Play and GitHub Releases |
 
 ## Privacy
 

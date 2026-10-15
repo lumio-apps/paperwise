@@ -234,7 +234,7 @@ class _PdfToImagePageState extends State<PdfToImagePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (_progress != null) ...[
-                  Text(_progress!, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+                  Text(_progress!, style: TextStyle(fontSize: 13, color: AppColors.muted)),
                   const SizedBox(height: 10),
                 ],
                 PrimaryButton(
@@ -262,7 +262,7 @@ class _PdfToImagePageState extends State<PdfToImagePage> {
       const SizedBox(height: 4),
       Text(
         _format == _Format.jpg ? 'Smaller files, good for photos and sharing.' : 'Sharper text, bigger files.',
-        style: const TextStyle(fontSize: 13, color: AppColors.muted),
+        style: TextStyle(fontSize: 13, color: AppColors.muted),
       ),
       const SizedBox(height: 18),
       ChoiceGroup<_Quality>(
@@ -336,7 +336,7 @@ class PickedPdfCard extends StatelessWidget {
                   file.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
                 ),
                 const SizedBox(height: 4),
                 Text(

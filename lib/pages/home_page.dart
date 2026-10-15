@@ -19,6 +19,7 @@ import 'protect_page.dart';
 import 'scan_page.dart';
 import 'split_page.dart';
 import 'viewer_page.dart';
+import '../strings.dart';
 
 /// The first screen: tool tiles and the latest files.
 class HomePage extends StatelessWidget {
@@ -36,7 +37,7 @@ class HomePage extends StatelessWidget {
         return ListView(
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
           children: [
-            const Row(
+            Row(
               children: [
                 AppLogo(),
                 SizedBox(width: 12),
@@ -77,8 +78,8 @@ class HomePage extends StatelessWidget {
                 if (recent.isNotEmpty)
                   TextButton(
                     onPressed: onSeeAllFiles,
-                    child: const Text(
-                      'See all',
+                    child: Text(
+                      'See all'.tr,
                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.accent),
                     ),
                   ),
@@ -86,14 +87,14 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             if (recent.isEmpty)
-              const SectionCard(
+              SectionCard(
                 child: Row(
                   children: [
                     PageThumb(),
                     SizedBox(width: 14),
                     Expanded(
                       child: Text(
-                        'PDFs you make will show up here, ready to open or share.',
+                        'PDFs you make will show up here, ready to open or share.'.tr,
                         style: TextStyle(fontSize: 15, height: 1.35, color: AppColors.muted),
                       ),
                     ),
@@ -158,7 +159,7 @@ Future<void> _openSearch(BuildContext context) async {
       MaterialPageRoute<void>(builder: (_) => ViewerPage(path: picked.first.path, startWithSearch: true)),
     );
   } catch (_) {
-    if (context.mounted) showMessage(context, 'Could not open the file picker.');
+    if (context.mounted) showMessage(context, 'Could not open the file picker.'.tr);
   }
 }
 
@@ -170,8 +171,8 @@ class _SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
-      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.ink),
+      text.tr,
+      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.ink),
     );
   }
 }
@@ -182,17 +183,17 @@ class _OfflineBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: 'Every tool works without internet',
+      message: 'Every tool works without internet'.tr,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(999)),
-        child: const Row(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.wifi_off_rounded, size: 16, color: AppColors.success),
             SizedBox(width: 6),
             Text(
-              'Offline',
+              'Offline'.tr,
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.ink),
             ),
           ],
@@ -234,17 +235,17 @@ class _ToolTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(999),
                       ),
                       child: Text(
-                        'Soon',
+                        'Soon'.tr,
                         style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: tool.palette.color),
                       ),
                     ),
                 ],
               ),
               Text(
-                tool.title,
+                tool.title.tr,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
               ),
             ],
           ),

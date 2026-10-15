@@ -262,10 +262,10 @@ class _ProtectPageState extends State<ProtectPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (_progress != null) ...[
-                  Text(_progress!, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+                  Text(_progress!, style: TextStyle(fontSize: 13, color: AppColors.muted)),
                   const SizedBox(height: 10),
                 ] else if (problem != null && !_busy && _mode != _Mode.watermark) ...[
-                  Text(problem, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+                  Text(problem, style: TextStyle(fontSize: 13, color: AppColors.muted)),
                   const SizedBox(height: 10),
                 ],
                 PrimaryButton(
@@ -308,7 +308,7 @@ class _ProtectPageState extends State<ProtectPage> {
           const SizedBox(height: 10),
           _passwordField(_confirm, 'Type it again'),
           const SizedBox(height: 14),
-          const Text(
+          Text(
             'Paperwise does not keep your password. If you forget it, nobody can open the file again. '
             'Pages are redrawn as pictures, so text in the locked copy cannot be selected or searched. '
             'Your original file is not changed.',
@@ -321,7 +321,7 @@ class _ProtectPageState extends State<ProtectPage> {
           const SizedBox(height: 8),
           _passwordField(_password, 'Type the password'),
           const SizedBox(height: 14),
-          const Text(
+          Text(
             'You get an unlocked copy. Text stays selectable. Your original locked file is not changed.',
             style: TextStyle(fontSize: 13, color: AppColors.muted),
           ),
@@ -353,7 +353,7 @@ class _ProtectPageState extends State<ProtectPage> {
                     _markImageName ?? 'No picture chosen',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 14, color: AppColors.muted),
+                    style: TextStyle(fontSize: 14, color: AppColors.muted),
                   ),
                 ),
                 SecondaryButton(
@@ -391,7 +391,7 @@ class _ProtectPageState extends State<ProtectPage> {
             enabled: !_busy,
           ),
           const SizedBox(height: 14),
-          const Text(
+          Text(
             'The watermark is burned into the pages, so it cannot be removed later. Pages become pictures, so '
             'text in the new copy cannot be selected or searched. Your original file is not changed.',
             style: TextStyle(fontSize: 13, color: AppColors.muted),

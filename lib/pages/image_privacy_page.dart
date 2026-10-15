@@ -222,7 +222,7 @@ class _ImagePrivacyPageState extends State<ImagePrivacyPage> {
                 Expanded(
                   child: Text(
                     '${_items.length} ${_items.length == 1 ? 'picture' : 'pictures'}',
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
                   ),
                 ),
                 TextButton.icon(
@@ -255,7 +255,7 @@ class _ImagePrivacyPageState extends State<ImagePrivacyPage> {
             const SizedBox(height: 4),
             Text(
               _size.maxSide == null ? 'Keeps the original size.' : 'Longest side at most ${_size.maxSide} pixels.',
-              style: const TextStyle(fontSize: 13, color: AppColors.muted),
+              style: TextStyle(fontSize: 13, color: AppColors.muted),
             ),
             const SizedBox(height: 16),
             ChoiceGroup<_Quality>(
@@ -267,12 +267,12 @@ class _ImagePrivacyPageState extends State<ImagePrivacyPage> {
               enabled: !_busy,
             ),
             const SizedBox(height: 4),
-            const Text(
+            Text(
               'Lower quality makes smaller files. PNG pictures stay sharp and are not compressed this way.',
               style: TextStyle(fontSize: 13, color: AppColors.muted),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Paperwise rebuilds each picture from its pixels only, so every hidden detail is left behind. '
               'Your originals are never changed.',
               style: TextStyle(fontSize: 13, height: 1.4, color: AppColors.muted),
@@ -286,7 +286,7 @@ class _ImagePrivacyPageState extends State<ImagePrivacyPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (_progress != null) ...[
-                  Text(_progress!, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+                  Text(_progress!, style: TextStyle(fontSize: 13, color: AppColors.muted)),
                   const SizedBox(height: 10),
                 ],
                 PrimaryButton(
@@ -332,7 +332,7 @@ class _ItemCard extends StatelessWidget {
                     width: 64,
                     height: 64,
                     color: AppColors.track,
-                    child: const Icon(Icons.broken_image_outlined, color: AppColors.muted),
+                    child: Icon(Icons.broken_image_outlined, color: AppColors.muted),
                   ),
                 ),
               ),
@@ -345,12 +345,12 @@ class _ItemCard extends StatelessWidget {
                       item.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.ink),
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.ink),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       formatBytes(item.sizeBytes),
-                      style: const TextStyle(fontSize: 13, color: AppColors.muted),
+                      style: TextStyle(fontSize: 13, color: AppColors.muted),
                     ),
                     const SizedBox(height: 8),
                     Wrap(
@@ -373,7 +373,7 @@ class _ItemCard extends StatelessWidget {
               IconButton(
                 tooltip: 'Remove',
                 onPressed: onRemove,
-                icon: const Icon(Icons.close_rounded, color: AppColors.muted),
+                icon: Icon(Icons.close_rounded, color: AppColors.muted),
               ),
             ],
           ),

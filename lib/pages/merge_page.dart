@@ -92,11 +92,11 @@ class _MergePageState extends State<MergePage> {
           if (ready.isNotEmpty) ...[
             Row(
               children: [
-                const Text('Total', style: TextStyle(fontSize: 14, color: AppColors.muted)),
+                Text('Total', style: TextStyle(fontSize: 14, color: AppColors.muted)),
                 const Spacer(),
                 Text(
                   '${pageCountLabel(totalPages)} · ${formatBytes(totalBytes)}',
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.ink),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.ink),
                 ),
               ],
             ),
@@ -133,7 +133,7 @@ class _MergePageState extends State<MergePage> {
     return ReorderableListView.builder(
       padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
       buildDefaultDragHandles: false,
-      header: const Padding(
+      header: Padding(
         padding: EdgeInsets.only(bottom: 12),
         child: Text(
           'Drag files to set the order. The top file comes first.',
@@ -165,7 +165,7 @@ class _MergePageState extends State<MergePage> {
             style: OutlinedButton.styleFrom(
               foregroundColor: AppColors.accent,
               minimumSize: const Size.fromHeight(52),
-              side: const BorderSide(color: AppColors.accent, width: 1.5),
+              side: BorderSide(color: AppColors.accent, width: 1.5),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
               textStyle: const TextStyle(fontFamily: 'Outfit', fontSize: 15, fontWeight: FontWeight.w700),
             ),
@@ -250,7 +250,7 @@ class _MergeFileCard extends StatelessWidget {
                     file.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
                   ),
                   const SizedBox(height: 3),
                   Text(
@@ -265,7 +265,7 @@ class _MergeFileCard extends StatelessWidget {
             IconButton(
               onPressed: onRemove,
               tooltip: 'Remove ${file.name}',
-              icon: const Icon(Icons.close_rounded, color: AppColors.muted),
+              icon: Icon(Icons.close_rounded, color: AppColors.muted),
             ),
           ],
         ),

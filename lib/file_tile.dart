@@ -6,6 +6,7 @@ import 'format.dart';
 import 'library.dart';
 import 'theme.dart';
 import 'widgets.dart';
+import 'strings.dart';
 
 enum _FileAction { open, favorite, share, save, rename, delete }
 
@@ -25,7 +26,7 @@ class FileTile extends StatelessWidget {
     try {
       await FileStore.instance.rename(file, newName);
     } catch (_) {
-      messenger.showSnackBar(const SnackBar(content: Text('Could not rename the file. Please try again.')));
+      messenger.showSnackBar(SnackBar(content: Text('Could not rename the file. Please try again.'.tr)));
     }
   }
 
@@ -33,14 +34,14 @@ class FileTile extends StatelessWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete this PDF?'),
+        title: Text('Delete this PDF?'.tr),
         content: Text('"${file.name}" will be removed from Paperwise. This can\'t be undone.'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text('Cancel'.tr)),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
             style: FilledButton.styleFrom(backgroundColor: AppColors.danger),
-            child: const Text('Delete'),
+            child: Text('Delete'.tr),
           ),
         ],
       ),
@@ -99,7 +100,7 @@ class FileTile extends StatelessWidget {
                             file.name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
                           ),
                         ),
                         if (favorite) ...[
@@ -111,44 +112,44 @@ class FileTile extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       '${formatBytes(file.sizeBytes)} · ${formatDate(file.modified)}',
-                      style: const TextStyle(fontSize: 13, color: AppColors.muted),
+                      style: TextStyle(fontSize: 13, color: AppColors.muted),
                     ),
                   ],
                 ),
               ),
               PopupMenuButton<_FileAction>(
                 tooltip: 'More options for ${file.name}',
-                icon: const Icon(Icons.more_vert_rounded, color: AppColors.muted),
+                icon: Icon(Icons.more_vert_rounded, color: AppColors.muted),
                 onSelected: (action) => _onAction(context, action),
                 itemBuilder: (context) => [
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: _FileAction.open,
-                    child: ListTile(leading: Icon(Icons.menu_book_outlined), title: Text('Read')),
+                    child: ListTile(leading: Icon(Icons.menu_book_outlined), title: Text('Read'.tr)),
                   ),
                   PopupMenuItem(
                     value: _FileAction.favorite,
                     child: ListTile(
                       leading: Icon(favorite ? Icons.star_rounded : Icons.star_outline_rounded),
-                      title: Text(favorite ? 'Remove from favorites' : 'Add to favorites'),
+                      title: Text(favorite ? 'Remove from favorites'.tr : 'Add to favorites'.tr),
                     ),
                   ),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: _FileAction.share,
-                    child: ListTile(leading: Icon(Icons.share_outlined), title: Text('Share')),
+                    child: ListTile(leading: Icon(Icons.share_outlined), title: Text('Share'.tr)),
                   ),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: _FileAction.save,
-                    child: ListTile(leading: Icon(Icons.download_rounded), title: Text('Save to phone')),
+                    child: ListTile(leading: Icon(Icons.download_rounded), title: Text('Save to phone'.tr)),
                   ),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: _FileAction.rename,
-                    child: ListTile(leading: Icon(Icons.drive_file_rename_outline_rounded), title: Text('Rename')),
+                    child: ListTile(leading: Icon(Icons.drive_file_rename_outline_rounded), title: Text('Rename'.tr)),
                   ),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: _FileAction.delete,
                     child: ListTile(
                       leading: Icon(Icons.delete_outline_rounded, color: AppColors.danger),
-                      title: Text('Delete', style: TextStyle(color: AppColors.danger)),
+                      title: Text('Delete'.tr, style: TextStyle(color: AppColors.danger)),
                     ),
                   ),
                 ],
@@ -198,17 +199,17 @@ class _RenameDialogState extends State<_RenameDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Rename PDF'),
+      title: Text('Rename PDF'.tr),
       content: TextField(
         controller: _controller,
         autofocus: true,
         textInputAction: TextInputAction.done,
         onSubmitted: (_) => _submit(),
-        decoration: const InputDecoration(hintText: 'New name', suffixText: '.pdf'),
+        decoration: InputDecoration(hintText: 'New name'.tr, suffixText: '.pdf'),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-        FilledButton(onPressed: _submit, child: const Text('Rename')),
+        TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel'.tr)),
+        FilledButton(onPressed: _submit, child: Text('Rename'.tr)),
       ],
     );
   }

@@ -169,7 +169,7 @@ class _CompressPageState extends State<CompressPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (_progress != null) ...[
-                  Text(_progress!, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+                  Text(_progress!, style: TextStyle(fontSize: 13, color: AppColors.muted)),
                   const SizedBox(height: 10),
                 ],
                 PrimaryButton(
@@ -196,7 +196,7 @@ class _CompressPageState extends State<CompressPage> {
         enabled: !_busy,
       ),
       const SizedBox(height: 4),
-      Text(_level.hint, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+      Text(_level.hint, style: TextStyle(fontSize: 13, color: AppColors.muted)),
       const SizedBox(height: 16),
       SectionCard(
         child: Column(
@@ -208,24 +208,24 @@ class _CompressPageState extends State<CompressPage> {
               estimate != null
                   ? '${formatBytes(file.sizeBytes)} → about ${formatBytes(estimate)}'
                   : (_estimating ? 'Working it out…' : 'Not available'),
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.ink),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.ink),
             ),
             if (estimate != null && estimate >= file.sizeBytes * 0.95) ...[
               const SizedBox(height: 6),
-              const Text(
+              Text(
                 'This PDF will not get much smaller, so nothing will be saved.',
                 style: TextStyle(fontSize: 13, color: AppColors.muted),
               ),
             ],
             if (_summary != null) ...[
               const SizedBox(height: 10),
-              Text(_summary!, style: const TextStyle(fontSize: 14, color: AppColors.success)),
+              Text(_summary!, style: TextStyle(fontSize: 14, color: AppColors.success)),
             ],
           ],
         ),
       ),
       const SizedBox(height: 12),
-      const Text(
+      Text(
         'The size is an estimate from a few pages. Pages are redrawn as pictures, so text can no longer be '
         'selected or searched. Compression works best on scans and photo PDFs.',
         style: TextStyle(fontSize: 13, color: AppColors.muted),

@@ -87,7 +87,7 @@ class _RedactPageState extends State<RedactPage> {
               ? const Center(child: CircularProgressIndicator())
               : Column(
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.fromLTRB(20, 0, 20, 8),
                       child: Align(
                         alignment: Alignment.centerLeft,

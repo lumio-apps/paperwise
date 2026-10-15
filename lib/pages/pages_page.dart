@@ -232,7 +232,7 @@ class _PagesPageState extends State<PagesPage> {
                   file.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.ink),
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.ink),
                 ),
               ),
               TextButton(onPressed: _busy ? null : _chooseFile, child: const Text('Change')),
@@ -248,7 +248,7 @@ class _PagesPageState extends State<PagesPage> {
                   selectedCount == 0
                       ? '${pageCountLabel(_items.length)} · tap to select, hold and drag to move'
                       : '${pageCountLabel(_items.length)} · $selectedCount selected',
-                  style: const TextStyle(fontSize: 13, color: AppColors.muted),
+                  style: TextStyle(fontSize: 13, color: AppColors.muted),
                 ),
               ),
               TextButton(
@@ -360,12 +360,12 @@ class _PagesPageState extends State<PagesPage> {
 
 /// A round icon with a small label, used in the action row.
 class _ToolAction extends StatelessWidget {
-  const _ToolAction({required this.icon, required this.label, required this.onTap, this.color = AppColors.ink});
+  const _ToolAction({required this.icon, required this.label, required this.onTap, this.color});
 
   final IconData icon;
   final String label;
   final VoidCallback? onTap;
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -377,9 +377,9 @@ class _ToolAction extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 26, color: onTap == null ? AppColors.muted : color),
+            Icon(icon, size: 26, color: onTap == null ? AppColors.muted : (color ?? AppColors.ink)),
             const SizedBox(height: 2),
-            Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: color)),
+            Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: color ?? AppColors.ink)),
           ],
         ),
       ),

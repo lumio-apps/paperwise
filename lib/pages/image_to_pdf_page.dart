@@ -140,10 +140,10 @@ class _ImageToPdfPageState extends State<ImageToPdfPage> {
                 Expanded(
                   child: Text(
                     _images.length == 1 ? '1 photo selected' : '${_images.length} photos selected',
-                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: AppColors.ink),
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: AppColors.ink),
                   ),
                 ),
-                const Text(
+                Text(
                   'Hold and drag to reorder',
                   style: TextStyle(fontSize: 13, color: AppColors.muted),
                 ),
@@ -215,7 +215,7 @@ class _ImageToPdfPageState extends State<ImageToPdfPage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (_images.isNotEmpty) ...[
-            Text(_summary, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+            Text(_summary, style: TextStyle(fontSize: 13, color: AppColors.muted)),
             const SizedBox(height: 10),
           ],
           PrimaryButton(
@@ -339,7 +339,7 @@ class _PhotoTile extends StatelessWidget {
               width: 24,
               height: 24,
               alignment: Alignment.center,
-              decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
+              decoration: BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
               child: Text(
                 '$number',
                 style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
@@ -394,7 +394,7 @@ class _AddCell extends StatelessWidget {
             const SizedBox(height: 2),
             Text(
               label,
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.accent),
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.accent),
             ),
           ],
         ),

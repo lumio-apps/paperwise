@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 import 'tools.dart';
+import 'strings.dart';
 
 /// Lists the next Paperwise updates and what each one adds.
 Future<void> showComingSoonSheet(BuildContext context) {
@@ -19,12 +20,12 @@ Future<void> showComingSoonSheet(BuildContext context) {
         controller: controller,
         padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
         children: [
-          const Text(
-            "What's coming",
+          Text(
+            "What's coming".tr,
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: AppColors.ink),
           ),
           const SizedBox(height: 6),
-          const Text(
+          Text(
             'Paperwise grows one small update at a time. Every tool will stay free and offline.',
             style: TextStyle(fontSize: 15, height: 1.4, color: AppColors.muted),
           ),
@@ -71,12 +72,12 @@ class _UpdateRow extends StatelessWidget {
             children: [
               Text(
                 update.title,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
               ),
               const SizedBox(height: 2),
               Text(
                 update.details,
-                style: const TextStyle(fontSize: 14, height: 1.35, color: AppColors.muted),
+                style: TextStyle(fontSize: 14, height: 1.35, color: AppColors.muted),
               ),
             ],
           ),

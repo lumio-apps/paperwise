@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'pages/viewer_page.dart';
+import 'strings.dart';
 
 /// Opens a PDF in the built-in Paperwise viewer.
 Future<void> openPdf(BuildContext context, String path) {
@@ -40,7 +41,7 @@ Future<void> saveFileToDevice(BuildContext context, String path, String fileName
       messenger.showSnackBar(SnackBar(content: Text('Saved "$fileName" to your phone.')));
     }
   } catch (_) {
-    messenger.showSnackBar(const SnackBar(content: Text('Could not save the file. Please try again.')));
+    messenger.showSnackBar(SnackBar(content: Text('Could not save the file. Please try again.'.tr)));
   }
 }
 

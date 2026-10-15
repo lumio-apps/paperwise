@@ -42,27 +42,27 @@ class _ImagesResultSheet extends StatelessWidget {
             Container(
               width: 68,
               height: 68,
-              decoration: const BoxDecoration(color: AppColors.successTint, shape: BoxShape.circle),
-              child: const Icon(Icons.check_rounded, size: 38, color: AppColors.success),
+              decoration: BoxDecoration(color: AppColors.successTint, shape: BoxShape.circle),
+              child: Icon(Icons.check_rounded, size: 38, color: AppColors.success),
             ),
             const SizedBox(height: 14),
             Text(
               single ? 'Your image is ready' : '${paths.length} images ready',
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: AppColors.ink),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: AppColors.ink),
             ),
             const SizedBox(height: 6),
             Text(
               single ? '${_nameOf(first)} · ${formatBytes(totalBytes)}' : '${formatBytes(totalBytes)} in total',
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 15, color: AppColors.muted),
+              style: TextStyle(fontSize: 15, color: AppColors.muted),
             ),
             if (note != null) ...[
               const SizedBox(height: 6),
               Text(
                 note!,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 14, color: AppColors.success, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 14, color: AppColors.success, fontWeight: FontWeight.w600),
               ),
             ],
             const SizedBox(height: 16),
@@ -99,7 +99,7 @@ class _ImagesResultSheet extends StatelessWidget {
               ),
             ] else ...[
               const SizedBox(height: 10),
-              const Text(
+              Text(
                 'In the share menu, choose "Save to Files" or any folder app to keep them on your phone.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 13, color: AppColors.muted),
@@ -108,7 +108,7 @@ class _ImagesResultSheet extends StatelessWidget {
             const SizedBox(height: 6),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
+              child: Text(
                 'Done',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.accent),
               ),

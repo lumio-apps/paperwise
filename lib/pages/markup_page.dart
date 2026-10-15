@@ -362,7 +362,7 @@ class _MarkupPageState extends State<MarkupPage> {
                 child: Text(
                   'Page ${_pageIndex + 1} of $_pageCount',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.ink),
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.ink),
                 ),
               ),
               IconButton(

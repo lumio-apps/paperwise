@@ -331,7 +331,7 @@ class _PlacePageState extends State<PlacePage> {
                             child: Text(
                               'Page ${_pageIndex + 1} of $_pageCount',
                               textAlign: TextAlign.center,
-                              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.ink),
+                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.ink),
                             ),
                           ),
                           IconButton(
@@ -367,7 +367,7 @@ class _PlacePageState extends State<PlacePage> {
                     SizedBox(
                       height: 48,
                       child: selected == null
-                          ? const Center(
+                          ? Center(
                               child: Text(
                                 'Drag to move. Tap an item to change it.',
                                 style: TextStyle(fontSize: 13, color: AppColors.muted),

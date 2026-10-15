@@ -271,7 +271,7 @@ class _EditPageState extends State<EditPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (problem != null && file.isReady) ...[
-                  Text(problem, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+                  Text(problem, style: TextStyle(fontSize: 13, color: AppColors.muted)),
                   const SizedBox(height: 10),
                 ],
                 PrimaryButton(
@@ -288,7 +288,7 @@ class _EditPageState extends State<EditPage> {
   List<Widget> _buildMode() {
     switch (_mode) {
       case _Mode.place:
-        return const [
+        return [
           Text(
             'Open the page editor to type text anywhere on a page, or draw your signature and place it. '
             'The text already in your PDF stays selectable. Your original file is not changed.',

@@ -151,6 +151,31 @@ class ReadingLibrary extends ChangeNotifier {
     if (_entries.remove(path) != null) _changed();
   }
 
+  /// The reading list for the backup, with file names instead of full paths.
+  List<Map<String, Object?>> exportByName(String folder) {
+    final prefix = '$folder/';
+    return [
+      for (final e in _entries.values)
+        if (e.path.startsWith(prefix)) e.copyWith(path: e.path.substring(prefix.length)).toJson(),
+    ];
+  }
+
+  /// Takes the reading list from a backup. Only files named in [names] are used,
+  /// and entries for files that are already known are left as they are.
+  void importByName(List<dynamic> json, String folder, List<String> names) {
+    final allowed = names.toSet();
+    var changed = false;
+    for (final item in json) {
+      final info = ReadingInfo.fromJson(item);
+      if (info == null || !allowed.contains(info.path)) continue;
+      final path = '$folder/${info.path}';
+      if (_entries.containsKey(path)) continue;
+      _entries[path] = info.copyWith(path: path);
+      changed = true;
+    }
+    if (changed) _changed();
+  }
+
   void _changed() {
     notifyListeners();
     _writeQueue = _writeQueue.then((_) => _write());

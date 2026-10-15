@@ -155,7 +155,7 @@ class _SplitPageState extends State<SplitPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (_progress != null) ...[
-                  Text(_progress!, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+                  Text(_progress!, style: TextStyle(fontSize: 13, color: AppColors.muted)),
                   const SizedBox(height: 10),
                 ],
                 PrimaryButton(
@@ -225,14 +225,14 @@ class _SplitPageState extends State<SplitPage> {
         const SizedBox(height: 8),
         Text(
           '+ ${pageCountLabel(count - shown)} more',
-          style: const TextStyle(fontSize: 13, color: AppColors.muted),
+          style: TextStyle(fontSize: 13, color: AppColors.muted),
         ),
       ],
       if (ranges.isNotEmpty) ...[
         const SizedBox(height: 20),
         Text(
           '${fileCountLabel(ranges.length)} will be created',
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
         ),
         const SizedBox(height: 10),
         Wrap(
@@ -250,7 +250,7 @@ class _SplitPageState extends State<SplitPage> {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   '+ ${ranges.length - _maxPartsShown} more',
-                  style: const TextStyle(fontSize: 13, color: AppColors.muted),
+                  style: TextStyle(fontSize: 13, color: AppColors.muted),
                 ),
               ),
           ],
@@ -292,7 +292,7 @@ class _FileCard extends StatelessWidget {
                   file.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
                 ),
                 const SizedBox(height: 3),
                 Text(
@@ -306,7 +306,7 @@ class _FileCard extends StatelessWidget {
           ),
           TextButton(
             onPressed: onChange,
-            child: const Text(
+            child: Text(
               'Change',
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.accent),
             ),
@@ -371,10 +371,10 @@ class _PartChip extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             title,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.ink),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.ink),
           ),
           const SizedBox(width: 6),
-          Text(range.label, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+          Text(range.label, style: TextStyle(fontSize: 13, color: AppColors.muted)),
         ],
       ),
     );

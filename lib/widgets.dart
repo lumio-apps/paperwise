@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'theme.dart';
+import 'strings.dart';
 
 /// The Paperwise app icon.
 class AppLogo extends StatelessWidget {
@@ -78,14 +79,14 @@ class ToolPage extends StatelessWidget {
                 children: [
                   RoundIconButton(
                     icon: Icons.arrow_back_rounded,
-                    tooltip: 'Back',
+                    tooltip: 'Back'.tr,
                     onPressed: () => Navigator.of(context).maybePop(),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      title,
-                      style: const TextStyle(
+                      title.tr,
+                      style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w800,
                         letterSpacing: -0.2,
@@ -152,7 +153,7 @@ class PrimaryButton extends StatelessWidget {
           : Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
+                Flexible(child: Text(label.tr, overflow: TextOverflow.ellipsis)),
                 const SizedBox(width: 10),
                 Icon(icon, size: 20),
               ],
@@ -184,7 +185,7 @@ class SecondaryButton extends StatelessWidget {
         foregroundColor: AppColors.ink,
         minimumSize: const Size.fromHeight(52),
         shape: const StadiumBorder(),
-        side: const BorderSide(color: AppColors.line, width: 1.5),
+        side: BorderSide(color: AppColors.line, width: 1.5),
         textStyle: const TextStyle(fontFamily: 'Outfit', fontSize: 15, fontWeight: FontWeight.w700),
       ),
     );
@@ -225,7 +226,7 @@ class FieldLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.muted),
+      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.muted),
     );
   }
 }
@@ -290,7 +291,7 @@ class _Choice extends StatelessWidget {
   Widget build(BuildContext context) {
     final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(14),
-      side: selected ? BorderSide.none : const BorderSide(color: AppColors.line),
+      side: selected ? BorderSide.none : BorderSide(color: AppColors.line),
     );
     return Semantics(
       selected: selected,
@@ -355,15 +356,15 @@ class EmptyState extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           Text(
-            title,
+            title.tr,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: AppColors.ink),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: AppColors.ink),
           ),
           const SizedBox(height: 6),
           Text(
-            message,
+            message.tr,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 15, height: 1.4, color: AppColors.muted),
+            style: TextStyle(fontSize: 15, height: 1.4, color: AppColors.muted),
           ),
           if (action != null) ...[
             const SizedBox(height: 22),
@@ -377,10 +378,10 @@ class EmptyState extends StatelessWidget {
 
 /// A tiny drawing of a page, used as a file thumbnail.
 class PageThumb extends StatelessWidget {
-  const PageThumb({super.key, this.color = AppColors.background, this.lineColor = const Color(0xFFC8C4E0)});
+  const PageThumb({super.key, this.color, this.lineColor});
 
-  final Color color;
-  final Color lineColor;
+  final Color? color;
+  final Color? lineColor;
 
   @override
   Widget build(BuildContext context) {
@@ -389,7 +390,7 @@ class PageThumb extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Container(
             height: 3,
-            decoration: BoxDecoration(color: lineColor, borderRadius: BorderRadius.circular(2)),
+            decoration: BoxDecoration(color: lineColor ?? (AppColors.isDark ? const Color(0xFF3A3660) : const Color(0xFFC8C4E0)), borderRadius: BorderRadius.circular(2)),
           ),
         );
 
@@ -397,7 +398,7 @@ class PageThumb extends StatelessWidget {
       width: 44,
       height: 58,
       padding: const EdgeInsets.fromLTRB(7, 9, 7, 9),
-      decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: color ?? AppColors.background, borderRadius: BorderRadius.circular(8)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -418,5 +419,5 @@ class PageThumb extends StatelessWidget {
 void showMessage(BuildContext context, String text) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(content: Text(text)));
+    ..showSnackBar(SnackBar(content: Text(text.tr)));
 }
