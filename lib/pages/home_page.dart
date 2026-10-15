@@ -7,6 +7,7 @@ import '../theme.dart';
 import '../tools.dart';
 import '../widgets.dart';
 import 'compress_page.dart';
+import 'edit_page.dart';
 import 'image_privacy_page.dart';
 import 'image_to_pdf_page.dart';
 import 'merge_page.dart';
@@ -135,8 +136,7 @@ void openTool(BuildContext context, ToolInfo tool) {
     case ToolId.protect:
       page = const ProtectPage();
     case ToolId.sign:
-      showMessage(context, '${tool.title} is coming in ${tool.comingIn}. Stay tuned!');
-      return;
+      page = const EditPage();
   }
   Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));
 }

@@ -60,7 +60,7 @@ const homeTools = <ToolInfo>[
     icon: Icons.lock_outline_rounded,
     palette: TilePalette.purple,
   ),
-  ToolInfo(id: ToolId.sign, title: 'Sign', icon: Icons.draw_outlined, palette: TilePalette.yellow, comingIn: 'v0.8'),
+  ToolInfo(id: ToolId.sign, title: 'Edit & sign', icon: Icons.draw_outlined, palette: TilePalette.yellow),
 ];
 
 /// One planned update, shown in "What's coming".
@@ -73,7 +73,6 @@ class PlannedUpdate {
 }
 
 const plannedUpdates = <PlannedUpdate>[
-  PlannedUpdate('v0.8', 'Edit', 'Add text, your signature, page numbers, header and footer.'),
   PlannedUpdate('v0.9', 'Markup and search', 'Highlight, draw and add shapes. Search for words inside a PDF.'),
   PlannedUpdate(
     'v0.10',

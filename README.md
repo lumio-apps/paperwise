@@ -21,6 +21,14 @@ Get the latest files from the [Releases page](https://github.com/lumio-apps/pape
   <img src="docs/screenshots/settings.jpg" width="240" alt="Settings screen">
 </p>
 
+## What's in v0.8
+
+- **Edit & sign**: type text anywhere on a page, or draw your signature with a finger and place it. Drag to move, tap to resize, and the signature can be remembered on your phone for next time.
+- **Page numbers**: top or bottom, left, center or right, in three looks (`1`, `Page 1`, `Page 1 of N`). Choose the page to start on, so a cover page can stay clean.
+- **Header and footer**: add your own text to every page. Use `{n}` for the page number and `{total}` for the number of pages.
+- Text is written straight into the PDF page, so the text that was already there stays selectable and searchable. Originals are never changed.
+- For now added text supports letters, numbers and keyboard symbols (no accents or other scripts yet).
+
 ## What's in v0.7
 
 - **Lock PDF**: protect a PDF with a password (AES-128). Paperwise checks that the new file opens with your password and not without it before saving. It never stores your password.
@@ -77,8 +85,8 @@ Paperwise grows one small update at a time, one group of features per update.
 | **v0.4** ✅ released | Convert and scan | PDF to image (JPG or PNG), scan paper to PDF with the camera, manual crop and filters |
 | **v0.5** ✅ released | Image privacy | Remove EXIF data (location, device info), resize, compress, blur or hide parts of a photo, batch processing |
 | **v0.6** ✅ released | Compress | Light, balanced and strong PDF compression, image quality control, size estimate before saving |
-| **v0.7** 🚧 in progress | Security | Password lock, unlock with the right password, text or image watermark |
-| **v0.8** | Edit | Add text, signature, page numbers, header and footer |
+| **v0.7** ✅ released | Security | Password lock, unlock with the right password, text or image watermark |
+| **v0.8** 🚧 in progress | Edit | Add text, signature, page numbers, header and footer |
 | **v0.9** | Markup and search | Highlight, pen and shapes, search for words inside a PDF |
 | **v0.10** | Your way | Dark mode, more languages, sort and search files, local backup and restore |
 | **v0.11** | OCR | Offline text recognition for scanned pages, searchable PDFs |
