@@ -37,6 +37,12 @@ Future<void> main() async {
 Widget _errorScreen(FlutterErrorDetails details) {
   var message = details.exceptionAsString();
   if (message.length > 700) message = '${message.substring(0, 700)}…';
+  final trace = (details.stack?.toString() ?? '')
+      .split('\n')
+      .where((line) => line.trim().isNotEmpty)
+      .take(14)
+      .map((line) => line.length > 150 ? line.substring(0, 150) : line)
+      .join('\n');
   return Directionality(
     textDirection: TextDirection.ltr,
     child: ColoredBox(
@@ -66,6 +72,16 @@ Widget _errorScreen(FlutterErrorDetails details) {
                 message,
                 style: const TextStyle(
                   fontSize: 12,
+                  color: Color(0xFF5B5778),
+                  fontWeight: FontWeight.w400,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                trace,
+                style: const TextStyle(
+                  fontSize: 10,
                   color: Color(0xFF5B5778),
                   fontWeight: FontWeight.w400,
                   decoration: TextDecoration.none,
