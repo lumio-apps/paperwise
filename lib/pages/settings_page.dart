@@ -12,6 +12,7 @@ import '../backup.dart';
 import '../file_actions.dart';
 import '../strings.dart';
 import '../theme.dart';
+import '../update_service.dart';
 import '../widgets.dart';
 
 const _sourceUrl = 'https://github.com/lumio-apps/paperwise';
@@ -43,8 +44,8 @@ class _SettingsPageState extends State<SettingsPage> {
         content: const Text(
           'Paperwise works fully offline. Every tool runs on your phone, so your files never leave it.\n\n'
           'There are no ads, no analytics and no account.\n\n'
-          'Paperwise does not even ask for internet permission, so it could not send anything if it wanted to. '
-          'Updates come through Google Play.',
+          'The only time Paperwise uses the internet is when you tap "Check for updates", '
+          'which asks GitHub whether a newer version exists.',
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'.tr)),
@@ -225,6 +226,18 @@ class _SettingsPageState extends State<SettingsPage> {
               title: 'Restore from a backup',
               subtitle: 'Bring back files from a Paperwise backup',
               onTap: _restore,
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        _SettingsGroup(
+          children: [
+            _SettingsTile(
+              icon: Icons.system_update_rounded,
+              palette: TilePalette.blue,
+              title: 'Check for updates',
+              subtitle: 'Asks GitHub if a newer version exists',
+              onTap: () => UpdateService.checkForUpdates(context),
             ),
           ],
         ),

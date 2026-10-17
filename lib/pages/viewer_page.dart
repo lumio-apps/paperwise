@@ -96,7 +96,7 @@ class _ViewerPageState extends State<ViewerPage> {
       return total == 0 ? 'Searching…' : 'Searching… $total found so far';
     }
     if (total == 0) {
-      return 'No matches. A scanned PDF has no text to search until OCR arrives (v0.11).';
+      return 'No matches. If this PDF is a scan, run Text from scans first.';
     }
     final current = (_searcher.currentIndex ?? 0) + 1;
     return 'Match $current of $total';

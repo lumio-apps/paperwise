@@ -107,6 +107,7 @@ const _hindi = <String, String>{
   'System': 'सिस्टम',
   'Language': 'भाषा',
   'Check for updates': 'अपडेट जाँचें',
+  'Asks GitHub if a newer version exists': 'GitHub से पूछता है कि नया वर्शन है या नहीं',
   "What's coming": 'आगे क्या आ रहा है',
   'The tools in the next updates': 'अगले अपडेट के टूल',
   'Privacy': 'प्राइवेसी',

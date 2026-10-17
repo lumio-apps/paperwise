@@ -16,6 +16,10 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // A screen that fails to draw would be a plain grey box in the release app.
+  // Show what went wrong instead, so it can be reported and fixed.
+  ErrorWidget.builder = _errorScreen;
+
   // The Outfit font is bundled in the app, so its license is shown with the others.
   LicenseRegistry.addLicense(() async* {
     final text = await rootBundle.loadString('assets/fonts/OFL.txt');
@@ -28,6 +32,51 @@ Future<void> main() async {
   await ReadingLibrary.instance.load();
   runApp(const PaperwiseApp());
   ExternalOpen.start(navigatorKey);
+}
+
+Widget _errorScreen(FlutterErrorDetails details) {
+  var message = details.exceptionAsString();
+  if (message.length > 700) message = '${message.substring(0, 700)}…';
+  return Directionality(
+    textDirection: TextDirection.ltr,
+    child: ColoredBox(
+      color: const Color(0xFFF4F2FF),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 64, 24, 24),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'This screen could not be shown.',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF241F4F),
+                  decoration: TextDecoration.none,
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Press the back button to leave. Your files are safe.',
+                style: TextStyle(fontSize: 15, color: Color(0xFF5B5778), decoration: TextDecoration.none),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                message,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFF5B5778),
+                  fontWeight: FontWeight.w400,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
 }
 
 class PaperwiseApp extends StatefulWidget {

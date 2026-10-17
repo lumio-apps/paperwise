@@ -3,7 +3,7 @@
 <p align="center">
   <b>Private PDF tools for Android. Fully offline.</b><br>
   Merge, split, sign, scan, compress, protect and search PDFs, all on your phone.<br>
-  No ads. No account. No tracking. No internet permission.
+  No ads. No account. No tracking. Your files never leave your phone.
 </p>
 
 <p align="center">
@@ -26,7 +26,7 @@
 
 ## Why Paperwise
 
-Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does none of that. Every tool runs on your phone, and the app has **no internet permission at all**, so it could not send your documents anywhere even if it wanted to. The code is open, so you can check that for yourself.
+Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does none of that. Every tool runs on your phone. The only time the app uses the internet is when you tap **Check for updates**, which asks GitHub for the newest version. Your documents are never uploaded. The code is open, so you can check that for yourself.
 
 ## What you can do
 
@@ -58,11 +58,9 @@ Your original files are never changed. Every tool saves a new copy.
 
 ## Install
 
-**Google Play:** coming soon.
-
 **From GitHub:** download the latest `.apk` from the [Releases page](https://github.com/lumio-apps/paperwise/releases/latest), open it on your phone and allow installs from your browser or file manager when Android asks. Requires Android 7.0 or newer.
 
-The GitHub APK and the Google Play version are signed with different keys, so Android will not update one over the other. To switch, use **Settings → Back up your files** first, uninstall, install the other one, then **Restore from a backup**. The APK does not update itself, so download the new one from Releases when a new version comes out.
+To update later, open **Settings → Check for updates**. Paperwise asks GitHub for the newest release, downloads the APK and hands it to Android to install over the old one. It only does this when you tap the button.
 
 ## Good to know
 
@@ -74,7 +72,7 @@ The GitHub APK and the Google Play version are signed with different keys, so An
 ## Privacy
 
 - Everything happens on your phone. Files you pick are read locally and results are saved in the app's own storage.
-- No internet permission, no ads, no analytics, no account.
+- The internet is used only when you tap Check for updates. No ads, no analytics, no account.
 - Passwords are used only to lock the file and are never stored.
 - Full policy: [PRIVACY.md](PRIVACY.md)
 
@@ -89,7 +87,7 @@ flutter run                    # on a connected phone or emulator
 flutter build apk --release    # signed with the debug key unless android/key.properties exists
 ```
 
-**Releases:** pushing a tag like `v1.0.0` runs GitHub Actions, which builds the APK and the Play Store bundle (`.aab`), signs them with the Lumio release key from repository secrets and publishes both on the Releases page. The Google Play listing text and checklist are in [docs/play-store/listing.md](docs/play-store/listing.md).
+**Releases:** pushing a tag like `v1.0.0` runs GitHub Actions, which builds the APK (and an `.aab` bundle), signs them with the Lumio release key from repository secrets and publishes them on the Releases page.
 
 ## Built with
 

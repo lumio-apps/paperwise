@@ -1,6 +1,6 @@
 # Privacy Policy for Paperwise
 
-_Last updated: 16 October 2026_
+_Last updated: 17 October 2026_
 
 Paperwise is made by [Lumio Apps](https://github.com/lumio-apps). It is a PDF toolkit for Android that works fully offline.
 
@@ -8,7 +8,7 @@ Paperwise is made by [Lumio Apps](https://github.com/lumio-apps). It is a PDF to
 
 - Paperwise does **not collect, store on a server, share or sell** any personal data.
 - Your files and everything you do in the app stay **on your phone**.
-- Paperwise has **no internet permission**, so it cannot send anything off your phone.
+- Paperwise uses the internet **only when you tap "Check for updates"**. Nothing else is ever sent.
 - There are **no ads, no analytics, no tracking and no account**.
 
 ## What the app does with your files
@@ -36,9 +36,13 @@ When you lock a PDF with a password, the password is used only to protect that f
 
 The backup feature creates one file on your phone. You choose where it goes (for example your Downloads folder, or another app through the share sheet). Paperwise does not upload it anywhere itself.
 
+## Updates
+
+When you tap **Check for updates** in Settings, Paperwise asks GitHub (api.github.com) whether a newer release exists. If you choose to update, it downloads the new APK from GitHub and hands it to Android to install. GitHub receives the usual network details of any web request (such as your IP address), but Paperwise sends no files, personal data or identifiers. Paperwise never checks for updates by itself.
+
 ## Permissions
 
-Paperwise asks for no special permissions. It uses the system file picker and the system camera screen when you choose to scan, so it only sees the files and pictures you pick.
+Paperwise uses the internet permission only for the update check above, and the permission to install packages only so Android can install the update you downloaded. It uses the system file picker and the system camera screen when you choose to scan, so it only sees the files and pictures you pick.
 
 ## Children
 

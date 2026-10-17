@@ -2,6 +2,15 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.1.0
+
+- **Check for updates is back** (Settings). Paperwise asks GitHub for the newest release, downloads the APK and opens the installer. It only does this when you tap the button. The internet permission is used for nothing else.
+
+## v1.0.1
+
+- A screen that fails to draw now shows what went wrong instead of a blank grey page.
+- Clearer message when a PDF search finds nothing.
+
 ## v1.0
 
 - Ready for Google Play: the app has no internet permission at all and the in-app updater is gone. Releases now also include a signed `.aab` bundle for Play.
@@ -75,4 +84,4 @@ What changed in each version of Paperwise, newest first.
 - **Split PDF**: cut a PDF by page ranges (like `1-4, 5-10`) or make one file per page. A colored page grid shows which pages go into which file.
 - **Image to PDF**: pick photos from the gallery or take new ones with the camera. Reorder them, then choose page size (A4, Letter, fit image), orientation and margin.
 - **Your files**: every PDF you make is saved in Paperwise. Open, share, save to your phone, rename or delete it.
-- _(v0.1 had an in-app updater. It was removed in v1.0.)_
+- _(The in-app updater was removed in v1.0 and came back in v1.1.0.)_
