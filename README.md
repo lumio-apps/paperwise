@@ -87,7 +87,7 @@ flutter run                    # on a connected phone or emulator
 flutter build apk --release    # signed with the debug key unless android/key.properties exists
 ```
 
-**Releases:** pushing a tag like `v1.0.0` runs GitHub Actions, which builds the APK (and an `.aab` bundle), signs them with the Lumio release key from repository secrets and publishes them on the Releases page.
+**Releases:** pushing a tag like `v1.0.0` runs GitHub Actions, which builds the APK, signs it with the Lumio release key from repository secrets and publishes it on the Releases page.
 
 ## Built with
 

@@ -29,8 +29,8 @@ jobs:
       - run: flutter analyze
 
       # The release key comes from repository secrets and is written to a file
-      # that Gradle reads (android/key.properties). Both the APK and the Play Store
-      # bundle are signed by Gradle with this key.
+      # that Gradle reads (android/key.properties). The APK is signed by Gradle
+      # with this key.
       # Required secrets: KEYSTORE_BASE64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD
       - name: Set up the release key
         env:
@@ -50,32 +50,14 @@ jobs:
       - name: Build release APK
         run: flutter build apk --release
 
-      - name: Build Play Store bundle (AAB)
-        run: flutter build appbundle --release
-
       - name: Check signatures
         run: |
           BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
           "$BUILD_TOOLS/apksigner" verify --print-certs build/app/outputs/flutter-apk/app-release.apk
-          keytool -printcert -jarfile build/app/outputs/bundle/release/app-release.aab
-
-      # Only prints a report. Google Play wants native libraries aligned to 16 KB pages.
-      - name: Check 16 KB page alignment (report only)
-        continue-on-error: true
-        run: |
-          BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
-          "$BUILD_TOOLS/zipalign" -c -P 16 -v 4 build/app/outputs/flutter-apk/app-release.apk | grep -i "\.so\|Verification" || true
-          mkdir -p libcheck && cd libcheck
-          unzip -q -o ../build/app/outputs/flutter-apk/app-release.apk 'lib/arm64-v8a/*.so'
-          for f in lib/arm64-v8a/*.so; do
-            align=$(readelf -lW "$f" | awk '/LOAD/ {print $NF}' | sort -u | tr '\n' ' ')
-            echo "$f  LOAD align: $align"
-          done
 
       - name: Collect files
         run: |
           cp build/app/outputs/flutter-apk/app-release.apk "Paperwise-${{ github.ref_name }}.apk"
-          cp build/app/outputs/bundle/release/app-release.aab "Paperwise-${{ github.ref_name }}.aab"
           rm -f android/app/release.jks android/key.properties
 
       - name: Publish GitHub release
@@ -83,5 +65,4 @@ jobs:
         with:
           files: |
             Paperwise-${{ github.ref_name }}.apk
-            Paperwise-${{ github.ref_name }}.aab
           generate_release_notes: true

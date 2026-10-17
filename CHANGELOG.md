@@ -5,6 +5,7 @@ What changed in each version of Paperwise, newest first.
 ## v1.1.0
 
 - **Check for updates is back** (Settings). Paperwise asks GitHub for the newest release, downloads the APK and opens the installer. It only does this when you tap the button. The internet permission is used for nothing else.
+- Releases now contain only the `.apk` (no more `.aab`).
 
 ## v1.0.1
 
