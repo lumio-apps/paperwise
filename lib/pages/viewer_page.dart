@@ -31,7 +31,9 @@ class ViewerPage extends StatefulWidget {
 class _ViewerPageState extends State<ViewerPage> {
   final PdfViewerController _controller = PdfViewerController();
   final ReadingLibrary _library = ReadingLibrary.instance;
-  late final PdfTextSearcher _searcher = PdfTextSearcher(_controller)..addListener(_onSearchChanged);
+  // Made only after the viewer has opened the PDF. Creating it earlier fails
+  // because the searcher needs the document to exist.
+  PdfTextSearcher? _searcher;
   final TextEditingController _query = TextEditingController();
   bool _searchMode = false;
   String _searched = '';
@@ -61,8 +63,8 @@ class _ViewerPageState extends State<ViewerPage> {
   void dispose() {
     _saveTimer?.cancel();
     _savePosition();
-    _searcher.removeListener(_onSearchChanged);
-    _searcher.dispose();
+    _searcher?.removeListener(_onSearchChanged);
+    _searcher?.dispose();
     _query.dispose();
     super.dispose();
   }
@@ -73,14 +75,15 @@ class _ViewerPageState extends State<ViewerPage> {
 
   void _runSearch() {
     final text = _query.text.trim();
-    if (text.isEmpty || !_controller.isReady) return;
+    final searcher = _searcher;
+    if (text.isEmpty || searcher == null || !_controller.isReady) return;
     FocusScope.of(context).unfocus();
     setState(() => _searched = text);
-    _searcher.startTextSearch(text);
+    searcher.startTextSearch(text);
   }
 
   void _closeSearch() {
-    _searcher.resetTextSearch();
+    _searcher?.resetTextSearch();
     setState(() {
       _searchMode = false;
       _searched = '';
@@ -91,14 +94,16 @@ class _ViewerPageState extends State<ViewerPage> {
   /// A short line about the search: progress, the match you are on, or none found.
   String get _searchStatus {
     if (_searched.isEmpty) return 'Type a word and tap search.';
-    final total = _searcher.matches.length;
-    if (_searcher.isSearching) {
+    final searcher = _searcher;
+    if (searcher == null) return 'Opening the PDF…';
+    final total = searcher.matches.length;
+    if (searcher.isSearching) {
       return total == 0 ? 'Searching…' : 'Searching… $total found so far';
     }
     if (total == 0) {
       return 'No matches. If this PDF is a scan, run Text from scans first.';
     }
-    final current = (_searcher.currentIndex ?? 0) + 1;
+    final current = (searcher.currentIndex ?? 0) + 1;
     return 'Match $current of $total';
   }
 
@@ -111,6 +116,7 @@ class _ViewerPageState extends State<ViewerPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       setState(() {
+        _searcher ??= (PdfTextSearcher(controller)..addListener(_onSearchChanged));
         _document = document;
         _pageCount = document.pages.length;
       });
@@ -186,6 +192,7 @@ class _ViewerPageState extends State<ViewerPage> {
 
   @override
   Widget build(BuildContext context) {
+    final searcher = _searcher;
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -292,12 +299,12 @@ class _ViewerPageState extends State<ViewerPage> {
                     ),
                     IconButton(
                       tooltip: 'Previous match',
-                      onPressed: _searcher.matches.isEmpty ? null : _searcher.goToPrevMatch,
+                      onPressed: searcher == null || searcher.matches.isEmpty ? null : searcher.goToPrevMatch,
                       icon: const Icon(Icons.keyboard_arrow_up_rounded),
                     ),
                     IconButton(
                       tooltip: 'Next match',
-                      onPressed: _searcher.matches.isEmpty ? null : _searcher.goToNextMatch,
+                      onPressed: searcher == null || searcher.matches.isEmpty ? null : searcher.goToNextMatch,
                       icon: const Icon(Icons.keyboard_arrow_down_rounded),
                     ),
                   ],
@@ -314,7 +321,7 @@ class _ViewerPageState extends State<ViewerPage> {
                   margin: 8,
                   onViewerReady: _onViewerReady,
                   onPageChanged: _onPageChanged,
-                  pagePaintCallbacks: [_searcher.pageTextMatchPaintCallback],
+                  pagePaintCallbacks: [if (searcher != null) searcher.pageTextMatchPaintCallback],
                   viewerOverlayBuilder: (context, size, handleLinkTap) => [
                     PdfViewerScrollThumb(controller: _controller, orientation: ScrollbarOrientation.right),
                   ],

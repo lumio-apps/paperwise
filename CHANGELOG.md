@@ -2,6 +2,10 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.1.3
+
+- Fixed the PDF viewer: it showed an error screen when opening a PDF. Search in PDF works again.
+
 ## v1.1.2
 
 - Error screens now also show where the error happened, to help fix a PDF that does not open.
