@@ -2,7 +2,7 @@
 
 What changed in each version of Paperwise, newest first.
 
-## v1.1.1
+## v1.1.2
 
 - Error screens now also show where the error happened, to help fix a PDF that does not open.
 - Releases contain only the `.apk`.
