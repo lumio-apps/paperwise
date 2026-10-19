@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 
-enum ToolId { merge, split, pages, imageToPdf, pdfToImage, imagePrivacy, compress, scan, ocr, protect, sign, markup, search, more }
+enum ToolId { merge, split, pages, imageToPdf, pdfToImage, imagePrivacy, compress, scan, ocr, protect, sign, markup, search, info, more }
 
 /// A tile on the home screen.
 class ToolInfo {
@@ -69,6 +69,7 @@ List<ToolInfo> get homeTools => <ToolInfo>[
   ToolInfo(id: ToolId.sign, title: 'Edit & sign', icon: Icons.draw_outlined, palette: TilePalette.yellow),
   ToolInfo(id: ToolId.markup, title: 'Markup', icon: Icons.highlight_rounded, palette: TilePalette.orange),
   ToolInfo(id: ToolId.search, title: 'Search in PDF', icon: Icons.search_rounded, palette: TilePalette.blue),
+  ToolInfo(id: ToolId.info, title: 'PDF info', icon: Icons.info_outline_rounded, palette: TilePalette.teal),
 ];
 
 /// One planned update, shown in "What's coming".

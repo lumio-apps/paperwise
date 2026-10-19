@@ -44,6 +44,7 @@ Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does 
 | ✍️ | **Edit & sign** | Type text anywhere, draw and place your signature, add page numbers, headers and footers |
 | 🖍️ | **Markup** | Highlighter, pen, boxes, ovals, lines and arrows in six colors |
 | 🔎 | **Search in PDF** | Find words inside a PDF and jump between matches |
+| 🧾 | **PDF info** | See the author, software and dates inside a PDF and save a clean copy without them |
 | 🛡️ | **Image privacy** | Remove hidden location and device info from photos, blur faces or number plates |
 
 **Also built in**
@@ -100,7 +101,7 @@ flutter build apk --release    # signed with the debug key unless android/key.pr
 
 ## Roadmap
 
-Paperwise is feature complete for v1.0. Ideas for later: OCR for more languages, more of the tool screens in Hindi, and more languages. See what changed in each version in the [changelog](CHANGELOG.md).
+Paperwise is feature complete for v1.0. See [TODO.md](TODO.md) for what is planned next. See what changed in each version in the [changelog](CHANGELOG.md).
 
 ## Contributing
 

@@ -38,6 +38,7 @@ const _hindi = <String, String>{
   'Edit & sign': 'एडिट और साइन',
   'Markup': 'मार्कअप',
   'Search in PDF': 'PDF में खोजें',
+  'PDF info': 'PDF की जानकारी',
 
   'Text from scans': 'स्कैन से टेक्स्ट',
   'Choose a scanned PDF': 'स्कैन किया PDF चुनें',

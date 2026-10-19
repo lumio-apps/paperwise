@@ -12,6 +12,7 @@ import 'compress_page.dart';
 import 'edit_page.dart';
 import 'image_privacy_page.dart';
 import 'image_to_pdf_page.dart';
+import 'info_page.dart';
 import 'markup_page.dart';
 import 'merge_page.dart';
 import 'pages_page.dart';
@@ -156,6 +157,8 @@ void openTool(BuildContext context, ToolInfo tool) {
     case ToolId.search:
       _openSearch(context);
       return;
+    case ToolId.info:
+      page = const InfoPage();
   }
   Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));
 }
