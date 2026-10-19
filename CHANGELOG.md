@@ -2,6 +2,11 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.1.4
+
+- **New look: soft "neumorphic" design.** Cards, tool tiles, buttons and the bottom bar now rise softly out of the background, and icons and the chosen option sink into it. Works in light and dark.
+- **Smooth animations.** Tool tiles and recent files glide in one after another, buttons sink in when you press them, the bottom bar slides between tabs, and the Compress/Split/other buttons fade between their label and the busy spinner. Everything is skipped when the phone has animations turned off.
+
 ## v1.1.3
 
 - Fixed the PDF viewer: it showed an error screen when opening a PDF. Search in PDF works again.

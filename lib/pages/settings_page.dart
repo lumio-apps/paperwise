@@ -10,6 +10,7 @@ import 'package:share_plus/share_plus.dart';
 import '../app_settings.dart';
 import '../backup.dart';
 import '../file_actions.dart';
+import '../neumorphic.dart';
 import '../strings.dart';
 import '../theme.dart';
 import '../update_service.dart';
@@ -317,11 +318,11 @@ class _SettingsTile extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-      leading: Container(
-        width: 42,
-        height: 42,
-        decoration: BoxDecoration(color: palette.tint, borderRadius: BorderRadius.circular(12)),
-        child: Icon(icon, color: palette.color, size: 22),
+      leading: NeuBox(
+        pressed: true,
+        radius: 14,
+        depth: 3,
+        child: SizedBox(width: 42, height: 42, child: Icon(icon, color: palette.color, size: 22)),
       ),
       title: Text(
         title.tr,

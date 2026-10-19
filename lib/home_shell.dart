@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'neumorphic.dart';
 import 'pages/files_page.dart';
 import 'pages/home_page.dart';
 import 'pages/settings_page.dart';
@@ -71,12 +72,10 @@ class _PillNavBar extends StatelessWidget {
       top: false,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
-        child: Container(
+        child: NeuBox(
+          radius: 34,
+          depth: 8,
           padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: AppColors.primary,
-            borderRadius: BorderRadius.circular(999),
-          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -103,7 +102,7 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = selected ? AppColors.primary : AppColors.navInactive;
+    final color = selected ? AppColors.accent : AppColors.muted;
     return Semantics(
       selected: selected,
       button: true,
@@ -111,15 +110,16 @@ class _NavItem extends StatelessWidget {
       excludeSemantics: true,
       child: Tooltip(
         message: destination.label.tr,
-        child: Material(
-          color: selected ? Colors.white : Colors.transparent,
-          shape: const StadiumBorder(),
-          child: InkWell(
-            customBorder: const StadiumBorder(),
-            onTap: onTap,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: NeuBox(
+            pressed: selected,
+            radius: 24,
+            depth: 5,
             child: AnimatedSize(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeOut,
+              duration: const Duration(milliseconds: 260),
+              curve: Curves.easeOutCubic,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: selected ? 18 : 13, vertical: 12),
                 child: Row(

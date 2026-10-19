@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../coming_soon_sheet.dart';
 import '../file_store.dart';
 import '../file_tile.dart';
+import '../neumorphic.dart';
 import '../picked_pdf.dart';
 import '../theme.dart';
 import '../tools.dart';
@@ -70,7 +71,7 @@ class HomePage extends StatelessWidget {
                 mainAxisExtent: 96,
               ),
               itemCount: homeTools.length,
-              itemBuilder: (context, index) => _ToolTile(tool: homeTools[index]),
+              itemBuilder: (context, index) => _ToolTile(tool: homeTools[index], index: index),
             ),
             const SizedBox(height: 26),
             Row(
@@ -88,25 +89,31 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             if (recent.isEmpty)
-              SectionCard(
-                child: Row(
-                  children: [
-                    PageThumb(),
-                    SizedBox(width: 14),
-                    Expanded(
-                      child: Text(
-                        'PDFs you make will show up here, ready to open or share.'.tr,
-                        style: TextStyle(fontSize: 15, height: 1.35, color: AppColors.muted),
+              RiseIn(
+                delay: const Duration(milliseconds: 500),
+                child: SectionCard(
+                  child: Row(
+                    children: [
+                      PageThumb(),
+                      SizedBox(width: 14),
+                      Expanded(
+                        child: Text(
+                          'PDFs you make will show up here, ready to open or share.'.tr,
+                          style: TextStyle(fontSize: 15, height: 1.35, color: AppColors.muted),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               )
             else
-              for (final file in recent)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: FileTile(file: file),
+              for (var i = 0; i < recent.length; i++)
+                RiseIn(
+                  delay: Duration(milliseconds: 500 + 80 * i),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 14),
+                    child: FileTile(file: recent[i]),
+                  ),
                 ),
           ],
         );
@@ -187,9 +194,11 @@ class _OfflineBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tooltip(
       message: 'Every tool works without internet'.tr,
-      child: Container(
+      child: NeuBox(
+        pressed: true,
+        radius: 18,
+        depth: 3,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(999)),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -207,51 +216,54 @@ class _OfflineBadge extends StatelessWidget {
 }
 
 class _ToolTile extends StatelessWidget {
-  const _ToolTile({required this.tool});
+  const _ToolTile({required this.tool, required this.index});
 
   final ToolInfo tool;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    final radius = BorderRadius.circular(24);
-    return Material(
-      color: tool.palette.tint,
-      borderRadius: radius,
-      child: InkWell(
-        borderRadius: radius,
+    return RiseIn(
+      delay: Duration(milliseconds: 45 * index),
+      child: NeuPress(
+        radius: 24,
+        depth: 8,
+        padding: const EdgeInsets.fromLTRB(14, 12, 12, 12),
         onTap: () => openTool(context, tool),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 14, 12, 14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Icon(tool.icon, size: 28, color: tool.palette.color),
-                  const Spacer(),
-                  if (!tool.isReady)
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: AppColors.surface.withValues(alpha: 0.7),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                      child: Text(
-                        'Soon'.tr,
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: tool.palette.color),
-                      ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                NeuBox(
+                  pressed: true,
+                  radius: 20,
+                  depth: 3,
+                  child: SizedBox(width: 40, height: 40, child: Icon(tool.icon, size: 22, color: tool.palette.color)),
+                ),
+                const Spacer(),
+                if (!tool.isReady)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: AppColors.surface.withValues(alpha: 0.7),
+                      borderRadius: BorderRadius.circular(999),
                     ),
-                ],
-              ),
-              Text(
-                tool.title.tr,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
-              ),
-            ],
-          ),
+                    child: Text(
+                      'Soon'.tr,
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: tool.palette.color),
+                    ),
+                  ),
+              ],
+            ),
+            Text(
+              tool.title.tr,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+            ),
+          ],
         ),
       ),
     );

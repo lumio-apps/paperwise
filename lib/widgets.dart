@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'neumorphic.dart';
 import 'theme.dart';
 import 'strings.dart';
 
@@ -36,14 +37,16 @@ class RoundIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: onPressed,
-      tooltip: tooltip,
-      icon: Icon(icon, size: 22),
-      style: IconButton.styleFrom(
-        backgroundColor: AppColors.surface,
-        foregroundColor: AppColors.ink,
-        fixedSize: const Size(44, 44),
+    return Tooltip(
+      message: tooltip,
+      child: Opacity(
+        opacity: onPressed == null ? 0.5 : 1,
+        child: NeuPress(
+          radius: 22,
+          depth: 5,
+          onTap: onPressed,
+          child: SizedBox(width: 44, height: 44, child: Icon(icon, size: 22, color: AppColors.ink)),
+        ),
       ),
     );
   }
@@ -94,11 +97,11 @@ class ToolPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(color: palette.tint, shape: BoxShape.circle),
-                    child: Icon(icon, color: palette.color, size: 22),
+                  NeuBox(
+                    pressed: true,
+                    radius: 22,
+                    depth: 4,
+                    child: SizedBox(width: 44, height: 44, child: Icon(icon, color: palette.color, size: 22)),
                   ),
                 ],
               ),
@@ -133,31 +136,43 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
-      onPressed: busy ? null : onPressed,
-      style: FilledButton.styleFrom(
-        backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
-        disabledBackgroundColor: AppColors.primary.withValues(alpha: 0.35),
-        disabledForegroundColor: Colors.white,
-        minimumSize: const Size.fromHeight(58),
-        shape: const StadiumBorder(),
-        textStyle: const TextStyle(fontFamily: 'Outfit', fontSize: 17, fontWeight: FontWeight.w700),
+    final enabled = !busy && onPressed != null;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        boxShadow: enabled ? Neu.raised(7) : const <BoxShadow>[],
       ),
-      child: busy
-          ? const SizedBox(
-              width: 22,
-              height: 22,
-              child: CircularProgressIndicator(strokeWidth: 2.5, color: Colors.white),
-            )
-          : Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(child: Text(label.tr, overflow: TextOverflow.ellipsis)),
-                const SizedBox(width: 10),
-                Icon(icon, size: 20),
-              ],
-            ),
+      child: FilledButton(
+        onPressed: busy ? null : onPressed,
+        style: FilledButton.styleFrom(
+          backgroundColor: AppColors.primary,
+          foregroundColor: Colors.white,
+          disabledBackgroundColor: AppColors.primary.withValues(alpha: 0.35),
+          disabledForegroundColor: Colors.white,
+          minimumSize: const Size.fromHeight(58),
+          shape: const StadiumBorder(),
+          textStyle: const TextStyle(fontFamily: 'Outfit', fontSize: 17, fontWeight: FontWeight.w700),
+        ),
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 220),
+          child: busy
+              ? const SizedBox(
+                  key: ValueKey('busy'),
+                  width: 22,
+                  height: 22,
+                  child: CircularProgressIndicator(strokeWidth: 2.5, color: Colors.white),
+                )
+              : Row(
+                  key: const ValueKey('label'),
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(child: Text(label.tr, overflow: TextOverflow.ellipsis)),
+                    const SizedBox(width: 10),
+                    Icon(icon, size: 20),
+                  ],
+                ),
+        ),
+      ),
     );
   }
 }
@@ -177,16 +192,23 @@ class SecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton.icon(
-      onPressed: onPressed,
-      icon: Icon(icon, size: 20),
-      label: Text(label.tr, overflow: TextOverflow.ellipsis),
-      style: OutlinedButton.styleFrom(
-        foregroundColor: AppColors.ink,
-        minimumSize: const Size.fromHeight(52),
-        shape: const StadiumBorder(),
-        side: BorderSide(color: AppColors.line, width: 1.5),
-        textStyle: const TextStyle(fontFamily: 'Outfit', fontSize: 15, fontWeight: FontWeight.w700),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        boxShadow: onPressed == null ? const <BoxShadow>[] : Neu.raised(6),
+      ),
+      child: OutlinedButton.icon(
+        onPressed: onPressed,
+        icon: Icon(icon, size: 20),
+        label: Text(label.tr, overflow: TextOverflow.ellipsis),
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppColors.ink,
+          backgroundColor: AppColors.background,
+          minimumSize: const Size.fromHeight(52),
+          shape: const StadiumBorder(),
+          side: BorderSide.none,
+          textStyle: const TextStyle(fontFamily: 'Outfit', fontSize: 15, fontWeight: FontWeight.w700),
+        ),
       ),
     );
   }
@@ -205,14 +227,7 @@ class SectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: child,
-    );
+    return NeuBox(radius: 24, depth: 7, padding: padding, child: child);
   }
 }
 
@@ -289,31 +304,28 @@ class _Choice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shape = RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(14),
-      side: selected ? BorderSide.none : BorderSide(color: AppColors.line),
-    );
     return Semantics(
       selected: selected,
       button: true,
-      child: Material(
-        color: selected ? AppColors.primary : AppColors.surface,
-        shape: shape,
-        child: InkWell(
-          customBorder: shape,
-          onTap: onTap,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: NeuBox(
+          radius: 14,
+          depth: 4,
+          pressed: selected,
           child: SizedBox(
             height: 46,
             child: Center(
-              child: Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              child: AnimatedDefaultTextStyle(
+                duration: const Duration(milliseconds: 200),
                 style: TextStyle(
+                  fontFamily: 'Outfit',
                   fontSize: 15,
                   fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
-                  color: selected ? Colors.white : AppColors.ink,
+                  color: selected ? AppColors.accent : AppColors.ink,
                 ),
+                child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
               ),
             ),
           ),
@@ -348,11 +360,11 @@ class EmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: 76,
-            height: 76,
-            decoration: BoxDecoration(color: palette.tint, borderRadius: BorderRadius.circular(24)),
-            child: Icon(icon, size: 36, color: palette.color),
+          NeuBox(
+            pressed: true,
+            radius: 24,
+            depth: 6,
+            child: SizedBox(width: 76, height: 76, child: Icon(icon, size: 36, color: palette.color)),
           ),
           const SizedBox(height: 18),
           Text(
@@ -390,26 +402,41 @@ class PageThumb extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Container(
             height: 3,
-            decoration: BoxDecoration(color: lineColor ?? (AppColors.isDark ? const Color(0xFF3A3660) : const Color(0xFFC8C4E0)), borderRadius: BorderRadius.circular(2)),
+            decoration: BoxDecoration(color: lineColor ?? (AppColors.isDark ? const Color(0xFF4A4578) : const Color(0xFFB3AED3)), borderRadius: BorderRadius.circular(2)),
           ),
         );
 
-    return Container(
-      width: 44,
-      height: 58,
-      padding: const EdgeInsets.fromLTRB(7, 9, 7, 9),
-      decoration: BoxDecoration(color: color ?? AppColors.background, borderRadius: BorderRadius.circular(8)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          line(1),
-          const SizedBox(height: 5),
-          line(0.7),
-          const SizedBox(height: 5),
-          line(1),
-          const SizedBox(height: 5),
-          line(0.5),
-        ],
+    final lines = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        line(1),
+        const SizedBox(height: 5),
+        line(0.7),
+        const SizedBox(height: 5),
+        line(1),
+        const SizedBox(height: 5),
+        line(0.5),
+      ],
+    );
+
+    final fill = color;
+    if (fill != null) {
+      return Container(
+        width: 44,
+        height: 58,
+        padding: const EdgeInsets.fromLTRB(7, 9, 7, 9),
+        decoration: BoxDecoration(color: fill, borderRadius: BorderRadius.circular(8)),
+        child: lines,
+      );
+    }
+    return NeuBox(
+      pressed: true,
+      radius: 10,
+      depth: 3,
+      child: SizedBox(
+        width: 44,
+        height: 58,
+        child: Padding(padding: const EdgeInsets.fromLTRB(7, 9, 7, 9), child: lines),
       ),
     );
   }

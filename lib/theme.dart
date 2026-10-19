@@ -13,12 +13,18 @@ class AppColors {
 
   static Color get ink => _pick(0xFF1E1A3B, 0xFFF1EFFF);
   static Color get muted => _pick(0xFF5E5A7A, 0xFFB0ACCB);
-  static Color get background => _pick(0xFFF4F2FF, 0xFF0F0D1F);
-  static Color get surface => _pick(0xFFFFFFFF, 0xFF1B1833);
+
+  /// The one soft color that screens, cards and buttons are all made from.
+  /// The neumorphic shapes rise out of it or sink into it.
+  static Color get background => _pick(0xFFE9E6F7, 0xFF1B1833);
+
+  /// A flat card color a little lighter than [background], for dialogs,
+  /// sheets and boxes that do not use the raised look.
+  static Color get surface => _pick(0xFFF3F1FD, 0xFF24203F);
   static Color get primary => _pick(0xFF241E4E, 0xFF4B42BB);
   static Color get accent => _pick(0xFF4338CA, 0xFFA9A4FF);
-  static Color get line => _pick(0xFFE2DFF2, 0xFF2E2A4D);
-  static Color get track => _pick(0xFFECEAF7, 0xFF26223F);
+  static Color get line => _pick(0xFFD2CEE8, 0xFF332F57);
+  static Color get track => _pick(0xFFDCD8EF, 0xFF2A2650);
   static Color get navInactive => _pick(0xFFD9D5F5, 0xFFD9D5F5);
   static Color get danger => _pick(0xFFB42318, 0xFFF97066);
   static Color get success => _pick(0xFF15803D, 0xFF4ADE80);
