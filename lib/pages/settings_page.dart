@@ -208,6 +208,20 @@ class _SettingsPageState extends State<SettingsPage> {
                   onSelectionChanged: (value) => settings.setLanguage(value.first),
                 ),
               ),
+              const SizedBox(height: 8),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: Text(
+                  'Reduce effects'.tr,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
+                ),
+                subtitle: Text(
+                  'Flat panels, no soft shadows or animations. Can feel smoother on older phones.'.tr,
+                  style: TextStyle(fontSize: 13, color: AppColors.muted),
+                ),
+                value: settings.reduceEffects,
+                onChanged: settings.setReduceEffects,
+              ),
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import 'app_settings.dart';
 import 'theme.dart';
 
 /// Shadows for the soft "neumorphic" look: shapes that rise out of the
@@ -13,8 +14,12 @@ class Neu {
   static Color get shadowDark => AppColors.isDark ? const Color(0xFF0F0D20) : const Color(0xFFC6C1E0);
   static Color get shadowLight => AppColors.isDark ? const Color(0xFF2A2650) : const Color(0xFFFFFFFF);
 
+  /// True when "Reduce effects" is on: flat panels, no shadows, no animations.
+  static bool get flat => AppSettings.instance.reduceEffects;
+
   /// A dark shadow to the bottom right and a light one to the top left.
-  static List<BoxShadow> raised(double depth) => [
+  /// Empty when [flat] is on.
+  static List<BoxShadow> raised(double depth) => flat ? const <BoxShadow>[] : [
         BoxShadow(color: shadowDark, offset: Offset(depth, depth), blurRadius: depth * 2),
         BoxShadow(color: shadowLight, offset: Offset(-depth, -depth), blurRadius: depth * 2),
       ];
@@ -74,6 +79,19 @@ class NeuBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const duration = Duration(milliseconds: 220);
+    if (Neu.flat) {
+      // Flat look: a plain panel. Sunken parts are a little darker, raised
+      // parts get a thin outline so they still stand out.
+      return AnimatedContainer(
+        duration: duration,
+        decoration: BoxDecoration(
+          color: pressed ? AppColors.track : AppColors.surface,
+          borderRadius: BorderRadius.circular(radius),
+          border: pressed ? null : Border.all(color: AppColors.line),
+        ),
+        child: Padding(padding: padding, child: child),
+      );
+    }
     return AnimatedContainer(
       duration: duration,
       curve: Curves.easeOutCubic,
@@ -151,7 +169,7 @@ class _NeuPressState extends State<NeuPress> {
         onTapCancel: enabled ? () => _set(false) : null,
         onTap: widget.onTap,
         child: AnimatedScale(
-          scale: _down ? 0.97 : 1,
+          scale: _down && !Neu.flat ? 0.97 : 1,
           duration: const Duration(milliseconds: 140),
           curve: Curves.easeOut,
           child: NeuBox(
@@ -206,7 +224,7 @@ class _RiseInState extends State<RiseIn> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.disableAnimationsOf(context)) return widget.child;
+    if (Neu.flat || MediaQuery.disableAnimationsOf(context)) return widget.child;
     return AnimatedBuilder(
       animation: _curve,
       child: widget.child,

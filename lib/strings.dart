@@ -106,6 +106,9 @@ const _hindi = <String, String>{
   'Dark': 'डार्क',
   'System': 'सिस्टम',
   'Language': 'भाषा',
+  'Reduce effects': 'इफ़ेक्ट कम करें',
+  'Flat panels, no soft shadows or animations. Can feel smoother on older phones.':
+      'सपाट पैनल, कोई मुलायम परछाईं या एनिमेशन नहीं। पुराने फ़ोन पर ज़्यादा स्मूद चल सकता है।',
   'Check for updates': 'अपडेट जाँचें',
   'Asks GitHub if a newer version exists': 'GitHub से पूछता है कि नया वर्शन है या नहीं',
   "What's coming": 'आगे क्या आ रहा है',

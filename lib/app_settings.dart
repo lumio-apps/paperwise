@@ -25,8 +25,8 @@ enum AppLanguage {
   }
 }
 
-/// The choices from Settings: look (light, dark or system), language and file
-/// order. They are kept in one small JSON file in the app's own storage.
+/// The choices from Settings: look (light, dark or system), language, file
+/// order and "Reduce effects". They are kept in one small JSON file in the app's own storage.
 class AppSettings extends ChangeNotifier {
   AppSettings._();
 
@@ -35,11 +35,15 @@ class AppSettings extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.system;
   AppLanguage _language = AppLanguage.english;
   FileSort _fileSort = FileSort.newest;
+  bool _reduceEffects = false;
   Future<void> _writeQueue = Future.value();
 
   ThemeMode get themeMode => _themeMode;
   AppLanguage get language => _language;
   FileSort get fileSort => _fileSort;
+
+  /// True when panels should be flat, with no soft shadows or animations.
+  bool get reduceEffects => _reduceEffects;
 
   Future<File> _storage() async {
     final docs = await getApplicationDocumentsDirectory();
@@ -62,6 +66,7 @@ class AppSettings extends ChangeNotifier {
         (s) => s.name == decoded['fileSort'],
         orElse: () => FileSort.newest,
       );
+      _reduceEffects = decoded['reduceEffects'] == true;
       notifyListeners();
     } catch (_) {
       // Start with the defaults if the file can't be read.
@@ -86,6 +91,12 @@ class AppSettings extends ChangeNotifier {
     _changed();
   }
 
+  void setReduceEffects(bool value) {
+    if (value == _reduceEffects) return;
+    _reduceEffects = value;
+    _changed();
+  }
+
   void _changed() {
     notifyListeners();
     _writeQueue = _writeQueue.then((_) => _write());
@@ -98,6 +109,7 @@ class AppSettings extends ChangeNotifier {
         'theme': _themeMode.name,
         'language': _language.code,
         'fileSort': _fileSort.name,
+        'reduceEffects': _reduceEffects,
       });
       await file.writeAsString(data, flush: true);
     } catch (_) {

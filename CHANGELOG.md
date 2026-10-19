@@ -2,6 +2,10 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.1.5
+
+- **Reduce effects** (Settings): flat panels with no soft shadows and no animations. It can feel smoother on older phones.
+
 ## v1.1.4
 
 - **New look: soft "neumorphic" design.** Cards, tool tiles, buttons and the bottom bar now rise softly out of the background, and icons and the chosen option sink into it. Works in light and dark.
