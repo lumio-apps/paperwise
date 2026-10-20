@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>Private PDF tools for Android. Fully offline.</b><br>
-  Merge, split, sign, scan, compress, protect and search PDFs, all on your phone.<br>
+  Merge, split, sign, scan, compress, protect, search and clean PDFs, all on your phone.<br>
   No ads. No account. No tracking. Your files never leave your phone.
 </p>
 
@@ -49,10 +49,11 @@ Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does 
 
 **Also built in**
 
-- A PDF reader with zoom, page jump, thumbnails, "Continue reading" and favorites
+- A PDF reader with zoom, page jump, thumbnails, "Continue reading", favorites and a night reading mode
 - Open PDFs straight from your file manager, chat apps or email ("Open with Paperwise")
 - Search and sort your files by newest, oldest, name or size
-- Light, dark or system look, in English and Hindi (हिन्दी)
+- A soft "neumorphic" look in light, dark or system theme, in English and Hindi (हिन्दी)
+- **Reduce effects** switch in Settings: flat panels with no shadows or animations, handy on older phones
 - Backup and restore in one `.pwbackup` file (you choose where it goes)
 
 Your original files are never changed. Every tool saves a new copy.
@@ -69,6 +70,7 @@ To update later, open **Settings → Check for updates**. Paperwise asks GitHub 
 - **Lock, Watermark and Compress** redraw each page as a picture. Text in those copies can no longer be selected. Edit & sign, Markup and Unlock keep the text selectable.
 - Text you add with **Edit & sign** supports letters, numbers and keyboard symbols (no accents or other scripts yet).
 - Hindi covers the main screens. Tool screens are still in English.
+- **PDF info** makes a clean copy by rebuilding the PDF page by page. The text stays selectable, but bookmarks, links and form fields are not kept.
 
 ## Privacy
 
@@ -101,7 +103,7 @@ flutter build apk --release    # signed with the debug key unless android/key.pr
 
 ## Roadmap
 
-Paperwise is feature complete for v1.0. See [TODO.md](TODO.md) for what is planned next. See what changed in each version in the [changelog](CHANGELOG.md).
+Paperwise has all its core tools and keeps growing, roughly one small update at a time. See [TODO.md](TODO.md) for what is planned next, and the [changelog](CHANGELOG.md) for what changed in each version.
 
 ## Contributing
 
