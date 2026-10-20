@@ -6,13 +6,22 @@ import 'package:flutter/services.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:pdfrx/pdfrx.dart';
 
+import '../app_settings.dart';
 import '../file_actions.dart';
 import '../file_store.dart';
 import '../library.dart';
 import '../theme.dart';
 import '../widgets.dart';
 
-enum _ViewerMenu { share, save, otherApp }
+enum _ViewerMenu { night, share, save, otherApp }
+
+/// Inverts the colors but keeps text a little soft, so night reading is easy on the eyes.
+const ColorFilter _nightFilter = ColorFilter.matrix(<double>[
+  -0.88, 0, 0, 0, 224,
+  0, -0.88, 0, 0, 224,
+  0, 0, -0.88, 0, 224,
+  0, 0, 0, 1, 0,
+]);
 
 /// Reads a PDF inside Paperwise: zoom, jump to a page, thumbnails, and it
 /// remembers where you stopped.
@@ -168,6 +177,8 @@ class _ViewerPageState extends State<ViewerPage> {
 
   Future<void> _onMenu(_ViewerMenu action) async {
     switch (action) {
+      case _ViewerMenu.night:
+        AppSettings.instance.setReaderNight(!AppSettings.instance.readerNight);
       case _ViewerMenu.share:
         await sharePdfs([widget.path]);
       case _ViewerMenu.save:
@@ -268,16 +279,25 @@ class _ViewerPageState extends State<ViewerPage> {
                     tooltip: 'More options',
                     icon: Icon(Icons.more_vert_rounded, color: AppColors.muted),
                     onSelected: _onMenu,
-                    itemBuilder: (context) => const [
+                    itemBuilder: (context) => [
                       PopupMenuItem(
+                        value: _ViewerMenu.night,
+                        child: ListTile(
+                          leading: Icon(
+                            AppSettings.instance.readerNight ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                          ),
+                          title: Text(AppSettings.instance.readerNight ? 'Day reading' : 'Night reading'),
+                        ),
+                      ),
+                      const PopupMenuItem(
                         value: _ViewerMenu.share,
                         child: ListTile(leading: Icon(Icons.share_outlined), title: Text('Share')),
                       ),
-                      PopupMenuItem(
+                      const PopupMenuItem(
                         value: _ViewerMenu.save,
                         child: ListTile(leading: Icon(Icons.download_rounded), title: Text('Save to phone')),
                       ),
-                      PopupMenuItem(
+                      const PopupMenuItem(
                         value: _ViewerMenu.otherApp,
                         child: ListTile(leading: Icon(Icons.open_in_new_rounded), title: Text('Open in another app')),
                       ),
@@ -311,7 +331,15 @@ class _ViewerPageState extends State<ViewerPage> {
                 ),
               ),
             Expanded(
-              child: PdfViewer.file(
+              child: ListenableBuilder(
+                listenable: AppSettings.instance,
+                builder: (context, child) => ColorFiltered(
+                  colorFilter: AppSettings.instance.readerNight
+                      ? _nightFilter
+                      : const ColorFilter.mode(Colors.transparent, BlendMode.dst),
+                  child: child,
+                ),
+                child: PdfViewer.file(
                 widget.path,
                 controller: _controller,
                 passwordProvider: _askPassword,
@@ -325,6 +353,7 @@ class _ViewerPageState extends State<ViewerPage> {
                   viewerOverlayBuilder: (context, size, handleLinkTap) => [
                     PdfViewerScrollThumb(controller: _controller, orientation: ScrollbarOrientation.right),
                   ],
+                ),
                 ),
               ),
             ),

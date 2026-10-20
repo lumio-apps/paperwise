@@ -2,6 +2,10 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.2.1
+
+- **Night reading** in the PDF viewer: open the ⋮ menu and choose Night reading for light text on a dark page. The choice is remembered. Choose Day reading to go back.
+
 ## v1.2.0
 
 - **PDF info** (new tool): see the title, author, software and dates saved inside a PDF, and save a clean copy without them before you share it. The clean copy keeps selectable text but drops bookmarks, links and form fields. Your original file is not changed.

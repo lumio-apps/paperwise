@@ -14,12 +14,12 @@ Package: a new dependency is named when one is needed. Everything else uses what
 - [x] v1.1.5: Reduce effects setting
 - [x] Already in the app: page numbers (Edit & sign), header and footer, extract pages (Page tools)
 - [x] v1.2.0: PDF info and metadata cleaner
+- [x] v1.2.1: Reader night mode (zoom and last page were already remembered or built in)
 
 ## v1.2: Everyday polish (small, high value)
 
 - [ ] **Page numbers: start number** (S): number from any value (for example start at 5). Position, size, first page and style already exist.
 - [ ] **Reader: outline and bookmarks** (M): show the PDF's table of contents and let people add their own bookmarks.
-- [ ] **Reader: night reading** (S): invert the page colors for dark rooms. Remember zoom and the last page.
 - [ ] **Files: select many** (M): long press to select, then share, delete or merge together.
 - [ ] **Share to Paperwise** (M): receive images and PDFs from other apps' Share menu (images go straight to Image to PDF).
 - [ ] **Hindi for all tool screens** (M): today only the main screens are translated.

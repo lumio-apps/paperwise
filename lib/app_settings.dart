@@ -36,6 +36,7 @@ class AppSettings extends ChangeNotifier {
   AppLanguage _language = AppLanguage.english;
   FileSort _fileSort = FileSort.newest;
   bool _reduceEffects = false;
+  bool _readerNight = false;
   Future<void> _writeQueue = Future.value();
 
   ThemeMode get themeMode => _themeMode;
@@ -44,6 +45,9 @@ class AppSettings extends ChangeNotifier {
 
   /// True when panels should be flat, with no soft shadows or animations.
   bool get reduceEffects => _reduceEffects;
+
+  /// True when the PDF viewer shows pages with inverted colors (white text on dark).
+  bool get readerNight => _readerNight;
 
   Future<File> _storage() async {
     final docs = await getApplicationDocumentsDirectory();
@@ -67,6 +71,7 @@ class AppSettings extends ChangeNotifier {
         orElse: () => FileSort.newest,
       );
       _reduceEffects = decoded['reduceEffects'] == true;
+      _readerNight = decoded['readerNight'] == true;
       notifyListeners();
     } catch (_) {
       // Start with the defaults if the file can't be read.
@@ -97,6 +102,12 @@ class AppSettings extends ChangeNotifier {
     _changed();
   }
 
+  void setReaderNight(bool value) {
+    if (value == _readerNight) return;
+    _readerNight = value;
+    _changed();
+  }
+
   void _changed() {
     notifyListeners();
     _writeQueue = _writeQueue.then((_) => _write());
@@ -110,6 +121,7 @@ class AppSettings extends ChangeNotifier {
         'language': _language.code,
         'fileSort': _fileSort.name,
         'reduceEffects': _reduceEffects,
+        'readerNight': _readerNight,
       });
       await file.writeAsString(data, flush: true);
     } catch (_) {
