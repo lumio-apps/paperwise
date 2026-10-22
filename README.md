@@ -56,6 +56,7 @@ Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does 
 - Open PDFs straight from your file manager, chat apps or email ("Open with Paperwise"), or send PDFs and pictures from any app's Share menu
 - Search and sort your files by newest, oldest, name or size
 - A clean, flat "list" look in light, dark or system theme, in English and Hindi (हिन्दी). No heavy shadows or animations, so it stays smooth on older phones
+- **Save location**: pick a folder in Settings and every new PDF or picture is also copied there (you can change or stop it any time)
 - Backup and restore in one `.pwbackup` file (you choose where it goes)
 
 Your original files are never changed. Every tool saves a new copy.
@@ -72,11 +73,12 @@ To update later, open **Settings → Check for updates**. Paperwise asks GitHub 
 - **Lock, Watermark and Compress** redraw each page as a picture. Text in those copies can no longer be selected. Edit & sign, Markup and Unlock keep the text selectable.
 - Text you add with **Edit & sign** supports letters, numbers and keyboard symbols (no accents or other scripts yet).
 - Hindi covers the main screens. Tool screens are still in English.
+- **Save location** needs a folder you pick yourself. On newer Android the main Downloads folder cannot be picked, so make a folder inside it (for example `Downloads/Paperwise`) and choose that.
 - **PDF info** makes a clean copy by rebuilding the PDF page by page. The text stays selectable, but bookmarks, links and form fields are not kept.
 
 ## Privacy
 
-- Everything happens on your phone. Files you pick are read locally and results are saved in the app's own storage.
+- Everything happens on your phone. Files you pick are read locally and results are saved in the app's own storage. If you pick a Save location, copies also go to that folder, and only that folder.
 - The internet is used only when you tap Check for updates. No ads, no analytics, no account.
 - Passwords are used only to lock the file and are never stored.
 - Full policy: [PRIVACY.md](PRIVACY.md)
