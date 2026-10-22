@@ -13,7 +13,10 @@ import '../widgets.dart';
 
 /// Turns photos from the gallery or camera into one PDF.
 class ImageToPdfPage extends StatefulWidget {
-  const ImageToPdfPage({super.key});
+  const ImageToPdfPage({super.key, this.initialPaths = const []});
+
+  /// Pictures to start with, for example ones shared from another app.
+  final List<String> initialPaths;
 
   @override
   State<ImageToPdfPage> createState() => _ImageToPdfPageState();
@@ -28,6 +31,12 @@ class _ImageToPdfPageState extends State<ImageToPdfPage> {
   final List<XFile> _images = [];
   ImagePdfOptions _options = const ImagePdfOptions();
   bool _busy = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _images.addAll([for (final path in widget.initialPaths) XFile(path)]);
+  }
 
   Future<void> _pickFromGallery() async {
     try {

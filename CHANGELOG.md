@@ -2,6 +2,10 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.3.0
+
+- **Share to Paperwise.** Choose Paperwise in the Share menu of the Gallery, a chat app or a file manager. Pictures open in Image to PDF, one PDF opens in the reader, and several PDFs open in Merge. Files are only copied into Paperwise's own cache on your phone.
+
 ## v1.2.1
 
 - **Night reading** in the PDF viewer: open the ⋮ menu and choose Night reading for light text on a dark page. The choice is remembered. Choose Day reading to go back.

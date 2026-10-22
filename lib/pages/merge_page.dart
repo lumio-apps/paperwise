@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../file_store.dart';
@@ -10,7 +12,10 @@ import '../widgets.dart';
 
 /// Joins several PDFs into one, in the order the user chooses.
 class MergePage extends StatefulWidget {
-  const MergePage({super.key});
+  const MergePage({super.key, this.initialPaths = const []});
+
+  /// PDFs to start with, for example ones shared from another app.
+  final List<String> initialPaths;
 
   @override
   State<MergePage> createState() => _MergePageState();
@@ -20,6 +25,27 @@ class _MergePageState extends State<MergePage> {
   final List<PickedPdf> _files = [];
   final _nameController = TextEditingController(text: FileStore.timestampName('Merged'));
   bool _busy = false;
+
+  @override
+  void initState() {
+    super.initState();
+    for (final path in widget.initialPaths) {
+      try {
+        _files.add(PickedPdf(path: path, name: path.split(RegExp(r'[\\/]')).last, sizeBytes: File(path).lengthSync()));
+      } catch (_) {
+        // Skip a file that cannot be read.
+      }
+    }
+    _loadAll(List.of(_files));
+  }
+
+  Future<void> _loadAll(List<PickedPdf> files) async {
+    for (final file in files) {
+      await file.load();
+      if (!mounted) return;
+      setState(() {});
+    }
+  }
 
   @override
   void dispose() {
