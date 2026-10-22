@@ -4,7 +4,7 @@ import 'file_actions.dart';
 import 'file_store.dart';
 import 'format.dart';
 import 'library.dart';
-import 'neumorphic.dart';
+import 'flat_ui.dart';
 import 'theme.dart';
 import 'widgets.dart';
 import 'strings.dart';
@@ -78,9 +78,8 @@ class FileTile extends StatelessWidget {
   Widget _buildTile(BuildContext context) {
     final info = ReadingLibrary.instance.infoFor(file.path);
     final favorite = info?.favorite ?? false;
-    return NeuPress(
+    return PanelPress(
       radius: 20,
-      depth: 6,
       onTap: () => openPdf(context, file.path),
       padding: const EdgeInsets.fromLTRB(12, 10, 4, 10),
       child: Row(

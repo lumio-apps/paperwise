@@ -2,6 +2,12 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.3.1
+
+- **New "Clean list" look.** Home now shows the tools in groups (Organize, Convert and scan, Secure and edit, Read and find), one row per tool with a short description. Cards, buttons and the bottom bar are flat, with no soft shadows, so every screen draws faster and the app feels lighter on older phones.
+- Light is now the default look. Dark and System are still in Settings, and your saved choice is kept.
+- The "Reduce effects" switch is gone, because the whole app is now light on effects.
+
 ## v1.3.0
 
 - **Share to Paperwise.** Choose Paperwise in the Share menu of the Gallery, a chat app or a file manager. Pictures open in Image to PDF, one PDF opens in the reader, and several PDFs open in Merge. Files are only copied into Paperwise's own cache on your phone.

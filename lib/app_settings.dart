@@ -26,25 +26,21 @@ enum AppLanguage {
 }
 
 /// The choices from Settings: look (light, dark or system), language, file
-/// order and "Reduce effects". They are kept in one small JSON file in the app's own storage.
+/// order. They are kept in one small JSON file in the app's own storage.
 class AppSettings extends ChangeNotifier {
   AppSettings._();
 
   static final AppSettings instance = AppSettings._();
 
-  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode _themeMode = ThemeMode.light;
   AppLanguage _language = AppLanguage.english;
   FileSort _fileSort = FileSort.newest;
-  bool _reduceEffects = false;
   bool _readerNight = false;
   Future<void> _writeQueue = Future.value();
 
   ThemeMode get themeMode => _themeMode;
   AppLanguage get language => _language;
   FileSort get fileSort => _fileSort;
-
-  /// True when panels should be flat, with no soft shadows or animations.
-  bool get reduceEffects => _reduceEffects;
 
   /// True when the PDF viewer shows pages with inverted colors (white text on dark).
   bool get readerNight => _readerNight;
@@ -63,14 +59,13 @@ class AppSettings extends ChangeNotifier {
       if (decoded is! Map) return;
       _themeMode = ThemeMode.values.firstWhere(
         (m) => m.name == decoded['theme'],
-        orElse: () => ThemeMode.system,
+        orElse: () => ThemeMode.light,
       );
       _language = AppLanguage.fromCode(decoded['language']);
       _fileSort = FileSort.values.firstWhere(
         (s) => s.name == decoded['fileSort'],
         orElse: () => FileSort.newest,
       );
-      _reduceEffects = decoded['reduceEffects'] == true;
       _readerNight = decoded['readerNight'] == true;
       notifyListeners();
     } catch (_) {
@@ -96,12 +91,6 @@ class AppSettings extends ChangeNotifier {
     _changed();
   }
 
-  void setReduceEffects(bool value) {
-    if (value == _reduceEffects) return;
-    _reduceEffects = value;
-    _changed();
-  }
-
   void setReaderNight(bool value) {
     if (value == _readerNight) return;
     _readerNight = value;
@@ -120,7 +109,6 @@ class AppSettings extends ChangeNotifier {
         'theme': _themeMode.name,
         'language': _language.code,
         'fileSort': _fileSort.name,
-        'reduceEffects': _reduceEffects,
         'readerNight': _readerNight,
       });
       await file.writeAsString(data, flush: true);

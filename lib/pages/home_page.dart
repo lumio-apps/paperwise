@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../coming_soon_sheet.dart';
 import '../file_store.dart';
 import '../file_tile.dart';
-import '../neumorphic.dart';
 import '../picked_pdf.dart';
 import '../theme.dart';
 import '../tools.dart';
@@ -32,7 +31,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final columns = MediaQuery.sizeOf(context).width >= 600 ? 4 : 2;
     return ListenableBuilder(
       listenable: FileStore.instance,
       builder: (context, _) {
@@ -59,21 +57,12 @@ class HomePage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 22),
-            const _SectionTitle('Pick a tool'),
-            const SizedBox(height: 12),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: columns,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                mainAxisExtent: 96,
-              ),
-              itemCount: homeTools.length,
-              itemBuilder: (context, index) => _ToolTile(tool: homeTools[index], index: index),
-            ),
+            for (final group in toolGroups) ...[
+              _SectionTitle(group.title),
+              const SizedBox(height: 8),
+              _ToolGroupCard(tools: [for (final id in group.ids) homeTools.firstWhere((t) => t.id == id)]),
+              const SizedBox(height: 18),
+            ],
             const SizedBox(height: 26),
             Row(
               children: [
@@ -90,31 +79,25 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             if (recent.isEmpty)
-              RiseIn(
-                delay: const Duration(milliseconds: 500),
-                child: SectionCard(
-                  child: Row(
-                    children: [
-                      PageThumb(),
-                      SizedBox(width: 14),
-                      Expanded(
-                        child: Text(
-                          'PDFs you make will show up here, ready to open or share.'.tr,
-                          style: TextStyle(fontSize: 15, height: 1.35, color: AppColors.muted),
-                        ),
+              SectionCard(
+                child: Row(
+                  children: [
+                    PageThumb(),
+                    SizedBox(width: 14),
+                    Expanded(
+                      child: Text(
+                        'PDFs you make will show up here, ready to open or share.'.tr,
+                        style: TextStyle(fontSize: 15, height: 1.35, color: AppColors.muted),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               )
             else
               for (var i = 0; i < recent.length; i++)
-                RiseIn(
-                  delay: Duration(milliseconds: 500 + 80 * i),
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 14),
-                    child: FileTile(file: recent[i]),
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: FileTile(file: recent[i]),
                 ),
           ],
         );
@@ -183,9 +166,12 @@ class _SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text.tr,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.ink),
+    return Padding(
+      padding: const EdgeInsets.only(left: 4),
+      child: Text(
+        text.tr.toUpperCase(),
+        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, letterSpacing: 0.4, color: AppColors.muted),
+      ),
     );
   }
 }
@@ -195,21 +181,20 @@ class _OfflineBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = TilePalette.teal;
     return Tooltip(
       message: 'Every tool works without internet'.tr,
-      child: NeuBox(
-        pressed: true,
-        radius: 18,
-        depth: 3,
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+        decoration: BoxDecoration(color: palette.tint, borderRadius: BorderRadius.circular(999)),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.wifi_off_rounded, size: 16, color: AppColors.success),
-            SizedBox(width: 6),
+            Icon(Icons.wifi_off_rounded, size: 16, color: palette.color),
+            const SizedBox(width: 6),
             Text(
               'Offline'.tr,
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.ink),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: palette.color),
             ),
           ],
         ),
@@ -218,54 +203,82 @@ class _OfflineBadge extends StatelessWidget {
   }
 }
 
-class _ToolTile extends StatelessWidget {
-  const _ToolTile({required this.tool, required this.index});
+/// One group of tools as rows inside a single card.
+class _ToolGroupCard extends StatelessWidget {
+  const _ToolGroupCard({required this.tools});
 
-  final ToolInfo tool;
-  final int index;
+  final List<ToolInfo> tools;
 
   @override
   Widget build(BuildContext context) {
-    return RiseIn(
-      delay: Duration(milliseconds: 45 * index),
-      child: NeuPress(
-        radius: 24,
-        depth: 8,
-        padding: const EdgeInsets.fromLTRB(14, 12, 12, 12),
-        onTap: () => openTool(context, tool),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Material(
+      color: AppColors.surface,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: AppColors.line),
+      ),
+      child: Column(
+        children: [
+          for (var i = 0; i < tools.length; i++) ...[
+            if (i > 0) Divider(height: 1, thickness: 1, color: AppColors.line),
+            _ToolRow(tool: tools[i]),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _ToolRow extends StatelessWidget {
+  const _ToolRow({required this.tool});
+
+  final ToolInfo tool;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => openTool(context, tool),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
+        child: Row(
           children: [
-            Row(
-              children: [
-                NeuBox(
-                  pressed: true,
-                  radius: 20,
-                  depth: 3,
-                  child: SizedBox(width: 40, height: 40, child: Icon(tool.icon, size: 22, color: tool.palette.color)),
-                ),
-                const Spacer(),
-                if (!tool.isReady)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface.withValues(alpha: 0.7),
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                    child: Text(
-                      'Soon'.tr,
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: tool.palette.color),
-                    ),
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(color: tool.palette.tint, borderRadius: BorderRadius.circular(12)),
+              child: Icon(tool.icon, size: 22, color: tool.palette.color),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    tool.title.tr,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.ink),
                   ),
-              ],
+                  if (tool.subtitle.isNotEmpty)
+                    Text(
+                      tool.subtitle.tr,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 13, color: AppColors.muted),
+                    ),
+                ],
+              ),
             ),
-            Text(
-              tool.title.tr,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
-            ),
+            if (!tool.isReady)
+              Padding(
+                padding: const EdgeInsets.only(right: 6),
+                child: Text(
+                  'Soon'.tr,
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: tool.palette.color),
+                ),
+              ),
+            Icon(Icons.chevron_right_rounded, size: 22, color: AppColors.muted),
           ],
         ),
       ),

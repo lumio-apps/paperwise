@@ -105,16 +105,14 @@ class PaperwiseApp extends StatefulWidget {
 class _PaperwiseAppState extends State<PaperwiseApp> {
   bool? _dark;
   AppLanguage? _language;
-  bool? _reduce;
 
   /// Many screens read colors and texts straight from [AppColors] and `.tr`.
   /// When the look or the language changes, every screen is asked to draw again.
-  void _syncLook(bool dark, AppLanguage language, bool reduce) {
+  void _syncLook(bool dark, AppLanguage language) {
     AppColors.isDark = dark;
-    final changed = _dark != null && (_dark != dark || _language != language || _reduce != reduce);
+    final changed = _dark != null && (_dark != dark || _language != language);
     _dark = dark;
     _language = language;
-    _reduce = reduce;
     if (changed) WidgetsBinding.instance.addPostFrameCallback((_) => _redrawEverything());
   }
 
@@ -149,7 +147,7 @@ class _PaperwiseAppState extends State<PaperwiseApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           builder: (context, child) {
-            _syncLook(Theme.of(context).brightness == Brightness.dark, settings.language, settings.reduceEffects);
+            _syncLook(Theme.of(context).brightness == Brightness.dark, settings.language);
             return child ?? const SizedBox.shrink();
           },
           home: const HomeShell(),

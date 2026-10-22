@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'neumorphic.dart';
+import 'flat_ui.dart';
 import 'theme.dart';
 import 'strings.dart';
 
@@ -41,9 +41,8 @@ class RoundIconButton extends StatelessWidget {
       message: tooltip,
       child: Opacity(
         opacity: onPressed == null ? 0.5 : 1,
-        child: NeuPress(
+        child: PanelPress(
           radius: 22,
-          depth: 5,
           onTap: onPressed,
           child: SizedBox(width: 44, height: 44, child: Icon(icon, size: 22, color: AppColors.ink)),
         ),
@@ -97,10 +96,9 @@ class ToolPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  NeuBox(
+                  Panel(
                     pressed: true,
                     radius: 22,
-                    depth: 4,
                     child: SizedBox(width: 44, height: 44, child: Icon(icon, color: palette.color, size: 22)),
                   ),
                 ],
@@ -136,13 +134,7 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final enabled = !busy && onPressed != null;
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(999),
-        boxShadow: enabled ? Neu.raised(7) : const <BoxShadow>[],
-      ),
-      child: FilledButton(
+    return FilledButton(
         onPressed: busy ? null : onPressed,
         style: FilledButton.styleFrom(
           backgroundColor: AppColors.primary,
@@ -172,7 +164,6 @@ class PrimaryButton extends StatelessWidget {
                   ],
                 ),
         ),
-      ),
     );
   }
 }
@@ -192,23 +183,17 @@ class SecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(999),
-        boxShadow: onPressed == null ? const <BoxShadow>[] : Neu.raised(6),
-      ),
-      child: OutlinedButton.icon(
-        onPressed: onPressed,
-        icon: Icon(icon, size: 20),
-        label: Text(label.tr, overflow: TextOverflow.ellipsis),
-        style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.ink,
-          backgroundColor: AppColors.background,
-          minimumSize: const Size.fromHeight(52),
-          shape: const StadiumBorder(),
-          side: BorderSide.none,
-          textStyle: const TextStyle(fontFamily: 'Outfit', fontSize: 15, fontWeight: FontWeight.w700),
-        ),
+    return OutlinedButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon, size: 20),
+      label: Text(label.tr, overflow: TextOverflow.ellipsis),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: AppColors.ink,
+        backgroundColor: AppColors.surface,
+        minimumSize: const Size.fromHeight(52),
+        shape: const StadiumBorder(),
+        side: BorderSide(color: AppColors.line),
+        textStyle: const TextStyle(fontFamily: 'Outfit', fontSize: 15, fontWeight: FontWeight.w700),
       ),
     );
   }
@@ -227,7 +212,7 @@ class SectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NeuBox(radius: 24, depth: 7, padding: padding, child: child);
+    return Panel(radius: 20, padding: padding, child: child);
   }
 }
 
@@ -310,9 +295,8 @@ class _Choice extends StatelessWidget {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: onTap,
-        child: NeuBox(
+        child: Panel(
           radius: 14,
-          depth: 4,
           pressed: selected,
           child: SizedBox(
             height: 46,
@@ -360,10 +344,9 @@ class EmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          NeuBox(
+          Panel(
             pressed: true,
             radius: 24,
-            depth: 6,
             child: SizedBox(width: 76, height: 76, child: Icon(icon, size: 36, color: palette.color)),
           ),
           const SizedBox(height: 18),
@@ -429,10 +412,9 @@ class PageThumb extends StatelessWidget {
         child: lines,
       );
     }
-    return NeuBox(
+    return Panel(
       pressed: true,
       radius: 10,
-      depth: 3,
       child: SizedBox(
         width: 44,
         height: 58,

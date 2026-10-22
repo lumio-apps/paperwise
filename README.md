@@ -52,8 +52,7 @@ Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does 
 - A PDF reader with zoom, page jump, thumbnails, "Continue reading", favorites and a night reading mode
 - Open PDFs straight from your file manager, chat apps or email ("Open with Paperwise"), or send PDFs and pictures from any app's Share menu
 - Search and sort your files by newest, oldest, name or size
-- A soft "neumorphic" look in light, dark or system theme, in English and Hindi (हिन्दी)
-- **Reduce effects** switch in Settings: flat panels with no shadows or animations, handy on older phones
+- A clean, flat "list" look in light, dark or system theme, in English and Hindi (हिन्दी). No heavy shadows or animations, so it stays smooth on older phones
 - Backup and restore in one `.pwbackup` file (you choose where it goes)
 
 Your original files are never changed. Every tool saves a new copy.

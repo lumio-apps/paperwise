@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'neumorphic.dart';
 import 'pages/files_page.dart';
 import 'pages/home_page.dart';
 import 'pages/settings_page.dart';
 import 'theme.dart';
 import 'strings.dart';
 
-/// Holds the three main sections and the floating pill bar to switch between them.
+/// Holds the three main sections and the bottom bar to switch between them.
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 
@@ -40,7 +39,7 @@ class _HomeShellState extends State<HomeShell> {
             ],
           ),
         ),
-        bottomNavigationBar: _PillNavBar(index: _index, onSelect: _select),
+        bottomNavigationBar: _NavBar(index: _index, onSelect: _select),
       ),
     );
   }
@@ -60,30 +59,32 @@ const _destinations = [
   _NavDestination('Settings', Icons.settings_outlined, Icons.settings_rounded),
 ];
 
-class _PillNavBar extends StatelessWidget {
-  const _PillNavBar({required this.index, required this.onSelect});
+class _NavBar extends StatelessWidget {
+  const _NavBar({required this.index, required this.onSelect});
 
   final int index;
   final ValueChanged<int> onSelect;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
-        child: NeuBox(
-          radius: 34,
-          depth: 8,
-          padding: const EdgeInsets.all(8),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        border: Border(top: BorderSide(color: AppColors.line)),
+      ),
+      child: SafeArea(
+        top: false,
+        child: SizedBox(
+          height: 68,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               for (var i = 0; i < _destinations.length; i++)
-                _NavItem(
-                  destination: _destinations[i],
-                  selected: i == index,
-                  onTap: () => onSelect(i),
+                Expanded(
+                  child: _NavItem(
+                    destination: _destinations[i],
+                    selected: i == index,
+                    onTap: () => onSelect(i),
+                  ),
                 ),
             ],
           ),
@@ -108,36 +109,26 @@ class _NavItem extends StatelessWidget {
       button: true,
       label: destination.label.tr,
       excludeSemantics: true,
-      child: Tooltip(
-        message: destination.label.tr,
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: onTap,
-          child: NeuBox(
-            pressed: selected,
-            radius: 24,
-            depth: 5,
-            child: AnimatedSize(
-              duration: const Duration(milliseconds: 260),
-              curve: Curves.easeOutCubic,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: selected ? 18 : 13, vertical: 12),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(selected ? destination.selectedIcon : destination.icon, color: color, size: 22),
-                    if (selected) ...[
-                      const SizedBox(width: 8),
-                      Text(
-                        destination.label.tr,
-                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: color),
-                      ),
-                    ],
-                  ],
-                ),
+      child: InkWell(
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 56,
+              height: 30,
+              decoration: BoxDecoration(
+                color: selected ? AppColors.track : Colors.transparent,
+                borderRadius: BorderRadius.circular(15),
               ),
+              child: Icon(selected ? destination.selectedIcon : destination.icon, color: color, size: 22),
             ),
-          ),
+            const SizedBox(height: 4),
+            Text(
+              destination.label.tr,
+              style: TextStyle(fontSize: 12, fontWeight: selected ? FontWeight.w700 : FontWeight.w500, color: color),
+            ),
+          ],
         ),
       ),
     );

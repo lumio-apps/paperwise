@@ -10,7 +10,7 @@ import 'package:share_plus/share_plus.dart';
 import '../app_settings.dart';
 import '../backup.dart';
 import '../file_actions.dart';
-import '../neumorphic.dart';
+import '../flat_ui.dart';
 import '../strings.dart';
 import '../theme.dart';
 import '../update_service.dart';
@@ -208,20 +208,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   onSelectionChanged: (value) => settings.setLanguage(value.first),
                 ),
               ),
-              const SizedBox(height: 8),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text(
-                  'Reduce effects'.tr,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.ink),
-                ),
-                subtitle: Text(
-                  'Flat panels, no soft shadows or animations. Can feel smoother on older phones.'.tr,
-                  style: TextStyle(fontSize: 13, color: AppColors.muted),
-                ),
-                value: settings.reduceEffects,
-                onChanged: settings.setReduceEffects,
-              ),
             ],
           ),
         ),
@@ -332,10 +318,9 @@ class _SettingsTile extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-      leading: NeuBox(
+      leading: Panel(
         pressed: true,
         radius: 14,
-        depth: 3,
         child: SizedBox(width: 42, height: 42, child: Icon(icon, color: palette.color, size: 22)),
       ),
       title: Text(
