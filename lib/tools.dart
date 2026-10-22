@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 
-enum ToolId { merge, split, pages, imageToPdf, pdfToImage, images, imagePrivacy, compress, scan, ocr, protect, sign, markup, search, info, nup, more }
+enum ToolId { merge, split, pages, imageToPdf, pdfToImage, images, imagePrivacy, compress, scan, ocr, protect, sign, markup, search, info, nup, idCard, more }
 
 /// A tile on the home screen.
 class ToolInfo {
@@ -34,6 +34,7 @@ List<ToolInfo> get homeTools => <ToolInfo>[
   ToolInfo(id: ToolId.split, title: 'Split PDF', icon: Icons.call_split_rounded, palette: TilePalette.orange, subtitle: 'By range or every page'),
   ToolInfo(id: ToolId.pages, title: 'Page tools', icon: Icons.view_module_outlined, palette: TilePalette.slate, subtitle: 'Reorder, rotate, delete'),
   ToolInfo(id: ToolId.nup, title: 'Pages per sheet', icon: Icons.grid_view_rounded, palette: TilePalette.teal, subtitle: 'Save paper when printing'),
+  ToolInfo(id: ToolId.idCard, title: 'ID card to PDF', icon: Icons.badge_outlined, palette: TilePalette.blue, subtitle: 'Front and back on one page'),
   ToolInfo(id: ToolId.imageToPdf, title: 'Image to PDF', icon: Icons.image_outlined, palette: TilePalette.pink, subtitle: 'Photos become pages'),
   ToolInfo(
     id: ToolId.pdfToImage,
@@ -107,7 +108,7 @@ class ToolGroup {
 
 const toolGroups = <ToolGroup>[
   ToolGroup('Organize', [ToolId.merge, ToolId.split, ToolId.pages, ToolId.nup]),
-  ToolGroup('Convert and scan', [ToolId.imageToPdf, ToolId.pdfToImage, ToolId.images, ToolId.scan, ToolId.ocr]),
+  ToolGroup('Convert and scan', [ToolId.imageToPdf, ToolId.idCard, ToolId.pdfToImage, ToolId.images, ToolId.scan, ToolId.ocr]),
   ToolGroup('Secure and edit', [ToolId.compress, ToolId.protect, ToolId.sign, ToolId.markup, ToolId.imagePrivacy]),
   ToolGroup('Read and find', [ToolId.search, ToolId.info]),
 ];

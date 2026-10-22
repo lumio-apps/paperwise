@@ -19,6 +19,7 @@ Package: a new dependency is named when one is needed. Everything else uses what
 - [x] v1.3.1: New flat Clean list look (replaces neumorphic and Reduce effects)
 - [x] v1.4.0: Images from PDF
 - [x] v1.5.0: Pages per sheet
+- [x] v1.6.0: ID card to PDF
 
 ## v1.2: Everyday polish (small, high value)
 
@@ -29,7 +30,6 @@ Package: a new dependency is named when one is needed. Everything else uses what
 
 ## v1.3: More PDF tools
 
-- [ ] **ID card to PDF** (M): scan front and back, put both on one A4 page. A very common need.
 - [ ] **Scan filters** (M): Original, Grayscale, Black and white, Enhanced. Plus manual crop and straighten after each scan.
 - [ ] **Crop and resize pages** (M): trim margins, or fit pages to A4 or Letter.
 - [ ] **Flatten PDF** (S): make notes and stamps part of the page so they cannot be moved.

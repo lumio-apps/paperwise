@@ -9,6 +9,7 @@ import '../tools.dart';
 import '../widgets.dart';
 import 'compress_page.dart';
 import 'edit_page.dart';
+import 'id_card_page.dart';
 import 'image_privacy_page.dart';
 import 'images_page.dart';
 import 'image_to_pdf_page.dart';
@@ -146,6 +147,8 @@ void openTool(BuildContext context, ToolInfo tool) {
       page = const ImagesPage();
     case ToolId.nup:
       page = const NUpPage();
+    case ToolId.idCard:
+      page = const IdCardPage();
     case ToolId.info:
       page = const InfoPage();
   }

@@ -35,6 +35,7 @@ Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does 
 | 🔗 | **Merge PDF** | Join PDFs into one and drag them into the order you want |
 | ✂️ | **Split PDF** | Cut by page ranges (`1-4, 5-10`) or make one file per page |
 | 🧩 | **Page tools** | Reorder, rotate, delete and extract pages on a visual page grid |
+| 🪪 | **ID card to PDF** | Put the front and back of an ID card on one A4 page, at real size or larger |
 | 🖼️ | **Image to PDF** | Turn photos from the gallery or camera into a PDF (A4, Letter or fit image) |
 | 📤 | **PDF to image** | Save pages as JPG or PNG, all pages or just some |
 | 📷 | **Scan to PDF** | Photograph paper, straighten it with the four corners, pick a look and build a PDF |

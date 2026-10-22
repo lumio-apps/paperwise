@@ -2,6 +2,10 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.6.0
+
+- **ID card to PDF** (new tool): add the front and back of an Aadhaar, PAN or licence from the gallery or camera, and Paperwise puts both on one A4 page, front on top. Choose the real card size or a larger one, with or without a thin border.
+
 ## v1.5.0
 
 - **Pages per sheet** (new tool): put 2 or 4 pages on each A4 sheet to save paper when printing, with an optional thin border and a small preview of the sheet. Tall pages go side by side on a landscape sheet. The new sheets are pictures, so their text cannot be selected.
