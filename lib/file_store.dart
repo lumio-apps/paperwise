@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'library.dart';
+import 'save_folder.dart';
 
 /// A PDF that Paperwise created and keeps on this phone.
 class OutputFile {
@@ -69,6 +71,7 @@ class FileStore extends ChangeNotifier {
     final dir = await folder();
     final file = await _uniqueFile(dir, cleanName(baseName));
     await file.writeAsBytes(bytes, flush: true);
+    unawaited(SaveFolder.copyIfSet(file.path, file.uri.pathSegments.last, 'application/pdf'));
     return OutputFile(
       path: file.path,
       name: file.uri.pathSegments.last,

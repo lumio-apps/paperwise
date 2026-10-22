@@ -45,6 +45,12 @@ const _hindi = <String, String>{
   'Save paper when printing': 'प्रिंट में काग़ज़ बचाएँ',
   'ID card to PDF': 'ID कार्ड से PDF',
   'Front and back on one page': 'आगे और पीछे एक पेज पर',
+  'Save location': 'सेव करने की जगह',
+  'Only inside Paperwise': 'सिर्फ़ Paperwise के अंदर',
+  'Cancel': 'रद्द करें',
+  'Stop copying': 'कॉपी करना बंद करें',
+  'Choose folder': 'फ़ोल्डर चुनें',
+  'Change folder': 'फ़ोल्डर बदलें',
   'Organize': 'व्यवस्थित करें',
   'Convert and scan': 'बदलें और स्कैन करें',
   'Secure and edit': 'सुरक्षित करें और बदलें',
@@ -82,7 +88,6 @@ const _hindi = <String, String>{
 
   // Shared buttons
   'Back': 'वापस',
-  'Cancel': 'रद्द करें',
   'Delete': 'हटाएँ',
   'Rename': 'नाम बदलें',
   'Share': 'शेयर करें',

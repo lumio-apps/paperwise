@@ -1,10 +1,12 @@
 package com.lumioapps.paperwise
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -23,10 +25,16 @@ class MainActivity : FlutterActivity() {
     private val mainHandler = Handler(Looper.getMainLooper())
     private var channel: MethodChannel? = null
 
+    // "Save location": a folder the user picks once, kept as a permission Android remembers.
+    private val folderChannelName = "com.lumioapps.paperwise/folder"
+    private val pickFolderRequest = 4711
+    private var pendingFolderResult: MethodChannel.Result? = null
+
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         val methodChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, channelName)
         channel = methodChannel
+        setUpFolderChannel(flutterEngine)
         methodChannel.setMethodCallHandler { call, result ->
             if (call.method == "getInitialFiles") {
                 val uris = takeUris(intent)
@@ -39,6 +47,105 @@ class MainActivity : FlutterActivity() {
                 result.notImplemented()
             }
         }
+    }
+
+    private fun setUpFolderChannel(flutterEngine: FlutterEngine) {
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, folderChannelName).setMethodCallHandler { call, result ->
+            when (call.method) {
+                "pickFolder" -> {
+                    if (pendingFolderResult != null) {
+                        result.success(null)
+                    } else {
+                        pendingFolderResult = result
+                        val pick = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+                        pick.addFlags(
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                                Intent.FLAG_GRANT_WRITE_URI_PERMISSION or
+                                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
+                                Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
+                        )
+                        try {
+                            startActivityForResult(pick, pickFolderRequest)
+                        } catch (e: Exception) {
+                            pendingFolderResult = null
+                            result.success(null)
+                        }
+                    }
+                }
+                "isUsable" -> result.success(isFolderUsable(call.argument<String>("uri")))
+                "copyToFolder" -> {
+                    val uri = call.argument<String>("uri")
+                    val path = call.argument<String>("path")
+                    val name = call.argument<String>("name")
+                    val mime = call.argument<String>("mime")
+                    if (uri == null || path == null || name == null || mime == null) {
+                        result.success(false)
+                    } else {
+                        worker.execute {
+                            val ok = try {
+                                copyIntoFolder(uri, path, name, mime)
+                            } catch (e: Exception) {
+                                false
+                            }
+                            mainHandler.post { result.success(ok) }
+                        }
+                    }
+                }
+                else -> result.notImplemented()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode != pickFolderRequest) {
+            super.onActivityResult(requestCode, resultCode, data)
+            return
+        }
+        val result = pendingFolderResult
+        pendingFolderResult = null
+        if (result == null) return
+        val tree = data?.data
+        if (resultCode != Activity.RESULT_OK || tree == null) {
+            result.success(null)
+            return
+        }
+        try {
+            contentResolver.takePersistableUriPermission(
+                tree,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+            )
+            result.success(mapOf("uri" to tree.toString(), "name" to folderName(tree)))
+        } catch (e: Exception) {
+            result.success(null)
+        }
+    }
+
+    private fun folderName(tree: Uri): String? {
+        return try {
+            val document = DocumentsContract.buildDocumentUriUsingTree(tree, DocumentsContract.getTreeDocumentId(tree))
+            contentResolver.query(document, arrayOf(DocumentsContract.Document.COLUMN_DISPLAY_NAME), null, null, null)?.use { cursor ->
+                if (cursor.moveToFirst()) cursor.getString(0) else null
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun isFolderUsable(uri: String?): Boolean {
+        if (uri == null) return false
+        return contentResolver.persistedUriPermissions.any { it.uri.toString() == uri && it.isWritePermission }
+    }
+
+    /** Copies a file into the chosen folder. Android renames it if the name is taken. */
+    private fun copyIntoFolder(treeUri: String, path: String, name: String, mime: String): Boolean {
+        val tree = Uri.parse(treeUri)
+        val parent = DocumentsContract.buildDocumentUriUsingTree(tree, DocumentsContract.getTreeDocumentId(tree))
+        val target = DocumentsContract.createDocument(contentResolver, parent, mime, name) ?: return false
+        val sink = contentResolver.openOutputStream(target) ?: return false
+        File(path).inputStream().use { input ->
+            sink.use { output -> input.copyTo(output) }
+        }
+        return true
     }
 
     override fun onNewIntent(intent: Intent) {

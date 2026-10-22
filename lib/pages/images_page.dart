@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -9,6 +10,7 @@ import '../format.dart';
 import '../image_result_sheet.dart';
 import '../pdf_images.dart';
 import '../picked_pdf.dart';
+import '../save_folder.dart';
 import '../theme.dart';
 import '../widgets.dart';
 import 'pdf_to_image_page.dart' show PickedPdfCard;
@@ -101,6 +103,7 @@ class _ImagesPageState extends State<ImagesPage> {
         final number = (i + 1).toString().padLeft(digits, '0');
         final out = File('${folder.path}/${base}_image$number.${image.extension}');
         await out.writeAsBytes(image.bytes, flush: true);
+        unawaited(SaveFolder.copyIfSet(out.path, out.uri.pathSegments.last, image.extension == 'png' ? 'image/png' : 'image/jpeg'));
         paths.add(out.path);
       }
       if (!mounted) return;

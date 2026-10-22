@@ -2,6 +2,10 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.7.0
+
+- **Save location** (Settings): pick a folder on your phone, and every new PDF and picture Paperwise makes is also copied there. Your files inside Paperwise stay as they are. You can change the folder or stop copying at any time. Android only lets an app write into a folder you picked, so Paperwise keeps that permission and nothing else.
+
 ## v1.6.0
 
 - **ID card to PDF** (new tool): add the front and back of an Aadhaar, PAN or licence from the gallery or camera, and Paperwise puts both on one A4 page, front on top. Choose the real card size or a larger one, with or without a thin border.

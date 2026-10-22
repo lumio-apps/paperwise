@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;
 import 'dart:typed_data';
@@ -13,6 +14,7 @@ import '../image_tools.dart';
 import '../page_ranges.dart';
 import '../pdf_tools.dart';
 import '../picked_pdf.dart';
+import '../save_folder.dart';
 import '../theme.dart';
 import '../widgets.dart';
 
@@ -173,6 +175,7 @@ class _PdfToImagePageState extends State<PdfToImagePage> {
             : '${base}_page${number.toString().padLeft(digits, '0')}.${_format.extension}';
         final out = File('${folder.path}/$name');
         await out.writeAsBytes(bytes, flush: true);
+        unawaited(SaveFolder.copyIfSet(out.path, name, _format == _Format.png ? 'image/png' : 'image/jpeg'));
         paths.add(out.path);
       }
 

@@ -20,6 +20,7 @@ Package: a new dependency is named when one is needed. Everything else uses what
 - [x] v1.4.0: Images from PDF
 - [x] v1.5.0: Pages per sheet
 - [x] v1.6.0: ID card to PDF
+- [x] v1.7.0: Save location
 
 ## v1.2: Everyday polish (small, high value)
 
@@ -56,7 +57,6 @@ Package: a new dependency is named when one is needed. Everything else uses what
 - [ ] **Folders and tags** (L): organize files inside Paperwise, with a filter row on the Files page.
 - [ ] **App shortcuts** (S): long press the app icon for Scan, Merge, Compress.
 - [ ] **Quick tile and home widget** (M): one tap to scan.
-- [ ] **Save location** (M): choose a folder on the phone for results instead of only "Save to phone".
 - [ ] **Batch compress and batch protect** (M): run one tool on many files.
 
 ## v2.0: Bigger ideas (research first)

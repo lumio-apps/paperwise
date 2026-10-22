@@ -11,6 +11,7 @@ import '../app_settings.dart';
 import '../backup.dart';
 import '../file_actions.dart';
 import '../flat_ui.dart';
+import '../save_folder.dart';
 import '../strings.dart';
 import '../theme.dart';
 import '../update_service.dart';
@@ -35,6 +36,43 @@ class _SettingsPageState extends State<SettingsPage> {
     PackageInfo.fromPlatform().then((info) {
       if (mounted) setState(() => _version = info.version);
     });
+  }
+
+  Future<void> _chooseSaveFolder() async {
+    final settings = AppSettings.instance;
+    final isSet = settings.saveFolderUri != null;
+    final action = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text('Save location'.tr),
+        content: Text(
+          isSet
+              ? 'New files are also copied to "${settings.saveFolderName}". Your files inside Paperwise stay as they are.'
+              : 'Pick a folder, for example Documents. Every PDF and picture Paperwise makes will also be copied there. '
+                  'Your files inside Paperwise stay as they are.\n\n'
+                  'On newer Android you cannot pick the main Downloads folder itself. Make a folder inside it first, '
+                  'for example Downloads/Paperwise, and pick that.',
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(dialogContext), child: Text('Cancel'.tr)),
+          if (isSet) TextButton(onPressed: () => Navigator.pop(dialogContext, 'stop'), child: Text('Stop copying'.tr)),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, 'pick'),
+            child: Text((isSet ? 'Change folder' : 'Choose folder').tr),
+          ),
+        ],
+      ),
+    );
+    if (!mounted || action == null) return;
+    if (action == 'stop') {
+      SaveFolder.clear();
+      return;
+    }
+    final chosen = await SaveFolder.pick();
+    if (!mounted) return;
+    if (chosen) {
+      showMessage(context, 'New files will also be copied to "${AppSettings.instance.saveFolderName}".');
+    }
   }
 
   void _showPrivacy() {
@@ -210,6 +248,20 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ],
           ),
+        ),
+        const SizedBox(height: 16),
+        _SettingsGroup(
+          children: [
+            _SettingsTile(
+              icon: Icons.folder_open_outlined,
+              palette: TilePalette.yellow,
+              title: 'Save location',
+              subtitle: settings.saveFolderName == null
+                  ? 'Only inside Paperwise'
+                  : 'Also copied to ${settings.saveFolderName}',
+              onTap: _chooseSaveFolder,
+            ),
+          ],
         ),
         const SizedBox(height: 16),
         _SettingsGroup(

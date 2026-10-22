@@ -36,6 +36,8 @@ class AppSettings extends ChangeNotifier {
   AppLanguage _language = AppLanguage.english;
   FileSort _fileSort = FileSort.newest;
   bool _readerNight = false;
+  String? _saveFolderUri;
+  String? _saveFolderName;
   Future<void> _writeQueue = Future.value();
 
   ThemeMode get themeMode => _themeMode;
@@ -44,6 +46,10 @@ class AppSettings extends ChangeNotifier {
 
   /// True when the PDF viewer shows pages with inverted colors (white text on dark).
   bool get readerNight => _readerNight;
+
+  /// A folder the user picked in Settings, where every new file is also copied. Null when not set.
+  String? get saveFolderUri => _saveFolderUri;
+  String? get saveFolderName => _saveFolderName;
 
   Future<File> _storage() async {
     final docs = await getApplicationDocumentsDirectory();
@@ -67,6 +73,12 @@ class AppSettings extends ChangeNotifier {
         orElse: () => FileSort.newest,
       );
       _readerNight = decoded['readerNight'] == true;
+      final folderUri = decoded['saveFolderUri'];
+      if (folderUri is String && folderUri.isNotEmpty) {
+        _saveFolderUri = folderUri;
+        final folderName = decoded['saveFolderName'];
+        _saveFolderName = folderName is String && folderName.isNotEmpty ? folderName : 'Chosen folder';
+      }
       notifyListeners();
     } catch (_) {
       // Start with the defaults if the file can't be read.
@@ -97,6 +109,12 @@ class AppSettings extends ChangeNotifier {
     _changed();
   }
 
+  void setSaveFolder(String? uri, String? name) {
+    _saveFolderUri = uri;
+    _saveFolderName = uri == null ? null : (name ?? 'Chosen folder');
+    _changed();
+  }
+
   void _changed() {
     notifyListeners();
     _writeQueue = _writeQueue.then((_) => _write());
@@ -110,6 +128,8 @@ class AppSettings extends ChangeNotifier {
         'language': _language.code,
         'fileSort': _fileSort.name,
         'readerNight': _readerNight,
+        'saveFolderUri': _saveFolderUri,
+        'saveFolderName': _saveFolderName,
       });
       await file.writeAsString(data, flush: true);
     } catch (_) {
