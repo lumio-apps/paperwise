@@ -38,6 +38,7 @@ Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does 
 | 🖼️ | **Image to PDF** | Turn photos from the gallery or camera into a PDF (A4, Letter or fit image) |
 | 📤 | **PDF to image** | Save pages as JPG or PNG, all pages or just some |
 | 📷 | **Scan to PDF** | Photograph paper, straighten it with the four corners, pick a look and build a PDF |
+| 🧮 | **Pages per sheet** | Put 2 or 4 pages on each A4 sheet to save paper when printing |
 | 🗜️ | **Compress** | Light, Balanced or Strong, with the expected size shown first |
 | 🔤 | **Text from scans** | Make scanned PDFs searchable, or copy their text (offline, English) |
 | 🔒 | **Protect** | Lock with a password (AES-128), unlock, or add a text or image watermark |

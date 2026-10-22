@@ -18,6 +18,7 @@ Package: a new dependency is named when one is needed. Everything else uses what
 - [x] v1.3.0: Share to Paperwise
 - [x] v1.3.1: New flat Clean list look (replaces neumorphic and Reduce effects)
 - [x] v1.4.0: Images from PDF
+- [x] v1.5.0: Pages per sheet
 
 ## v1.2: Everyday polish (small, high value)
 
@@ -31,7 +32,6 @@ Package: a new dependency is named when one is needed. Everything else uses what
 - [ ] **ID card to PDF** (M): scan front and back, put both on one A4 page. A very common need.
 - [ ] **Scan filters** (M): Original, Grayscale, Black and white, Enhanced. Plus manual crop and straighten after each scan.
 - [ ] **Crop and resize pages** (M): trim margins, or fit pages to A4 or Letter.
-- [ ] **Pages per sheet** (M): 2 or 4 pages on one sheet, to save paper.
 - [ ] **Flatten PDF** (S): make notes and stamps part of the page so they cannot be moved.
 - [ ] **Signature upgrades** (M): several saved signatures and initials, add today's date next to a signature.
 - [ ] **Compress presets** (S): "Under 1 MB", "Under 200 KB" targets for forms and uploads.

@@ -14,6 +14,7 @@ import 'images_page.dart';
 import 'image_to_pdf_page.dart';
 import 'info_page.dart';
 import 'markup_page.dart';
+import 'nup_page.dart';
 import 'merge_page.dart';
 import 'pages_page.dart';
 import 'ocr_page.dart';
@@ -143,6 +144,8 @@ void openTool(BuildContext context, ToolInfo tool) {
       return;
     case ToolId.images:
       page = const ImagesPage();
+    case ToolId.nup:
+      page = const NUpPage();
     case ToolId.info:
       page = const InfoPage();
   }

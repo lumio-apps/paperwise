@@ -41,6 +41,8 @@ const _hindi = <String, String>{
   'PDF info': 'PDF की जानकारी',
   'Images from PDF': 'PDF से तस्वीरें',
   'Save pictures stored inside': 'PDF के अंदर की तस्वीरें सहेजें',
+  'Pages per sheet': 'एक शीट पर कई पेज',
+  'Save paper when printing': 'प्रिंट में काग़ज़ बचाएँ',
   'Organize': 'व्यवस्थित करें',
   'Convert and scan': 'बदलें और स्कैन करें',
   'Secure and edit': 'सुरक्षित करें और बदलें',

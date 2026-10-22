@@ -2,6 +2,10 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.5.0
+
+- **Pages per sheet** (new tool): put 2 or 4 pages on each A4 sheet to save paper when printing, with an optional thin border and a small preview of the sheet. Tall pages go side by side on a landscape sheet. The new sheets are pictures, so their text cannot be selected.
+
 ## v1.4.0
 
 - **Images from PDF** (new tool): save the photos and pictures stored inside a PDF as separate files. JPEG photos come out exactly as they are in the PDF, with no loss of quality. See-through masks and tiny icons are left out.
