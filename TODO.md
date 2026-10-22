@@ -17,6 +17,7 @@ Package: a new dependency is named when one is needed. Everything else uses what
 - [x] v1.2.1: Reader night mode (zoom and last page were already remembered or built in)
 - [x] v1.3.0: Share to Paperwise
 - [x] v1.3.1: New flat Clean list look (replaces neumorphic and Reduce effects)
+- [x] v1.4.0: Images from PDF
 
 ## v1.2: Everyday polish (small, high value)
 
@@ -32,7 +33,6 @@ Package: a new dependency is named when one is needed. Everything else uses what
 - [ ] **Crop and resize pages** (M): trim margins, or fit pages to A4 or Letter.
 - [ ] **Pages per sheet** (M): 2 or 4 pages on one sheet, to save paper.
 - [ ] **Flatten PDF** (S): make notes and stamps part of the page so they cannot be moved.
-- [ ] **Images from PDF** (S): extract every picture inside a PDF.
 - [ ] **Signature upgrades** (M): several saved signatures and initials, add today's date next to a signature.
 - [ ] **Compress presets** (S): "Under 1 MB", "Under 200 KB" targets for forms and uploads.
 

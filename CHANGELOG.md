@@ -2,6 +2,10 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.4.0
+
+- **Images from PDF** (new tool): save the photos and pictures stored inside a PDF as separate files. JPEG photos come out exactly as they are in the PDF, with no loss of quality. See-through masks and tiny icons are left out.
+
 ## v1.3.1
 
 - **New "Clean list" look.** Home now shows the tools in groups (Organize, Convert and scan, Secure and edit, Read and find), one row per tool with a short description. Cards, buttons and the bottom bar are flat, with no soft shadows, so every screen draws faster and the app feels lighter on older phones.

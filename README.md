@@ -44,6 +44,7 @@ Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does 
 | ✍️ | **Edit & sign** | Type text anywhere, draw and place your signature, add page numbers, headers and footers |
 | 🖍️ | **Markup** | Highlighter, pen, boxes, ovals, lines and arrows in six colors |
 | 🔎 | **Search in PDF** | Find words inside a PDF and jump between matches |
+| 🖼️ | **Images from PDF** | Save the photos stored inside a PDF as separate JPG or PNG files |
 | 🧾 | **PDF info** | See the author, software and dates inside a PDF and save a clean copy without them |
 | 🛡️ | **Image privacy** | Remove hidden location and device info from photos, blur faces or number plates |
 

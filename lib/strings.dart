@@ -39,6 +39,8 @@ const _hindi = <String, String>{
   'Markup': 'मार्कअप',
   'Search in PDF': 'PDF में खोजें',
   'PDF info': 'PDF की जानकारी',
+  'Images from PDF': 'PDF से तस्वीरें',
+  'Save pictures stored inside': 'PDF के अंदर की तस्वीरें सहेजें',
   'Organize': 'व्यवस्थित करें',
   'Convert and scan': 'बदलें और स्कैन करें',
   'Secure and edit': 'सुरक्षित करें और बदलें',

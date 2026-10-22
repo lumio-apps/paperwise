@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 
-enum ToolId { merge, split, pages, imageToPdf, pdfToImage, imagePrivacy, compress, scan, ocr, protect, sign, markup, search, info, more }
+enum ToolId { merge, split, pages, imageToPdf, pdfToImage, images, imagePrivacy, compress, scan, ocr, protect, sign, markup, search, info, more }
 
 /// A tile on the home screen.
 class ToolInfo {
@@ -78,6 +78,7 @@ List<ToolInfo> get homeTools => <ToolInfo>[
   ),
   ToolInfo(id: ToolId.sign, title: 'Edit & sign', icon: Icons.draw_outlined, palette: TilePalette.yellow, subtitle: 'Text, signature, numbers'),
   ToolInfo(id: ToolId.markup, title: 'Markup', icon: Icons.highlight_rounded, palette: TilePalette.orange, subtitle: 'Highlight and draw'),
+  ToolInfo(id: ToolId.images, title: 'Images from PDF', icon: Icons.collections_outlined, palette: TilePalette.yellow, subtitle: 'Save pictures stored inside'),
   ToolInfo(id: ToolId.search, title: 'Search in PDF', icon: Icons.search_rounded, palette: TilePalette.blue, subtitle: 'Find words in a PDF'),
   ToolInfo(id: ToolId.info, title: 'PDF info', icon: Icons.info_outline_rounded, palette: TilePalette.teal, subtitle: 'Author, dates, clean copy'),
 ];
@@ -105,7 +106,7 @@ class ToolGroup {
 
 const toolGroups = <ToolGroup>[
   ToolGroup('Organize', [ToolId.merge, ToolId.split, ToolId.pages]),
-  ToolGroup('Convert and scan', [ToolId.imageToPdf, ToolId.pdfToImage, ToolId.scan, ToolId.ocr]),
+  ToolGroup('Convert and scan', [ToolId.imageToPdf, ToolId.pdfToImage, ToolId.images, ToolId.scan, ToolId.ocr]),
   ToolGroup('Secure and edit', [ToolId.compress, ToolId.protect, ToolId.sign, ToolId.markup, ToolId.imagePrivacy]),
   ToolGroup('Read and find', [ToolId.search, ToolId.info]),
 ];

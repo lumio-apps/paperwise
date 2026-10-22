@@ -10,6 +10,7 @@ import '../widgets.dart';
 import 'compress_page.dart';
 import 'edit_page.dart';
 import 'image_privacy_page.dart';
+import 'images_page.dart';
 import 'image_to_pdf_page.dart';
 import 'info_page.dart';
 import 'markup_page.dart';
@@ -140,6 +141,8 @@ void openTool(BuildContext context, ToolInfo tool) {
     case ToolId.search:
       _openSearch(context);
       return;
+    case ToolId.images:
+      page = const ImagesPage();
     case ToolId.info:
       page = const InfoPage();
   }
