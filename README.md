@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>Private PDF tools for Android. Fully offline.</b><br>
-  Merge, split, sign, scan, compress, protect, search and clean PDFs, all on your phone.<br>
+  Merge, split, sign, scan, compress, protect, search and clean PDFs, and read Excel and Word files, all on your phone.<br>
   No ads. No account. No tracking. Your files never leave your phone.
 </p>
 
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/screenshots/home.jpg" width="190" alt="Home screen with colorful tool tiles">
+  <img src="docs/screenshots/home.jpg" width="190" alt="Home screen with the tools">
   &nbsp;
   <img src="docs/screenshots/tools.jpg" width="190" alt="More tools: Text from scans, Protect, Edit and sign, Markup, Search">
   &nbsp;
@@ -26,35 +26,55 @@
 
 ## Why Paperwise
 
-Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does none of that. Every tool runs on your phone. The only time the app uses the internet is when you tap **Check for updates**, which asks GitHub for the newest version. Your documents are never uploaded. The code is open, so you can check that for yourself.
+Most PDF and office apps upload your files, show ads or ask you to sign in. Paperwise does none of that. Every tool runs on your phone. The only time the app uses the internet is when you tap **Check for updates**, which asks GitHub for the newest version. Your documents are never uploaded. The code is open, so you can check that for yourself.
 
 ## What you can do
+
+Tools are grouped the same way as on the home screen.
+
+**Organize**
 
 | | Tool | What it does |
 | --- | --- | --- |
 | 🔗 | **Merge PDF** | Join PDFs into one and drag them into the order you want |
 | ✂️ | **Split PDF** | Cut by page ranges (`1-4, 5-10`) or make one file per page |
 | 🧩 | **Page tools** | Reorder, rotate, delete and extract pages on a visual page grid |
-| 🪪 | **ID card to PDF** | Put the front and back of an ID card on one A4 page, at real size or larger |
-| 🖼️ | **Image to PDF** | Turn photos from the gallery or camera into a PDF (A4, Letter or fit image) |
-| 📤 | **PDF to image** | Save pages as JPG or PNG, all pages or just some |
-| 📷 | **Scan to PDF** | Photograph paper, straighten it with the four corners, pick a look and build a PDF |
 | 🧮 | **Pages per sheet** | Put 2 or 4 pages on each A4 sheet to save paper when printing |
-| 🗜️ | **Compress** | Light, Balanced or Strong, with the expected size shown first |
+
+**Convert and scan**
+
+| | Tool | What it does |
+| --- | --- | --- |
+| 🖼️ | **Image to PDF** | Turn photos from the gallery or camera into a PDF (A4, Letter or fit image) |
+| 🪪 | **ID card to PDF** | Put the front and back of an ID card on one A4 page, at real size or larger |
+| 📤 | **PDF to image** | Save pages as JPG or PNG, all pages or just some |
+| 🗂️ | **Images from PDF** | Save the photos stored inside a PDF as separate JPG or PNG files |
+| 📷 | **Scan to PDF** | Photograph paper, straighten it with the four corners, pick a look and build a PDF |
 | 🔤 | **Text from scans** | Make scanned PDFs searchable, or copy their text (offline, English) |
+
+**Secure and edit**
+
+| | Tool | What it does |
+| --- | --- | --- |
+| 🗜️ | **Compress** | Light, Balanced or Strong, with the expected size shown first |
 | 🔒 | **Protect** | Lock with a password (AES-128), unlock, or add a text or image watermark |
 | ✍️ | **Edit & sign** | Type text anywhere, draw and place your signature, add page numbers, headers and footers |
 | 🖍️ | **Markup** | Highlighter, pen, boxes, ovals, lines and arrows in six colors |
-| 🔎 | **Search in PDF** | Find words inside a PDF and jump between matches |
-| 🖼️ | **Images from PDF** | Save the photos stored inside a PDF as separate JPG or PNG files |
-| 📊 | **Excel viewer** | Open `.xlsx` and `.csv` files as a table with a tab for each sheet (view only) |
-| 🧾 | **PDF info** | See the author, software and dates inside a PDF and save a clean copy without them |
 | 🛡️ | **Image privacy** | Remove hidden location and device info from photos, blur faces or number plates |
+
+**Read and find**
+
+| | Tool | What it does |
+| --- | --- | --- |
+| 🔎 | **Search in PDF** | Find words inside a PDF and jump between matches |
+| 🧾 | **PDF info** | See the author, software and dates inside a PDF and save a clean copy without them |
+| 📊 | **Excel viewer** | Open `.xlsx` and `.csv` files as a table with a tab for each sheet. Tap a cell to see or copy it (view only) |
+| 📝 | **Word viewer** | Read `.docx` documents with headings, lists, tables and pictures. Make text bigger and copy it (view only) |
 
 **Also built in**
 
 - A PDF reader with zoom, page jump, thumbnails, "Continue reading", favorites and a night reading mode
-- Open PDFs and Excel sheets straight from your file manager, chat apps or email ("Open with Paperwise"), or send PDFs, sheets and pictures from any app's Share menu
+- Open PDFs, Excel sheets and Word files straight from your file manager, chat apps or email ("Open with Paperwise"), or send them and pictures from any app's Share menu
 - Search and sort your files by newest, oldest, name or size
 - A clean, flat "list" look in light, dark or system theme, in English and Hindi (हिन्दी). No heavy shadows or animations, so it stays smooth on older phones
 - **Save location**: pick a folder in Settings and every new PDF or picture is also copied there (you can change or stop it any time)
@@ -75,6 +95,7 @@ To update later, open **Settings → Check for updates**. Paperwise asks GitHub 
 - Text you add with **Edit & sign** supports letters, numbers and keyboard symbols (no accents or other scripts yet).
 - Hindi covers the main screens. Tool screens are still in English.
 - **Excel viewer** shows values as they were last saved. Formulas are not worked out again, and charts, pictures, colors and merged cells are not shown. Very large sheets show the first 20,000 rows and 200 columns. Old `.xls` files and password-locked files cannot be opened.
+- **Word viewer** shows the text and layout of a document, not its exact pages. Headers, footers, footnotes, comments and page numbers are not shown, and some picture types (like EMF) appear as "Picture not shown". Old `.doc` files and password-locked files cannot be opened.
 - **Save location** needs a folder you pick yourself. On newer Android the main Downloads folder cannot be picked, so make a folder inside it (for example `Downloads/Paperwise`) and choose that.
 - **PDF info** makes a clean copy by rebuilding the PDF page by page. The text stays selectable, but bookmarks, links and form fields are not kept.
 
@@ -105,6 +126,7 @@ flutter build apk --release    # signed with the debug key unless android/key.pr
 - [`pdf`](https://pub.dev/packages/pdf) and [`image`](https://pub.dev/packages/image) for creating PDFs and pictures
 - [`pointycastle`](https://pub.dev/packages/pointycastle) for PDF encryption
 - Google ML Kit text recognition (bundled, runs on the device) for scans
+- A small built-in reader for `.xlsx` and `.docx` files (ZIP and XML), written for Paperwise, so no extra libraries are needed
 - [Outfit](https://fonts.google.com/specimen/Outfit) font (SIL Open Font License)
 
 ## Roadmap

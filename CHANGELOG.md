@@ -2,6 +2,11 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.9.0
+
+- **Word viewer** (new tool in Read and find): read `.docx` documents on your phone. Headings, bold, italic, underline, colors, lists, tables and pictures are shown, and text boxes appear below the paragraph they belong to. Make the text bigger or smaller with the buttons at the top, and press and hold to select and copy text. View only: nothing in the file is changed.
+- "Open with Paperwise" and the Share menu now also accept Word files.
+
 ## v1.8.0
 
 - **Excel viewer** (new tool in Read and find): open `.xlsx` sheets and `.csv` files and read them as a table. Column letters and row numbers stay in view while you scroll, each sheet has its own tab at the bottom, and tapping a cell shows all of its text with a Copy button. Dates, times, percents, decimals and currency are shown the way the file asks for. View only: nothing in the file is changed.

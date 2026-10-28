@@ -45,6 +45,8 @@ const _hindi = <String, String>{
   'Save paper when printing': 'प्रिंट में काग़ज़ बचाएँ',
   'ID card to PDF': 'ID कार्ड से PDF',
   'Front and back on one page': 'आगे और पीछे एक पेज पर',
+  'Word viewer': 'वर्ड व्यूअर',
+  'Read .docx documents': '.docx दस्तावेज़ पढ़ें',
   'Excel viewer': 'एक्सेल व्यूअर',
   'Open .xlsx and .csv sheets': '.xlsx और .csv शीट खोलें',
   'Save location': 'सेव करने की जगह',

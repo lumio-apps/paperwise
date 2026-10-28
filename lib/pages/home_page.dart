@@ -8,6 +8,7 @@ import '../theme.dart';
 import '../tools.dart';
 import '../widgets.dart';
 import 'compress_page.dart';
+import 'doc_viewer_page.dart';
 import 'edit_page.dart';
 import 'id_card_page.dart';
 import 'image_privacy_page.dart';
@@ -154,6 +155,9 @@ void openTool(BuildContext context, ToolInfo tool) {
       page = const InfoPage();
     case ToolId.excel:
       openSheetFromPicker(context);
+      return;
+    case ToolId.word:
+      openDocumentFromPicker(context);
       return;
   }
   Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));

@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'office/office_file.dart';
+import 'pages/doc_viewer_page.dart';
 import 'pages/image_to_pdf_page.dart';
 import 'pages/merge_page.dart';
 import 'pages/sheet_viewer_page.dart';
 import 'pages/viewer_page.dart';
 
 /// Opens files that other apps hand to Paperwise: "Open with Paperwise" for a
-/// PDF or a sheet, and the Share menu for PDFs, sheets and pictures.
+/// PDF, sheet or Word file, and the Share menu for those and pictures.
 ///
 /// The Android side copies each file into the app's cache and gives us its path.
 class ExternalOpen {
@@ -61,11 +62,12 @@ class ExternalOpen {
     final navigator = navigatorKey.currentState;
     if (navigator == null) return;
 
-    // Excel and CSV files open in the sheet viewer, one at a time.
-    final sheets = paths.where(isSheetFile).toList();
-    final rest = paths.where((p) => !isSheetFile(p)).toList();
+    // Excel, CSV and Word files open in their viewer, one at a time.
+    final rest = paths.where((p) => !isSheetFile(p) && !isDocumentFile(p)).toList();
     if (rest.isEmpty) {
-      await navigator.push(MaterialPageRoute<void>(builder: (_) => SheetViewerPage(path: sheets.first)));
+      final first = paths.first;
+      final Widget viewer = isSheetFile(first) ? SheetViewerPage(path: first) : DocViewerPage(path: first);
+      await navigator.push(MaterialPageRoute<void>(builder: (_) => viewer));
       return;
     }
 

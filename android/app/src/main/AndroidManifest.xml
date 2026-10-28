@@ -33,7 +33,7 @@
                 <data android:scheme="file"/>
                 <data android:mimeType="application/pdf"/>
             </intent-filter>
-            <!-- "Open with Paperwise" for Excel and CSV sheets (view only). -->
+            <!-- "Open with Paperwise" for Excel, CSV and Word files (view only). -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -43,6 +43,7 @@
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
                 <data android:mimeType="text/csv"/>
                 <data android:mimeType="text/comma-separated-values"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
             </intent-filter>
             <!-- "Share to Paperwise" for PDFs and pictures from the Share menu of other apps. -->
             <intent-filter>
@@ -52,6 +53,7 @@
                 <data android:mimeType="image/*"/>
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
                 <data android:mimeType="text/csv"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE"/>

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 
-enum ToolId { merge, split, pages, imageToPdf, pdfToImage, images, imagePrivacy, compress, scan, ocr, protect, sign, markup, search, info, nup, idCard, excel, more }
+enum ToolId { merge, split, pages, imageToPdf, pdfToImage, images, imagePrivacy, compress, scan, ocr, protect, sign, markup, search, info, nup, idCard, excel, word, more }
 
 /// A tile on the home screen.
 class ToolInfo {
@@ -83,6 +83,7 @@ List<ToolInfo> get homeTools => <ToolInfo>[
   ToolInfo(id: ToolId.images, title: 'Images from PDF', icon: Icons.collections_outlined, palette: TilePalette.yellow, subtitle: 'Save pictures stored inside'),
   ToolInfo(id: ToolId.search, title: 'Search in PDF', icon: Icons.search_rounded, palette: TilePalette.blue, subtitle: 'Find words in a PDF'),
   ToolInfo(id: ToolId.excel, title: 'Excel viewer', icon: Icons.table_chart_outlined, palette: TilePalette.green, subtitle: 'Open .xlsx and .csv sheets'),
+  ToolInfo(id: ToolId.word, title: 'Word viewer', icon: Icons.description_outlined, palette: TilePalette.blue, subtitle: 'Read .docx documents'),
   ToolInfo(id: ToolId.info, title: 'PDF info', icon: Icons.info_outline_rounded, palette: TilePalette.teal, subtitle: 'Author, dates, clean copy'),
 ];
 
@@ -111,5 +112,5 @@ const toolGroups = <ToolGroup>[
   ToolGroup('Organize', [ToolId.merge, ToolId.split, ToolId.pages, ToolId.nup]),
   ToolGroup('Convert and scan', [ToolId.imageToPdf, ToolId.idCard, ToolId.pdfToImage, ToolId.images, ToolId.scan, ToolId.ocr]),
   ToolGroup('Secure and edit', [ToolId.compress, ToolId.protect, ToolId.sign, ToolId.markup, ToolId.imagePrivacy]),
-  ToolGroup('Read and find', [ToolId.search, ToolId.info, ToolId.excel]),
+  ToolGroup('Read and find', [ToolId.search, ToolId.info, ToolId.excel, ToolId.word]),
 ];
