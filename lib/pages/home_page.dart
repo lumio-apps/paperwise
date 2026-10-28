@@ -22,6 +22,7 @@ import 'ocr_page.dart';
 import 'pdf_to_image_page.dart';
 import 'protect_page.dart';
 import 'scan_page.dart';
+import 'sheet_viewer_page.dart';
 import 'split_page.dart';
 import 'viewer_page.dart';
 import '../strings.dart';
@@ -151,6 +152,9 @@ void openTool(BuildContext context, ToolInfo tool) {
       page = const IdCardPage();
     case ToolId.info:
       page = const InfoPage();
+    case ToolId.excel:
+      openSheetFromPicker(context);
+      return;
   }
   Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));
 }

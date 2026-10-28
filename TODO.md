@@ -21,6 +21,8 @@ Package: a new dependency is named when one is needed. Everything else uses what
 - [x] v1.5.0: Pages per sheet
 - [x] v1.6.0: ID card to PDF
 - [x] v1.7.0: Save location
+- [x] v1.8.0: Excel viewer (.xlsx and .csv, view only)
+- [ ] v1.9.0: Word viewer (.docx, view only)
 
 ## v1.2: Everyday polish (small, high value)
 

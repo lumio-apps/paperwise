@@ -227,9 +227,13 @@ class MainActivity : FlutterActivity() {
             .replace(Regex("[\\\\/:*?\"<>|]"), "_")
             .trim()
         if (name.isEmpty()) name = "document"
-        if (!Regex(".*\\.(pdf|jpe?g|png|webp|gif|bmp|heic|heif)$", RegexOption.IGNORE_CASE).matches(name)) {
+        if (!Regex(".*\\.(pdf|jpe?g|png|webp|gif|bmp|heic|heif|xlsx|docx|csv|tsv)$", RegexOption.IGNORE_CASE).matches(name)) {
             val type = contentResolver.getType(uri) ?: ""
             name += when {
+                type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" -> ".xlsx"
+                type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" -> ".docx"
+                type == "text/csv" || type == "text/comma-separated-values" -> ".csv"
+                type == "text/tab-separated-values" -> ".tsv"
                 type == "image/png" -> ".png"
                 type == "image/webp" -> ".webp"
                 type == "image/gif" -> ".gif"

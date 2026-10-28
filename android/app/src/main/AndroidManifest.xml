@@ -33,12 +33,25 @@
                 <data android:scheme="file"/>
                 <data android:mimeType="application/pdf"/>
             </intent-filter>
+            <!-- "Open with Paperwise" for Excel and CSV sheets (view only). -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="content"/>
+                <data android:scheme="file"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                <data android:mimeType="text/csv"/>
+                <data android:mimeType="text/comma-separated-values"/>
+            </intent-filter>
             <!-- "Share to Paperwise" for PDFs and pictures from the Share menu of other apps. -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:mimeType="application/pdf"/>
                 <data android:mimeType="image/*"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                <data android:mimeType="text/csv"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE"/>
@@ -56,6 +69,19 @@
         <intent>
             <action android:name="android.intent.action.VIEW"/>
             <data android:mimeType="application/pdf"/>
+        </intent>
+        <!-- Lets "Open in another app" find a spreadsheet or document app. -->
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:mimeType="text/csv"/>
         </intent>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>

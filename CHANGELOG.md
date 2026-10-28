@@ -2,6 +2,12 @@
 
 What changed in each version of Paperwise, newest first.
 
+## v1.8.0
+
+- **Excel viewer** (new tool in Read and find): open `.xlsx` sheets and `.csv` files and read them as a table. Column letters and row numbers stay in view while you scroll, each sheet has its own tab at the bottom, and tapping a cell shows all of its text with a Copy button. Dates, times, percents, decimals and currency are shown the way the file asks for. View only: nothing in the file is changed.
+- "Open with Paperwise" and the Share menu now also accept Excel and CSV files.
+- Menu in the viewer: Share, or open the file in another app to edit it.
+
 ## v1.7.0
 
 - **Save location** (Settings): pick a folder on your phone, and every new PDF and picture Paperwise makes is also copied there. Your files inside Paperwise stay as they are. You can change the folder or stop copying at any time. Android only lets an app write into a folder you picked, so Paperwise keeps that permission and nothing else.

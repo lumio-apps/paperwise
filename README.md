@@ -47,13 +47,14 @@ Most PDF apps upload your files, show ads or ask you to sign in. Paperwise does 
 | 🖍️ | **Markup** | Highlighter, pen, boxes, ovals, lines and arrows in six colors |
 | 🔎 | **Search in PDF** | Find words inside a PDF and jump between matches |
 | 🖼️ | **Images from PDF** | Save the photos stored inside a PDF as separate JPG or PNG files |
+| 📊 | **Excel viewer** | Open `.xlsx` and `.csv` files as a table with a tab for each sheet (view only) |
 | 🧾 | **PDF info** | See the author, software and dates inside a PDF and save a clean copy without them |
 | 🛡️ | **Image privacy** | Remove hidden location and device info from photos, blur faces or number plates |
 
 **Also built in**
 
 - A PDF reader with zoom, page jump, thumbnails, "Continue reading", favorites and a night reading mode
-- Open PDFs straight from your file manager, chat apps or email ("Open with Paperwise"), or send PDFs and pictures from any app's Share menu
+- Open PDFs and Excel sheets straight from your file manager, chat apps or email ("Open with Paperwise"), or send PDFs, sheets and pictures from any app's Share menu
 - Search and sort your files by newest, oldest, name or size
 - A clean, flat "list" look in light, dark or system theme, in English and Hindi (हिन्दी). No heavy shadows or animations, so it stays smooth on older phones
 - **Save location**: pick a folder in Settings and every new PDF or picture is also copied there (you can change or stop it any time)
@@ -73,6 +74,7 @@ To update later, open **Settings → Check for updates**. Paperwise asks GitHub 
 - **Lock, Watermark and Compress** redraw each page as a picture. Text in those copies can no longer be selected. Edit & sign, Markup and Unlock keep the text selectable.
 - Text you add with **Edit & sign** supports letters, numbers and keyboard symbols (no accents or other scripts yet).
 - Hindi covers the main screens. Tool screens are still in English.
+- **Excel viewer** shows values as they were last saved. Formulas are not worked out again, and charts, pictures, colors and merged cells are not shown. Very large sheets show the first 20,000 rows and 200 columns. Old `.xls` files and password-locked files cannot be opened.
 - **Save location** needs a folder you pick yourself. On newer Android the main Downloads folder cannot be picked, so make a folder inside it (for example `Downloads/Paperwise`) and choose that.
 - **PDF info** makes a clean copy by rebuilding the PDF page by page. The text stays selectable, but bookmarks, links and form fields are not kept.
 
